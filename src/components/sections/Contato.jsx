@@ -152,51 +152,6 @@ export default function Contato() {
             </div>
           ))}
         </div>
-        <div style={{ display: "flex", gap: ".6rem", marginTop: "2.2rem" }}>
-          <SocialIcon
-            href="https://instagram.com"
-            label="Instagram"
-            icon={
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <rect x="4" y="4" width="16" height="16" rx="5" stroke="currentColor" strokeWidth="1.7" />
-                <circle cx="12" cy="12" r="3.4" stroke="currentColor" strokeWidth="1.7" />
-                <circle cx="17.2" cy="6.9" r="1.1" fill="currentColor" />
-              </svg>
-            }
-          />
-          <SocialIcon
-            href="https://linkedin.com"
-            label="LinkedIn"
-            icon={
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <rect x="4" y="4" width="16" height="16" rx="3.5" stroke="currentColor" strokeWidth="1.7" />
-                <rect x="7.3" y="10.1" width="2.1" height="6.2" fill="currentColor" />
-                <circle cx="8.35" cy="7.8" r="1.2" fill="currentColor" />
-                <path d="M12 16.3v-3.5c0-1.5.9-2.5 2.2-2.5 1.2 0 2 .8 2 2.3v3.7" stroke="currentColor" strokeWidth="1.7" />
-              </svg>
-            }
-          />
-          <SocialIcon
-            href="https://youtube.com"
-            label="YouTube"
-            icon={
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <rect x="3.6" y="6.8" width="16.8" height="10.4" rx="3" stroke="currentColor" strokeWidth="1.7" />
-                <path d="M10.5 10.2l4.4 2.1-4.4 2.1v-4.2z" fill="currentColor" />
-              </svg>
-            }
-          />
-          <SocialIcon
-            href="https://facebook.com"
-            label="Facebook"
-            icon={
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <rect x="4" y="4" width="16" height="16" rx="3.5" stroke="currentColor" strokeWidth="1.7" />
-                <path d="M13.1 17v-4h2.3l.4-2.2h-2.7V9.5c0-.8.2-1.3 1.3-1.3h1.5V6.3h-2.2c-2.3 0-3 1.3-3 3.2v1.3H9V13h1.7v4h2.4z" fill="currentColor" />
-              </svg>
-            }
-          />
-        </div>
       </Reveal>
 
       <Reveal delay={150}>

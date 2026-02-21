@@ -4,6 +4,7 @@ import Nav from "./components/layout/Nav";
 import WhatsAppButton from "./components/layout/WhatsAppButton";
 import QuoteModal from "./components/modal/QuoteModal";
 import Contato from "./components/sections/Contato";
+import Feedbacks from "./components/sections/Feedbacks";
 import Hero from "./components/sections/Hero";
 import QuemSomos from "./components/sections/QuemSomos";
 import SaibaMais from "./components/sections/SaibaMais";
@@ -22,13 +23,15 @@ export default function App() {
       <Nav openModal={() => setModalOpen(true)} />
       <Hero openModal={() => setModalOpen(true)} />
       <Divider />
+      <Veiculos openModal={() => setModalOpen(true)} />
+      <Divider />
       <QuemSomos />
       <Divider />
-      <Veiculos openModal={() => setModalOpen(true)} />
+      <SaibaMais />
       <Divider />
       <Servicos />
       <Divider />
-      <SaibaMais />
+      <Feedbacks />
       <Divider />
       <Contato />
       <Divider />

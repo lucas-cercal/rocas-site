@@ -48,7 +48,7 @@ export default function Footer() {
           src={logoImage}
           alt="ROCAS Locadora"
           style={{
-            height: 58,
+            height: 72,
             width: "auto",
             filter: "drop-shadow(0 0 8px rgba(160,190,230,.12)) brightness(.88)",
           }}

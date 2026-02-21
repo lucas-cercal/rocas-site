@@ -4,7 +4,7 @@ import { theme } from "../../constants/theme";
 import { useScrolled } from "../../hooks/useScrolled";
 import { useI18n } from "../../i18n/LanguageContext";
 
-function NavLink({ href, children }) {
+function NavLink({ href, children, scrolled = false }) {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -16,13 +16,15 @@ function NavLink({ href, children }) {
         fontSize: ".76rem",
         letterSpacing: ".22em",
         textTransform: "uppercase",
-        color: hovered ? theme.cr7 : theme.cr4,
+        color: hovered ? (scrolled ? "#0f1c2f" : theme.cr7) : scrolled ? "#243246" : theme.cr4,
         textDecoration: "none",
         fontWeight: 500,
-        transition: "color .2s",
+        transition: "color .2s, border-color .2s",
         position: "relative",
         paddingBottom: 4,
-        borderBottom: hovered ? `1px solid ${theme.cr6}` : "1px solid transparent",
+        borderBottom: hovered
+          ? `1px solid ${scrolled ? "rgba(15,28,47,.35)" : theme.cr6}`
+          : "1px solid transparent",
       }}
     >
       {children}
@@ -30,7 +32,7 @@ function NavLink({ href, children }) {
   );
 }
 
-function NavCta({ onClick, children }) {
+function NavCta({ onClick, children, scrolled = false }) {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -39,9 +41,17 @@ function NavCta({ onClick, children }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        border: `1px solid ${hovered ? theme.cr6 : theme.cr3}`,
-        background: hovered ? theme.cr6 : "transparent",
-        color: hovered ? theme.bg0 : theme.cr6,
+        border: `1px solid ${
+          scrolled
+            ? hovered
+              ? "rgba(15,28,47,.88)"
+              : "rgba(15,28,47,.34)"
+            : hovered
+              ? theme.cr6
+              : theme.cr3
+        }`,
+        background: hovered ? (scrolled ? "#132033" : theme.cr6) : "transparent",
+        color: hovered ? (scrolled ? "#f8fbff" : theme.bg0) : scrolled ? "#1a2a40" : theme.cr6,
         padding: ".56rem 1.42rem",
         fontSize: ".72rem",
         letterSpacing: ".22em",
@@ -101,17 +111,17 @@ export default function Nav({ openModal }) {
           left: 0,
           right: 0,
           zIndex: 500,
-          height: 78,
+          height: scrolled ? 70 : 78,
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          padding: isMobile ? "0 1.25rem" : "0 4rem",
-          background: scrolled ? "rgba(4,9,19,.97)" : "rgba(4,9,19,.9)",
-          backdropFilter: "blur(16px)",
-          WebkitBackdropFilter: "blur(16px)",
-          borderBottom: `1px solid ${theme.bd}`,
-          boxShadow: scrolled ? "0 2px 40px rgba(0,0,0,.5)" : "none",
-          transition: "background .3s, box-shadow .3s",
+          padding: isMobile ? "0 1.25rem" : scrolled ? "0 3.2rem" : "0 4rem",
+          background: scrolled ? "rgba(248,251,255,.92)" : "transparent",
+          backdropFilter: scrolled ? "blur(16px)" : "none",
+          WebkitBackdropFilter: scrolled ? "blur(16px)" : "none",
+          borderBottom: scrolled ? "1px solid rgba(12,22,36,.13)" : "1px solid transparent",
+          boxShadow: scrolled ? "0 10px 28px rgba(9,18,32,.16)" : "none",
+          transition: "height .28s ease, padding .28s ease, background .28s ease, box-shadow .28s ease, border-color .28s ease",
         }}
       >
         <a href="#home" style={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
@@ -119,9 +129,12 @@ export default function Nav({ openModal }) {
             src={logoImage}
             alt="ROCAS Locadora"
             style={{
-              height: 72,
+              height: scrolled ? 60 : 72,
               width: "auto",
-              filter: "drop-shadow(0 0 12px rgba(180,210,240,.18))",
+              filter: scrolled
+                ? "brightness(.22) contrast(1.18) drop-shadow(0 1px 2px rgba(0,0,0,.12))"
+                : "drop-shadow(0 0 12px rgba(180,210,240,.18))",
+              transition: "height .28s ease, filter .28s ease",
             }}
           />
         </a>
@@ -129,7 +142,7 @@ export default function Nav({ openModal }) {
         {!isMobile && (
           <div style={{ display: "flex", alignItems: "center", gap: "2rem" }}>
             {links.map((link) => (
-              <NavLink key={link.href} href={link.href}>
+              <NavLink key={link.href} href={link.href} scrolled={scrolled}>
                 {link.label}
               </NavLink>
             ))}
@@ -137,9 +150,9 @@ export default function Nav({ openModal }) {
               value={language}
               onChange={(event) => setLanguage(event.target.value)}
               style={{
-                background: "transparent",
-                border: `1px solid ${theme.bd}`,
-                color: theme.textLo,
+                background: scrolled ? "rgba(250,252,255,.92)" : "transparent",
+                border: scrolled ? "1px solid rgba(16,28,44,.24)" : `1px solid ${theme.bd}`,
+                color: scrolled ? "#1b2b41" : theme.textLo,
                 fontSize: ".68rem",
                 letterSpacing: ".15em",
                 padding: ".3rem .5rem",
@@ -147,6 +160,7 @@ export default function Nav({ openModal }) {
                 fontFamily: "'Neue Montreal', sans-serif",
                 fontWeight: 500,
                 textTransform: "uppercase",
+                transition: "all .28s ease",
               }}
             >
               {languageOptions.map((option) => (
@@ -155,7 +169,9 @@ export default function Nav({ openModal }) {
                 </option>
               ))}
             </select>
-            <NavCta onClick={openModal}>{t.nav.cta}</NavCta>
+            <NavCta onClick={openModal} scrolled={scrolled}>
+              {t.nav.cta}
+            </NavCta>
           </div>
         )}
 
@@ -178,7 +194,13 @@ export default function Nav({ openModal }) {
             {[0, 1, 2].map((index) => (
               <span
                 key={index}
-                style={{ width: 22, height: 1, background: theme.cr5, display: "block" }}
+                style={{
+                  width: 22,
+                  height: 1,
+                  background: scrolled ? "#1b2b41" : theme.cr5,
+                  display: "block",
+                  transition: "background .28s ease",
+                }}
               />
             ))}
           </button>

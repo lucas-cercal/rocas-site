@@ -1,5 +1,13 @@
 import { theme } from "../../constants/theme";
 
+const lightField = {
+  label: "#5f7492",
+  bg: "#f7fbff",
+  border: "rgba(44,72,110,.22)",
+  text: "#132846",
+  placeholder: "#6f86aa",
+};
+
 export function FInput({
   id,
   name,
@@ -10,7 +18,9 @@ export function FInput({
   onChange,
   required = false,
   autoComplete,
+  variant = "dark",
 }) {
+  const isLight = variant === "light";
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: ".3rem" }}>
       <label
@@ -19,7 +29,7 @@ export function FInput({
           fontSize: ".68rem",
           letterSpacing: ".22em",
           textTransform: "uppercase",
-          color: theme.textLo,
+          color: isLight ? lightField.label : theme.textLo,
         }}
       >
         {label}
@@ -34,14 +44,15 @@ export function FInput({
         required={required}
         autoComplete={autoComplete}
         style={{
-          background: theme.bg1,
-          border: `1px solid ${theme.bd}`,
-          color: theme.cr5,
+          background: isLight ? lightField.bg : theme.bg1,
+          border: isLight ? `1px solid ${lightField.border}` : `1px solid ${theme.bd}`,
+          color: isLight ? lightField.text : theme.cr5,
           fontFamily: "'Neue Montreal', sans-serif",
           fontSize: ".9rem",
           padding: ".82rem 1rem",
           outline: "none",
           width: "100%",
+          boxShadow: isLight ? "inset 0 1px 0 rgba(255,255,255,.65)" : "none",
         }}
       />
     </div>
@@ -57,7 +68,9 @@ export function FSelect({
   onChange,
   required = false,
   placeholderOption = "Selecione",
+  variant = "dark",
 }) {
+  const isLight = variant === "light";
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: ".3rem" }}>
       <label
@@ -66,7 +79,7 @@ export function FSelect({
           fontSize: ".68rem",
           letterSpacing: ".22em",
           textTransform: "uppercase",
-          color: theme.textLo,
+          color: isLight ? lightField.label : theme.textLo,
         }}
       >
         {label}
@@ -78,14 +91,15 @@ export function FSelect({
         onChange={onChange}
         required={required}
         style={{
-          background: theme.bg1,
-          border: `1px solid ${theme.bd}`,
-          color: theme.cr5,
+          background: isLight ? lightField.bg : theme.bg1,
+          border: isLight ? `1px solid ${lightField.border}` : `1px solid ${theme.bd}`,
+          color: isLight ? lightField.text : theme.cr5,
           fontFamily: "'Neue Montreal', sans-serif",
           fontSize: ".9rem",
           padding: ".82rem 1rem",
           outline: "none",
           width: "100%",
+          boxShadow: isLight ? "inset 0 1px 0 rgba(255,255,255,.65)" : "none",
         }}
       >
         <option value="">{placeholderOption}</option>
@@ -108,7 +122,9 @@ export function FTextarea({
   onChange,
   required = false,
   rows = 4,
+  variant = "dark",
 }) {
+  const isLight = variant === "light";
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: ".3rem" }}>
       <label
@@ -117,7 +133,7 @@ export function FTextarea({
           fontSize: ".68rem",
           letterSpacing: ".22em",
           textTransform: "uppercase",
-          color: theme.textLo,
+          color: isLight ? lightField.label : theme.textLo,
         }}
       >
         {label}
@@ -131,15 +147,16 @@ export function FTextarea({
         onChange={onChange}
         required={required}
         style={{
-          background: theme.bg1,
-          border: `1px solid ${theme.bd}`,
-          color: theme.cr5,
+          background: isLight ? lightField.bg : theme.bg1,
+          border: isLight ? `1px solid ${lightField.border}` : `1px solid ${theme.bd}`,
+          color: isLight ? lightField.text : theme.cr5,
           fontFamily: "'Neue Montreal', sans-serif",
           fontSize: ".9rem",
           padding: ".82rem 1rem",
           outline: "none",
           width: "100%",
           resize: "vertical",
+          boxShadow: isLight ? "inset 0 1px 0 rgba(255,255,255,.65)" : "none",
         }}
       />
     </div>

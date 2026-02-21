@@ -49,7 +49,8 @@ export default function Hero({ openModal }) {
               width: "100%",
               height: "100%",
               objectFit: "cover",
-              objectPosition: "center center",
+              objectPosition: "center 42%",
+              transform: "scale(1.18)",
               display: "block",
             }}
           >
@@ -113,7 +114,7 @@ export default function Hero({ openModal }) {
           <h1
             style={{
               fontFamily: "'Neue Montreal', sans-serif",
-              fontSize: isMobile ? "clamp(1.9rem,9vw,2.7rem)" : "clamp(2.5rem,4.6vw,4.2rem)",
+              fontSize: isMobile ? "clamp(1.7rem,8.2vw,2.35rem)" : "clamp(2.2rem,4vw,3.6rem)",
               fontWeight: 700,
               lineHeight: 1.04,
               color: theme.cr8,
