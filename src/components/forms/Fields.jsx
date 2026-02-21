@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { theme } from "../../constants/theme";
 
 const lightField = {
@@ -19,8 +20,22 @@ export function FInput({
   required = false,
   autoComplete,
   variant = "dark",
+  interactive = false,
 }) {
   const isLight = variant === "light";
+  const [focused, setFocused] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const borderColor = focused
+    ? isLight
+      ? "rgba(60,98,146,.55)"
+      : theme.bdAct
+    : hovered
+      ? isLight
+        ? "rgba(56,90,132,.38)"
+        : "rgba(142,180,237,.25)"
+      : isLight
+        ? lightField.border
+        : theme.bd;
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: ".3rem" }}>
       <label
@@ -29,7 +44,8 @@ export function FInput({
           fontSize: ".68rem",
           letterSpacing: ".22em",
           textTransform: "uppercase",
-          color: isLight ? lightField.label : theme.textLo,
+          color: focused ? (isLight ? "#3d5f87" : theme.cr4) : isLight ? lightField.label : theme.textLo,
+          transition: interactive ? "color .2s ease" : undefined,
         }}
       >
         {label}
@@ -43,16 +59,28 @@ export function FInput({
         onChange={onChange}
         required={required}
         autoComplete={autoComplete}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
         style={{
           background: isLight ? lightField.bg : theme.bg1,
-          border: isLight ? `1px solid ${lightField.border}` : `1px solid ${theme.bd}`,
+          border: `1px solid ${borderColor}`,
           color: isLight ? lightField.text : theme.cr5,
           fontFamily: "'Neue Montreal', sans-serif",
           fontSize: ".9rem",
           padding: ".82rem 1rem",
           outline: "none",
           width: "100%",
-          boxShadow: isLight ? "inset 0 1px 0 rgba(255,255,255,.65)" : "none",
+          transform: interactive && focused ? "translateY(-1px)" : "none",
+          boxShadow: focused
+            ? isLight
+              ? "0 0 0 3px rgba(131,166,211,.16), inset 0 1px 0 rgba(255,255,255,.72)"
+              : "0 0 0 3px rgba(142,180,237,.16)"
+            : isLight
+              ? "inset 0 1px 0 rgba(255,255,255,.65)"
+              : "none",
+          transition: interactive ? "all .22s ease" : undefined,
         }}
       />
     </div>
@@ -69,8 +97,22 @@ export function FSelect({
   required = false,
   placeholderOption = "Selecione",
   variant = "dark",
+  interactive = false,
 }) {
   const isLight = variant === "light";
+  const [focused, setFocused] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const borderColor = focused
+    ? isLight
+      ? "rgba(60,98,146,.55)"
+      : theme.bdAct
+    : hovered
+      ? isLight
+        ? "rgba(56,90,132,.38)"
+        : "rgba(142,180,237,.25)"
+      : isLight
+        ? lightField.border
+        : theme.bd;
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: ".3rem" }}>
       <label
@@ -79,7 +121,8 @@ export function FSelect({
           fontSize: ".68rem",
           letterSpacing: ".22em",
           textTransform: "uppercase",
-          color: isLight ? lightField.label : theme.textLo,
+          color: focused ? (isLight ? "#3d5f87" : theme.cr4) : isLight ? lightField.label : theme.textLo,
+          transition: interactive ? "color .2s ease" : undefined,
         }}
       >
         {label}
@@ -90,16 +133,28 @@ export function FSelect({
         value={value}
         onChange={onChange}
         required={required}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
         style={{
           background: isLight ? lightField.bg : theme.bg1,
-          border: isLight ? `1px solid ${lightField.border}` : `1px solid ${theme.bd}`,
+          border: `1px solid ${borderColor}`,
           color: isLight ? lightField.text : theme.cr5,
           fontFamily: "'Neue Montreal', sans-serif",
           fontSize: ".9rem",
           padding: ".82rem 1rem",
           outline: "none",
           width: "100%",
-          boxShadow: isLight ? "inset 0 1px 0 rgba(255,255,255,.65)" : "none",
+          transform: interactive && focused ? "translateY(-1px)" : "none",
+          boxShadow: focused
+            ? isLight
+              ? "0 0 0 3px rgba(131,166,211,.16), inset 0 1px 0 rgba(255,255,255,.72)"
+              : "0 0 0 3px rgba(142,180,237,.16)"
+            : isLight
+              ? "inset 0 1px 0 rgba(255,255,255,.65)"
+              : "none",
+          transition: interactive ? "all .22s ease" : undefined,
         }}
       >
         <option value="">{placeholderOption}</option>
@@ -123,8 +178,22 @@ export function FTextarea({
   required = false,
   rows = 4,
   variant = "dark",
+  interactive = false,
 }) {
   const isLight = variant === "light";
+  const [focused, setFocused] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const borderColor = focused
+    ? isLight
+      ? "rgba(60,98,146,.55)"
+      : theme.bdAct
+    : hovered
+      ? isLight
+        ? "rgba(56,90,132,.38)"
+        : "rgba(142,180,237,.25)"
+      : isLight
+        ? lightField.border
+        : theme.bd;
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: ".3rem" }}>
       <label
@@ -133,7 +202,8 @@ export function FTextarea({
           fontSize: ".68rem",
           letterSpacing: ".22em",
           textTransform: "uppercase",
-          color: isLight ? lightField.label : theme.textLo,
+          color: focused ? (isLight ? "#3d5f87" : theme.cr4) : isLight ? lightField.label : theme.textLo,
+          transition: interactive ? "color .2s ease" : undefined,
         }}
       >
         {label}
@@ -146,9 +216,13 @@ export function FTextarea({
         value={value}
         onChange={onChange}
         required={required}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
         style={{
           background: isLight ? lightField.bg : theme.bg1,
-          border: isLight ? `1px solid ${lightField.border}` : `1px solid ${theme.bd}`,
+          border: `1px solid ${borderColor}`,
           color: isLight ? lightField.text : theme.cr5,
           fontFamily: "'Neue Montreal', sans-serif",
           fontSize: ".9rem",
@@ -156,7 +230,15 @@ export function FTextarea({
           outline: "none",
           width: "100%",
           resize: "none",
-          boxShadow: isLight ? "inset 0 1px 0 rgba(255,255,255,.65)" : "none",
+          transform: interactive && focused ? "translateY(-1px)" : "none",
+          boxShadow: focused
+            ? isLight
+              ? "0 0 0 3px rgba(131,166,211,.16), inset 0 1px 0 rgba(255,255,255,.72)"
+              : "0 0 0 3px rgba(142,180,237,.16)"
+            : isLight
+              ? "inset 0 1px 0 rgba(255,255,255,.65)"
+              : "none",
+          transition: interactive ? "all .22s ease" : undefined,
         }}
       />
     </div>

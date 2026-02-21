@@ -76,9 +76,11 @@ function ProtectionRow({ label, strength, highlight = false }) {
 export default function SaibaMais() {
   const { t } = useI18n();
   const isMobile = useBreakpoint(980);
+  const isMediumViewport = useBreakpoint(1280);
   const [openItem, setOpenItem] = useState(null);
   const [panelHovered, setPanelHovered] = useState(false);
   const items = t.saibaMais.items;
+  const showSideBySide = !isMobile && !isMediumViewport;
 
   return (
     <section id="saiba-mais" style={{ background: lightSection.bg, padding: isMobile ? "4.5rem 1.25rem" : "7rem 4rem" }}>
@@ -108,10 +110,10 @@ export default function SaibaMais() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: isMobile ? "1fr" : "700px minmax(500px, 1fr)",
+            gridTemplateColumns: showSideBySide ? "700px minmax(500px, 1fr)" : "1fr",
             justifyContent: "stretch",
             alignItems: "start",
-            gap: isMobile ? "2rem" : "2.2rem",
+            gap: isMobile ? "2rem" : showSideBySide ? "2.2rem" : "1.6rem",
           }}
         >
           <div>
@@ -161,7 +163,7 @@ export default function SaibaMais() {
               onMouseEnter={() => setPanelHovered(true)}
               onMouseLeave={() => setPanelHovered(false)}
               style={{
-                width: 500,
+                width: showSideBySide ? 500 : "min(100%, 560px)",
                 justifySelf: "center",
                 position: "static",
                 background: lightSection.panelBg,
@@ -173,6 +175,7 @@ export default function SaibaMais() {
                   : "0 14px 28px rgba(8,14,24,.22), inset 0 0 0 1px rgba(198,220,255,.08), 0 0 0 1px rgba(112,148,198,.1)",
                 transform: panelHovered ? "translateY(-3px)" : "translateY(0)",
                 transition: "transform .28s ease, box-shadow .28s ease, border-color .28s ease",
+                marginTop: showSideBySide ? 0 : ".4rem",
               }}
             >
               <div

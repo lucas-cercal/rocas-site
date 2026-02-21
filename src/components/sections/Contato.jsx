@@ -37,6 +37,8 @@ export default function Contato() {
   const { t } = useI18n();
   const isMobile = useBreakpoint(980);
   const [sent, setSent] = useState(false);
+  const [quoteCardHovered, setQuoteCardHovered] = useState(false);
+  const [submitHovered, setSubmitHovered] = useState(false);
   const [form, setForm] = useState({
     fullName: "",
     company: "",
@@ -155,7 +157,20 @@ export default function Contato() {
       </Reveal>
 
       <Reveal delay={150}>
-        <div style={{ background: theme.bg2, padding: "2.4rem", border: `1px solid ${theme.bd}` }}>
+        <div
+          onMouseEnter={() => setQuoteCardHovered(true)}
+          onMouseLeave={() => setQuoteCardHovered(false)}
+          style={{
+            background: theme.bg2,
+            padding: "2.4rem",
+            border: `1px solid ${quoteCardHovered ? theme.bdAct : theme.bd}`,
+            boxShadow: quoteCardHovered
+              ? "0 16px 34px rgba(0,0,0,.28), inset 0 0 0 1px rgba(167,198,236,.12)"
+              : "0 10px 24px rgba(0,0,0,.18), inset 0 0 0 1px rgba(167,198,236,.06)",
+            transform: quoteCardHovered ? "translateY(-2px)" : "translateY(0)",
+            transition: "all .28s ease",
+          }}
+        >
           <div
             style={{
               fontFamily: "'Neue Montreal', sans-serif",
@@ -178,6 +193,7 @@ export default function Contato() {
                 onChange={handleChange}
                 required
                 autoComplete="name"
+                interactive
               />
               <FInput
                 id="contato-company"
@@ -187,6 +203,7 @@ export default function Contato() {
                 value={form.company}
                 onChange={handleChange}
                 autoComplete="organization"
+                interactive
               />
             </div>
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: ".9rem", marginBottom: ".9rem" }}>
@@ -200,6 +217,7 @@ export default function Contato() {
                 onChange={handleChange}
                 required
                 autoComplete="email"
+                interactive
               />
               <FInput
                 id="contato-whatsapp"
@@ -210,6 +228,7 @@ export default function Contato() {
                 value={form.whatsapp}
                 onChange={handleChange}
                 autoComplete="tel"
+                interactive
               />
             </div>
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: ".9rem", marginBottom: ".9rem" }}>
@@ -221,6 +240,7 @@ export default function Contato() {
                 placeholderOption={t.common.selectOption}
                 value={form.serviceType}
                 onChange={handleChange}
+                interactive
               />
               <FInput
                 id="contato-period"
@@ -229,6 +249,7 @@ export default function Contato() {
                 placeholder={t.contato.form.periodPlaceholder}
                 value={form.period}
                 onChange={handleChange}
+                interactive
               />
             </div>
             <FTextarea
@@ -238,9 +259,12 @@ export default function Contato() {
               placeholder={t.contato.form.messagePlaceholder}
               value={form.message}
               onChange={handleChange}
+              interactive
             />
             <button
               type="submit"
+              onMouseEnter={() => setSubmitHovered(true)}
+              onMouseLeave={() => setSubmitHovered(false)}
               style={{
                 width: "100%",
                 marginTop: "1.1rem",
@@ -257,6 +281,8 @@ export default function Contato() {
                 cursor: "pointer",
                 fontWeight: 500,
                 transition: "all .3s",
+                boxShadow: submitHovered ? "0 12px 28px rgba(186,210,241,.28)" : "none",
+                transform: submitHovered ? "translateY(-1px)" : "translateY(0)",
               }}
             >
               {sent ? t.contato.form.success : t.contato.form.submit}

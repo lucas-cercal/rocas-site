@@ -32,36 +32,54 @@ function NavLink({ href, children, scrolled = false }) {
   );
 }
 
-function NavCta({ onClick, children, scrolled = false }) {
+function NavCta({ onClick, href, children, scrolled = false }) {
   const [hovered, setHovered] = useState(false);
+
+  const style = {
+    border: `1px solid ${
+      scrolled
+        ? hovered
+          ? "rgba(15,28,47,.88)"
+          : "rgba(15,28,47,.34)"
+        : hovered
+          ? theme.cr6
+          : theme.cr3
+    }`,
+    background: hovered ? (scrolled ? "#132033" : theme.cr6) : "transparent",
+    color: hovered ? (scrolled ? "#f8fbff" : theme.bg0) : scrolled ? "#1a2a40" : theme.cr6,
+    padding: ".56rem 1.42rem",
+    fontSize: ".72rem",
+    letterSpacing: ".22em",
+    cursor: "pointer",
+    transition: "all .3s",
+    fontWeight: 500,
+    fontFamily: "'Neue Montreal', sans-serif",
+    textTransform: "uppercase",
+    whiteSpace: "nowrap",
+    textDecoration: "none",
+    display: "inline-block",
+  };
+
+  if (href) {
+    return (
+      <a
+        href={href}
+        onClick={onClick}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        style={style}
+      >
+        {children}
+      </a>
+    );
+  }
 
   return (
     <button
       onClick={onClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      style={{
-        border: `1px solid ${
-          scrolled
-            ? hovered
-              ? "rgba(15,28,47,.88)"
-              : "rgba(15,28,47,.34)"
-            : hovered
-              ? theme.cr6
-              : theme.cr3
-        }`,
-        background: hovered ? (scrolled ? "#132033" : theme.cr6) : "transparent",
-        color: hovered ? (scrolled ? "#f8fbff" : theme.bg0) : scrolled ? "#1a2a40" : theme.cr6,
-        padding: ".56rem 1.42rem",
-        fontSize: ".72rem",
-        letterSpacing: ".22em",
-        cursor: "pointer",
-        transition: "all .3s",
-        fontWeight: 500,
-        fontFamily: "'Neue Montreal', sans-serif",
-        textTransform: "uppercase",
-        whiteSpace: "nowrap",
-      }}
+      style={style}
     >
       {children}
     </button>
@@ -169,7 +187,7 @@ export default function Nav({ openModal }) {
                 </option>
               ))}
             </select>
-            <NavCta onClick={openModal} scrolled={scrolled}>
+            <NavCta href="#contato" scrolled={scrolled}>
               {t.nav.cta}
             </NavCta>
           </div>
@@ -262,10 +280,8 @@ export default function Nav({ openModal }) {
             ))}
           </select>
           <NavCta
-            onClick={() => {
-              setOpen(false);
-              openModal();
-            }}
+            href="#contato"
+            onClick={() => setOpen(false)}
           >
             {t.nav.cta}
           </NavCta>

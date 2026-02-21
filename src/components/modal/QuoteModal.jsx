@@ -9,6 +9,9 @@ export default function QuoteModal({ open, onClose }) {
   const { t } = useI18n();
   const isMobile = useBreakpoint(980);
   const [sent, setSent] = useState(false);
+  const [modalHovered, setModalHovered] = useState(false);
+  const [closeHovered, setCloseHovered] = useState(false);
+  const [submitHovered, setSubmitHovered] = useState(false);
   const [form, setForm] = useState({
     name: "",
     whatsapp: "",
@@ -80,6 +83,8 @@ export default function QuoteModal({ open, onClose }) {
       }}
     >
       <div
+        onMouseEnter={() => setModalHovered(true)}
+        onMouseLeave={() => setModalHovered(false)}
         style={{
           background: theme.bg2,
           width: "90%",
@@ -90,10 +95,17 @@ export default function QuoteModal({ open, onClose }) {
           border: `1px solid ${theme.bd}`,
           maxHeight: "90vh",
           overflowY: "auto",
+          boxShadow: modalHovered
+            ? "0 20px 46px rgba(0,0,0,.48), inset 0 0 0 1px rgba(177,205,241,.12)"
+            : "0 14px 34px rgba(0,0,0,.4), inset 0 0 0 1px rgba(177,205,241,.08)",
+          transform: modalHovered ? "translateY(-2px)" : "translateY(0)",
+          transition: "all .28s ease",
         }}
       >
         <button
           onClick={onClose}
+          onMouseEnter={() => setCloseHovered(true)}
+          onMouseLeave={() => setCloseHovered(false)}
           aria-label="Fechar modal"
           style={{
             position: "absolute",
@@ -101,10 +113,12 @@ export default function QuoteModal({ open, onClose }) {
             right: "1.2rem",
             background: "none",
             border: "none",
-            color: theme.textLo,
+            color: closeHovered ? theme.cr5 : theme.textLo,
             fontSize: "1.3rem",
             cursor: "pointer",
             lineHeight: 1,
+            transform: closeHovered ? "rotate(90deg)" : "rotate(0)",
+            transition: "all .22s ease",
           }}
         >
           ✕
@@ -135,6 +149,7 @@ export default function QuoteModal({ open, onClose }) {
               onChange={handleChange}
               required
               autoComplete="name"
+              interactive
             />
             <FInput
               id="quote-whatsapp"
@@ -146,6 +161,7 @@ export default function QuoteModal({ open, onClose }) {
               onChange={handleChange}
               required
               autoComplete="tel"
+              interactive
             />
           </div>
           <FSelect
@@ -156,6 +172,7 @@ export default function QuoteModal({ open, onClose }) {
             placeholderOption={t.common.selectOption}
             value={form.service}
             onChange={handleChange}
+            interactive
           />
           <div style={{ marginTop: ".9rem" }}>
             <FTextarea
@@ -165,10 +182,13 @@ export default function QuoteModal({ open, onClose }) {
               placeholder={t.modal.periodPlaceholder}
               value={form.period}
               onChange={handleChange}
+              interactive
             />
           </div>
           <button
             type="submit"
+            onMouseEnter={() => setSubmitHovered(true)}
+            onMouseLeave={() => setSubmitHovered(false)}
             style={{
               width: "100%",
               marginTop: "1.1rem",
@@ -185,6 +205,8 @@ export default function QuoteModal({ open, onClose }) {
               cursor: "pointer",
               fontWeight: 500,
               transition: "all .3s",
+              boxShadow: submitHovered ? "0 10px 26px rgba(186,210,241,.28)" : "none",
+              transform: submitHovered ? "translateY(-1px)" : "translateY(0)",
             }}
           >
             {sent ? t.modal.success : t.modal.submit}
