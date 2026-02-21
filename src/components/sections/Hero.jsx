@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { logoImage } from "../../assets";
-import logoAnimatedVideo from "../../assets/logo-animada.mp4";
+import heroVideo from "../../assets/cidade.mp4";
 import { theme } from "../../constants/theme";
 import { useBreakpoint } from "../../hooks/useBreakpoint";
 import { useI18n } from "../../i18n/LanguageContext";
@@ -26,38 +26,45 @@ export default function Hero({ openModal }) {
         style={{
           position: "absolute",
           inset: 0,
-          background:
-            "radial-gradient(ellipse 80% 60% at 70% 45%, rgba(100,130,190,.06) 0%,transparent 60%), radial-gradient(ellipse 50% 80% at 15% 60%, rgba(80,110,170,.04) 0%,transparent 60%), linear-gradient(160deg,#080a0f 0%,#0b0d14 45%,#0f1220 100%)",
+          background: "linear-gradient(160deg,#080a0f 0%,#0b0d14 45%,#0f1220 100%)",
         }}
       />
-      <div style={{ position: "absolute", inset: 0, pointerEvents: "none", overflow: "hidden", perspective: 600 }}>
+      {!videoError && (
         <div
           style={{
             position: "absolute",
-            left: "-50%",
-            right: "-50%",
-            top: "40%",
-            height: "200%",
-            backgroundImage:
-              "linear-gradient(rgba(180,200,228,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(180,200,228,.04) 1px,transparent 1px)",
-            backgroundSize: "60px 60px",
-            transform: "rotateX(60deg)",
-            maskImage: "linear-gradient(to bottom,transparent,black 30%,black 70%,transparent)",
-            WebkitMaskImage:
-              "linear-gradient(to bottom,transparent,black 30%,black 70%,transparent)",
+            inset: 0,
+            zIndex: 0,
           }}
-        />
-      </div>
+        >
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            poster={logoImage}
+            preload="metadata"
+            onError={() => setVideoError(true)}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center center",
+              display: "block",
+            }}
+          >
+            <source src={heroVideo} type="video/mp4" />
+          </video>
+        </div>
+      )}
       <div
         style={{
           position: "absolute",
-          right: 0,
-          top: 0,
-          bottom: 0,
-          width: "48%",
-          background: `linear-gradient(145deg,${theme.bg2},${theme.bg3})`,
-          clipPath: "polygon(12% 0,100% 0,100% 100%,0% 100%)",
+          inset: 0,
+          background:
+            "linear-gradient(100deg, rgba(6,10,18,.86) 0%, rgba(6,10,18,.78) 38%, rgba(5,8,14,.62) 62%, rgba(4,7,12,.78) 100%), radial-gradient(ellipse 70% 52% at 20% 45%, rgba(74,106,160,.18) 0%, transparent 62%)",
           pointerEvents: "none",
+          zIndex: 1,
         }}
       />
       <div
@@ -66,15 +73,20 @@ export default function Hero({ openModal }) {
           zIndex: 2,
           width: "100%",
           padding: isMobile ? "0 1.25rem" : "0 4rem",
-          paddingTop: 78,
-          display: "grid",
-          gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
-          gap: isMobile ? "1.5rem" : "3rem",
+          paddingTop: isMobile ? 96 : 112,
+          display: "flex",
           alignItems: "center",
           minHeight: "100vh",
         }}
       >
-        <div style={{ padding: isMobile ? "2.2rem 0 1rem" : "4rem 0", animation: "fadeUp 1s ease both" }}>
+        <div
+          style={{
+            width: "100%",
+            maxWidth: isMobile ? "100%" : 760,
+            padding: isMobile ? "2.2rem 0 1rem" : "4rem 0",
+            animation: "fadeUp 1s ease both",
+          }}
+        >
           <div
             style={{
               display: "inline-flex",
@@ -101,9 +113,9 @@ export default function Hero({ openModal }) {
           <h1
             style={{
               fontFamily: "'Neue Montreal', sans-serif",
-              fontSize: isMobile ? "clamp(2.35rem,12vw,3.6rem)" : "clamp(3.3rem,5.9vw,5.8rem)",
+              fontSize: isMobile ? "clamp(1.9rem,9vw,2.7rem)" : "clamp(2.5rem,4.6vw,4.2rem)",
               fontWeight: 700,
-              lineHeight: 1,
+              lineHeight: 1.04,
               color: theme.cr8,
               marginBottom: "1.8rem",
             }}
@@ -180,75 +192,6 @@ export default function Hero({ openModal }) {
                 </div>
               );
             })}
-          </div>
-        </div>
-
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}>
-          <div
-            style={{
-              position: "absolute",
-              width: 320,
-              height: 320,
-              borderRadius: "50%",
-              background: "radial-gradient(circle,rgba(120,160,220,.06) 0%,transparent 70%)",
-              pointerEvents: "none",
-            }}
-          />
-          <div
-            style={{
-              width: isMobile ? "min(82vw, 360px)" : "min(94%, 500px)",
-              aspectRatio: "1 / 1",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              position: "relative",
-              zIndex: 2,
-              transform: isMobile ? "translate(14%, -4%)" : "translate(18%, -7%)",
-            }}
-          >
-            <div
-              style={{
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                filter:
-                  "drop-shadow(0 0 80px rgba(160,190,230,.2)) drop-shadow(0 30px 60px rgba(0,0,0,.7)) brightness(1.05)",
-                animation: "floatY 7s ease-in-out infinite",
-              }}
-            >
-              {!videoError ? (
-                <video
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  poster={logoImage}
-                  onError={() => setVideoError(true)}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "contain",
-                    objectPosition: "center center",
-                    display: "block",
-                  }}
-                >
-                  <source src={logoAnimatedVideo} type="video/mp4" />
-                </video>
-              ) : (
-                <img
-                  src={logoImage}
-                  alt="ROCAS"
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "contain",
-                    objectPosition: "center center",
-                  }}
-                />
-              )}
-            </div>
           </div>
         </div>
       </div>
