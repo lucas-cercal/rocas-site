@@ -5,7 +5,7 @@ import { useI18n } from "../../i18n/LanguageContext";
 import Reveal from "../ui/Reveal";
 import { SLabel, STitle } from "../ui/SectionTitle";
 
-function Pillar({ num, title, desc }) {
+function Pillar({ title, desc }) {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -33,15 +33,12 @@ function Pillar({ num, title, desc }) {
       />
       <div
         style={{
-          fontFamily: "'Neue Montreal', sans-serif",
-          fontSize: "2rem",
-          color: "rgba(150,170,200,.1)",
-          lineHeight: 1,
-          marginBottom: ".4rem",
+          width: 24,
+          height: 2,
+          background: "linear-gradient(to right, rgba(180,205,240,.85), transparent)",
+          marginBottom: ".65rem",
         }}
-      >
-        {num}
-      </div>
+      />
       <div
         style={{
           fontSize: ".7rem",
@@ -104,7 +101,7 @@ export default function QuemSomos() {
       <Reveal delay={150}>
         <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 1, background: theme.bd }}>
           {pillars.map((pillar) => (
-            <Pillar key={pillar.num} num={pillar.num} title={pillar.title} desc={pillar.desc} />
+            <Pillar key={pillar.title} title={pillar.title} desc={pillar.desc} />
           ))}
         </div>
       </Reveal>

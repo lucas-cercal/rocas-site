@@ -5,7 +5,7 @@ import { useI18n } from "../../i18n/LanguageContext";
 import Reveal from "../ui/Reveal";
 import { SLabel, STitle } from "../ui/SectionTitle";
 
-function ServiceCard({ num, title, desc }) {
+function ServiceCard({ title, desc }) {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -15,24 +15,18 @@ function ServiceCard({ num, title, desc }) {
       style={{
         background: hovered ? theme.bg3 : theme.bg2,
         padding: "2rem 2.4rem",
-        display: "flex",
-        gap: "1.2rem",
         transition: "background .3s",
       }}
     >
-      <div
-        style={{
-          fontFamily: "'Neue Montreal', sans-serif",
-          fontSize: "2.5rem",
-          color: "rgba(150,170,200,.1)",
-          lineHeight: 1,
-          flexShrink: 0,
-          marginTop: "-.2rem",
-        }}
-      >
-        {num}
-      </div>
       <div>
+        <div
+          style={{
+            width: 26,
+            height: 2,
+            background: "linear-gradient(to right, rgba(180,205,240,.85), transparent)",
+            marginBottom: ".7rem",
+          }}
+        />
         <div
           style={{
             fontSize: ".72rem",
@@ -78,8 +72,8 @@ export default function Servicos() {
             marginTop: "3rem",
           }}
         >
-          {services.map(([num, title, desc]) => (
-            <ServiceCard key={num} num={num} title={title} desc={desc} />
+          {services.map(([, title, desc]) => (
+            <ServiceCard key={title} title={title} desc={desc} />
           ))}
         </div>
       </Reveal>
