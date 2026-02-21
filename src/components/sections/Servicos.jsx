@@ -22,7 +22,7 @@ function ServiceCard({ num, title, desc }) {
     >
       <div
         style={{
-          fontFamily: "'Cormorant Garamond',serif",
+          fontFamily: "'Neue Montreal', sans-serif",
           fontSize: "2.5rem",
           color: "rgba(150,170,200,.1)",
           lineHeight: 1,
@@ -39,13 +39,13 @@ function ServiceCard({ num, title, desc }) {
             letterSpacing: ".14em",
             textTransform: "uppercase",
             color: theme.cr6,
-            fontWeight: 600,
+            fontWeight: 500,
             marginBottom: ".55rem",
           }}
         >
           {title}
         </div>
-        <div style={{ fontSize: ".76rem", color: theme.textMd, lineHeight: 1.7, fontWeight: 300 }}>
+        <div style={{ fontSize: ".76rem", color: theme.textMd, lineHeight: 1.7, fontWeight: 500 }}>
           {desc}
         </div>
       </div>

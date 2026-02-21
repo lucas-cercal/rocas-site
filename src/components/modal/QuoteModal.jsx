@@ -112,11 +112,11 @@ export default function QuoteModal({ open, onClose }) {
         <div
           id="quote-modal-title"
           style={{
-            fontFamily: "'Cormorant Garamond',serif",
+            fontFamily: "'Neue Montreal', sans-serif",
             fontSize: "1.8rem",
             color: theme.cr7,
             marginBottom: ".3rem",
-            fontWeight: 400,
+            fontWeight: 700,
           }}
         >
           {t.modal.title}
@@ -178,12 +178,12 @@ export default function QuoteModal({ open, onClose }) {
               color: theme.bg0,
               border: "none",
               padding: ".9rem",
-              fontFamily: "'Raleway',sans-serif",
+              fontFamily: "'Neue Montreal', sans-serif",
               fontSize: ".68rem",
               letterSpacing: ".26em",
               textTransform: "uppercase",
               cursor: "pointer",
-              fontWeight: 700,
+              fontWeight: 500,
               transition: "all .3s",
             }}
           >

@@ -66,17 +66,17 @@ function VehicleCard({ badge, name, desc, tags, grad, image }) {
             color: theme.accentDim,
             textTransform: "uppercase",
             marginBottom: ".5rem",
-            fontWeight: 600,
+            fontWeight: 500,
           }}
         >
           {badge}
         </div>
         <div
           style={{
-            fontFamily: "'Cormorant Garamond',serif",
+            fontFamily: "'Neue Montreal', sans-serif",
             fontSize: "1.4rem",
             color: theme.cr7,
-            fontWeight: 400,
+            fontWeight: 700,
             marginBottom: ".6rem",
           }}
         >
@@ -88,7 +88,7 @@ function VehicleCard({ badge, name, desc, tags, grad, image }) {
             color: theme.textMd,
             lineHeight: 1.65,
             marginBottom: "1.2rem",
-            fontWeight: 300,
+            fontWeight: 500,
           }}
         >
           {desc}

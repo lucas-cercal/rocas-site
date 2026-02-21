@@ -1,18 +1,22 @@
 export const theme = {
-  bg0: "#0b0d12", bg1: "#0f1118", bg2: "#13161f",
-  bg3: "#181c28", bg4: "#1d2232",
-  cr3: "#6f7891", cr4: "#9ca7bf", cr5: "#c3cddd",
-  cr6: "#cdd5e0", cr7: "#e2e8f0", cr8: "#f0f3f7",
-  accent: "#c8d4e4", accentDim: "#7a8fa8",
-  textMd: "#a2afc1", textLo: "#73829a",
-  bd: "rgba(180,200,228,0.08)", bdAct: "rgba(180,200,228,0.22)",
+  bg0: "#03060d", bg1: "#070d1a", bg2: "#0b1424",
+  bg3: "#0f1b31", bg4: "#142542",
+  cr3: "#6782a9", cr4: "#8fa8cf", cr5: "#b9cbed",
+  cr6: "#d2def5", cr7: "#e6eeff", cr8: "#f4f8ff",
+  accent: "#9ec4ff", accentDim: "#5f87c3",
+  textMd: "#9eb4d8", textLo: "#6f86aa",
+  bd: "rgba(142,180,237,0.15)", bdAct: "rgba(142,180,237,0.32)",
 };
 
 export const globalStyles = `
-  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Raleway:wght@200;300;400;500;600;700&display=swap');
+  @import url('https://fonts.cdnfonts.com/css/neue-montreal');
+  :root {
+    --font-title: 'Neue Montreal', sans-serif;
+    --font-body: 'Neue Montreal', sans-serif;
+  }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; font-size: clamp(17px, 0.5vw + 13px, 20px); }
-  body { font-family: 'Raleway', sans-serif; font-size: 1.03rem; background: ${theme.bg1}; color: ${theme.cr5}; overflow-x: hidden; margin: 0; }
+  body { font-family: var(--font-body); font-weight: 500; font-size: 1.03rem; background: ${theme.bg1}; color: ${theme.cr5}; overflow-x: hidden; margin: 0; }
   ::-webkit-scrollbar { width: 3px; }
   ::-webkit-scrollbar-track { background: ${theme.bg0}; }
   ::-webkit-scrollbar-thumb { background: ${theme.cr3}; border-radius: 2px; }

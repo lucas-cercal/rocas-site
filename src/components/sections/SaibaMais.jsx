@@ -27,7 +27,7 @@ export default function SaibaMais() {
               color: theme.textMd,
               lineHeight: 1.85,
               marginTop: "1rem",
-              fontWeight: 300,
+              fontWeight: 500,
             }}
           >
             {t.saibaMais.intro}
@@ -61,7 +61,7 @@ export default function SaibaMais() {
                     transform: openItem === index ? "rotate(45deg)" : "none",
                     flexShrink: 0,
                     lineHeight: 1,
-                    fontWeight: 300,
+                    fontWeight: 500,
                   }}
                 >
                   +
@@ -69,7 +69,7 @@ export default function SaibaMais() {
               </div>
               {openItem === index && (
                 <div style={{ paddingBottom: "1.3rem" }}>
-                  <p style={{ fontSize: ".77rem", color: theme.textMd, lineHeight: 1.85, fontWeight: 300 }}>
+                  <p style={{ fontSize: ".77rem", color: theme.textMd, lineHeight: 1.85, fontWeight: 500 }}>
                     {answer}
                   </p>
                 </div>

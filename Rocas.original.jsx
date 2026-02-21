@@ -229,7 +229,7 @@ function Hero({ openModal }) {
           <h1 style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(3.2rem,5.5vw,5.5rem)", fontWeight: 400, lineHeight: 1.0, color: theme.cr8, marginBottom: "1.8rem" }}>
             Proteção que<br />
             <em style={{ fontStyle: "italic", fontWeight: 300, background: `linear-gradient(135deg,${theme.cr7},${theme.cr5} 60%,${theme.cr6})`, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>não se vê.</em><br />
-            Solidez que<br />se sente.
+            Segurança que<br />se sente.
           </h1>
           <p style={{ fontSize: ".81rem", color: theme.textMd, lineHeight: 1.9, maxWidth: 400, marginBottom: "2.8rem", fontWeight: 300 }}>
             Frota exclusiva de veículos blindados híbridos, certificação ABNT e atendimento absolutamente confidencial. Para executivos e famílias que não negociam segurança.

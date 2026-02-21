@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { buildWhatsAppLink } from "../../constants/contact";
 import { theme } from "../../constants/theme";
 import { useBreakpoint } from "../../hooks/useBreakpoint";
@@ -7,30 +7,29 @@ import { FInput, FSelect, FTextarea } from "../forms/Fields";
 import Reveal from "../ui/Reveal";
 import { SLabel, STitle } from "../ui/SectionTitle";
 
-function SocialIcon({ label }) {
-  const [hovered, setHovered] = useState(false);
-
+function SocialIcon({ href, label, icon }) {
   return (
-    <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={label}
       style={{
-        width: 32,
-        height: 32,
-        border: `1px solid ${hovered ? theme.cr5 : theme.bd}`,
+        width: 56,
+        height: 56,
+        border: `1px solid ${theme.bd}`,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        color: hovered ? theme.cr7 : theme.textLo,
-        fontSize: ".62rem",
-        fontWeight: 700,
+        color: theme.cr7,
         cursor: "pointer",
         transition: "all .3s",
-        background: hovered ? "rgba(180,200,228,.05)" : "transparent",
+        background: `linear-gradient(145deg, ${theme.bg2}, ${theme.bg3})`,
+        textDecoration: "none",
       }}
     >
-      {label}
-    </div>
+      {icon}
+    </a>
   );
 }
 
@@ -47,6 +46,20 @@ export default function Contato() {
     period: "",
     message: "",
   });
+  const contactIcons = useMemo(
+    () => ({
+      WhatsApp: "🟢",
+      "E-mail": "✉️",
+      Atendimento: "🕒",
+      "Área de atuação": "📍",
+      Service: "🕒",
+      Coverage: "📍",
+      Atención: "🕒",
+      Cobertura: "📍",
+      "Zone d'action": "📍",
+    }),
+    []
+  );
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -99,7 +112,7 @@ export default function Contato() {
             color: theme.textMd,
             lineHeight: 1.85,
             marginTop: "1.2rem",
-            fontWeight: 300,
+            fontWeight: 500,
           }}
         >
           {t.contato.intro}
@@ -109,14 +122,19 @@ export default function Contato() {
             <div key={label} style={{ display: "flex", gap: "1rem", alignItems: "flex-start" }}>
               <div
                 style={{
-                  width: 5,
-                  height: 5,
-                  borderRadius: "50%",
-                  background: theme.accentDim,
-                  marginTop: 7,
+                  width: 36,
+                  height: 36,
+                  border: `1px solid ${theme.bd}`,
+                  background: theme.bg2,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: "1rem",
                   flexShrink: 0,
                 }}
-              />
+              >
+                {contactIcons[label] || "•"}
+              </div>
               <div>
                 <div
                   style={{
@@ -129,15 +147,55 @@ export default function Contato() {
                 >
                   {label}
                 </div>
-                <div style={{ fontSize: ".8rem", color: theme.cr5 }}>{value}</div>
+                <div style={{ fontSize: ".8rem", color: theme.cr5, fontWeight: 500 }}>{value}</div>
               </div>
             </div>
           ))}
         </div>
         <div style={{ display: "flex", gap: ".6rem", marginTop: "2.2rem" }}>
-          {["IG", "LI", "YT", "FB"].map((social) => (
-            <SocialIcon key={social} label={social} />
-          ))}
+          <SocialIcon
+            href="https://instagram.com"
+            label="Instagram"
+            icon={
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect x="4" y="4" width="16" height="16" rx="5" stroke="currentColor" strokeWidth="1.7" />
+                <circle cx="12" cy="12" r="3.4" stroke="currentColor" strokeWidth="1.7" />
+                <circle cx="17.2" cy="6.9" r="1.1" fill="currentColor" />
+              </svg>
+            }
+          />
+          <SocialIcon
+            href="https://linkedin.com"
+            label="LinkedIn"
+            icon={
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect x="4" y="4" width="16" height="16" rx="3.5" stroke="currentColor" strokeWidth="1.7" />
+                <rect x="7.3" y="10.1" width="2.1" height="6.2" fill="currentColor" />
+                <circle cx="8.35" cy="7.8" r="1.2" fill="currentColor" />
+                <path d="M12 16.3v-3.5c0-1.5.9-2.5 2.2-2.5 1.2 0 2 .8 2 2.3v3.7" stroke="currentColor" strokeWidth="1.7" />
+              </svg>
+            }
+          />
+          <SocialIcon
+            href="https://youtube.com"
+            label="YouTube"
+            icon={
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect x="3.6" y="6.8" width="16.8" height="10.4" rx="3" stroke="currentColor" strokeWidth="1.7" />
+                <path d="M10.5 10.2l4.4 2.1-4.4 2.1v-4.2z" fill="currentColor" />
+              </svg>
+            }
+          />
+          <SocialIcon
+            href="https://facebook.com"
+            label="Facebook"
+            icon={
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect x="4" y="4" width="16" height="16" rx="3.5" stroke="currentColor" strokeWidth="1.7" />
+                <path d="M13.1 17v-4h2.3l.4-2.2h-2.7V9.5c0-.8.2-1.3 1.3-1.3h1.5V6.3h-2.2c-2.3 0-3 1.3-3 3.2v1.3H9V13h1.7v4h2.4z" fill="currentColor" />
+              </svg>
+            }
+          />
         </div>
       </Reveal>
 
@@ -145,11 +203,11 @@ export default function Contato() {
         <div style={{ background: theme.bg2, padding: "2.4rem", border: `1px solid ${theme.bd}` }}>
           <div
             style={{
-              fontFamily: "'Cormorant Garamond',serif",
+              fontFamily: "'Neue Montreal', sans-serif",
               fontSize: "1.7rem",
               color: theme.cr7,
               marginBottom: "1.8rem",
-              fontWeight: 400,
+              fontWeight: 700,
             }}
           >
             {t.contato.form.title}
@@ -237,12 +295,12 @@ export default function Contato() {
                 color: theme.bg0,
                 border: "none",
                 padding: ".9rem",
-                fontFamily: "'Raleway',sans-serif",
+                fontFamily: "'Neue Montreal', sans-serif",
                 fontSize: ".68rem",
                 letterSpacing: ".26em",
                 textTransform: "uppercase",
                 cursor: "pointer",
-                fontWeight: 700,
+                fontWeight: 500,
                 transition: "all .3s",
               }}
             >

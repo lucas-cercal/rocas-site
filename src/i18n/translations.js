@@ -6,7 +6,7 @@ const pt = {
   },
   hero: {
     badge: "Mobilidade Blindada & Discreta",
-    lines: ["Proteção que", "não se vê.", "Solidez que", "se sente."],
+    lines: ["Proteção que", "não se vê.", "Segurança que", "se sente."],
     desc:
       "Frota exclusiva de veículos blindados híbridos, certificação ABNT e atendimento absolutamente confidencial. Para executivos e famílias que não negociam segurança.",
     ctaPrimary: "Solicitar Cotação",
@@ -24,7 +24,7 @@ const pt = {
     titleB: "fundamentos sólidos",
     paragraphs: [
       "Assim como a rocha sustenta estruturas e protege o que está sobre ela, a ROCAS existe para garantir estabilidade, segurança e confiança em cada deslocamento executivo.",
-      "Nossa frota é composta exclusivamente por veículos híbridos blindados, com aparência discreta e blindagem certificada — porque para quem realmente precisa de proteção, visibilidade é vulnerabilidade.",
+      "Nossa frota é composta exclusivamente por veículos híbridos blindados, com aparência discreta e blindagem certificada, porque para quem realmente precisa de proteção, visibilidade é vulnerabilidade.",
       "Confidencialidade sobre identidade, rotinas e contratos é nossa prática padrão. O mínimo que você merece.",
     ],
     pillars: [
@@ -41,7 +41,7 @@ const pt = {
       {
         num: "03",
         title: "Sustentabilidade",
-        desc: "Frota 100% híbrida — eficiência elétrica urbana com autonomia a combustão para longas distâncias.",
+        desc: "Frota 100% híbrida, eficiência elétrica urbana com autonomia a combustão para longas distâncias.",
       },
       {
         num: "04",
@@ -127,15 +127,15 @@ const pt = {
       ],
       [
         "Veículo blindado parece diferente por fora?",
-        "Não — e esse é um dos principais critérios da ROCAS. Nossa frota mantém a aparência original de fábrica. A blindagem é incorporada internamente, preservando design, motorização e comportamento visual. Discrição é parte da proteção.",
+        "Não, e esse é um dos principais critérios da ROCAS. Nossa frota mantém a aparência original de fábrica. A blindagem é incorporada internamente, preservando design, motorização e comportamento visual. Discrição é parte da proteção.",
       ],
       [
         "Por que escolher veículos híbridos blindados?",
-        "Veículos híbridos combinam eficiência elétrica — menor ruído, emissão e custo operacional — com a autonomia do motor a combustão. Para uso executivo urbano, oferecem economia sem comprometer desempenho. Toda a frota ROCAS é certificada como híbrida e blindada.",
+        "Veículos híbridos combinam eficiência elétrica, menor ruído, emissão e custo operacional, com a autonomia do motor a combustão. Para uso executivo urbano, oferecem economia sem comprometer desempenho. Toda a frota ROCAS é certificada como híbrida e blindada.",
       ],
       [
         "A blindagem exige manutenção especial?",
-        "Sim. O peso adicional exige monitoramento mais frequente de freios, suspensão e pneus. A ROCAS realiza manutenção preventiva rigorosa com revisões periódicas e inspeção completa antes de cada locação — zero improviso.",
+        "Sim. O peso adicional exige monitoramento mais frequente de freios, suspensão e pneus. A ROCAS realiza manutenção preventiva rigorosa com revisões periódicas e inspeção completa antes de cada locação, zero improviso.",
       ],
       [
         "Como funciona a confidencialidade dos contratos?",
@@ -143,7 +143,7 @@ const pt = {
       ],
       [
         "Depoimentos de clientes",
-        "Em breve publicaremos avaliações de clientes que autorizaram o compartilhamento de suas experiências — sempre de forma anônima. Sua segurança vem antes de qualquer testemunho.",
+        "Cliente A, diretoria financeira: Atendimento rápido, veículo impecável e operação silenciosa em toda a semana. Cliente B, família em deslocamento intermunicipal: Sentimos segurança real sem chamar atenção. Cliente C, jurídico corporativo: Processo de locação objetivo, sigilo respeitado e suporte ativo durante toda a agenda.",
       ],
     ],
   },
@@ -156,8 +156,8 @@ const pt = {
     info: [
       ["WhatsApp", "+55 (41) 98531-8314"],
       ["E-mail", "contato@rocas.com.br"],
-      ["Atendimento", "24h — 7 dias por semana"],
-      ["Área de atuação", "Brasil — regiões a confirmar"],
+      ["Atendimento", "24h, 7 dias por semana"],
+      ["Área de atuação", "Brasil, regiões a confirmar"],
     ],
     form: {
       title: "Solicitar Cotação",
@@ -258,7 +258,7 @@ const en = mergeDeep(pt, {
   },
   hero: {
     badge: "Armored & Discreet Mobility",
-    lines: ["Protection that", "is not seen.", "Strength that", "is felt."],
+    lines: ["Protection that", "is not seen.", "Security that", "is felt."],
     desc:
       "Exclusive fleet of hybrid armored vehicles, ABNT-compliant armor, and fully confidential service. For executives and families who do not compromise on safety.",
     ctaPrimary: "Request Quote",
@@ -395,7 +395,7 @@ const en = mergeDeep(pt, {
       ],
       [
         "Client testimonials",
-        "We will soon publish reviews from clients who authorize sharing, always in anonymous form. Security comes before marketing.",
+        "Client A, finance executive: Fast response, immaculate vehicle, and low profile service all week. Client B, family intercity travel: We felt real security without drawing attention. Client C, corporate legal team: Clear rental process, confidentiality respected, and active support throughout our schedule.",
       ],
     ],
   },
@@ -408,8 +408,8 @@ const en = mergeDeep(pt, {
     info: [
       ["WhatsApp", "+55 (41) 98531-8314"],
       ["E-mail", "contato@rocas.com.br"],
-      ["Service", "24h — 7 days a week"],
-      ["Coverage", "Brazil — regions upon confirmation"],
+      ["Service", "24h, 7 days a week"],
+      ["Coverage", "Brazil, regions upon confirmation"],
     ],
     form: {
       title: "Request Quote",
@@ -487,7 +487,7 @@ const es = mergeDeep(pt, {
   },
   hero: {
     badge: "Movilidad Blindada y Discreta",
-    lines: ["Protección que", "no se ve.", "Solidez que", "se siente."],
+    lines: ["Protección que", "no se ve.", "Seguridad que", "se siente."],
     desc:
       "Flota exclusiva de vehículos híbridos blindados, blindaje certificado y atención absolutamente confidencial. Para ejecutivos y familias que no negocian la seguridad.",
     ctaPrimary: "Solicitar Cotización",
@@ -624,7 +624,7 @@ const es = mergeDeep(pt, {
       ],
       [
         "Testimonios de clientes",
-        "Pronto publicaremos testimonios autorizados, siempre de forma anónima.",
+        "Cliente A, dirección financiera: Atención rápida, vehículo impecable y operación discreta durante toda la semana. Cliente B, familia en traslado interurbano: Sentimos seguridad real sin llamar la atención. Cliente C, equipo legal corporativo: Proceso claro, confidencialidad respetada y soporte activo durante toda la agenda.",
       ],
     ],
   },
@@ -637,8 +637,8 @@ const es = mergeDeep(pt, {
     info: [
       ["WhatsApp", "+55 (41) 98531-8314"],
       ["E-mail", "contato@rocas.com.br"],
-      ["Atención", "24h — 7 días por semana"],
-      ["Cobertura", "Brasil — regiones a confirmar"],
+      ["Atención", "24h, 7 días por semana"],
+      ["Cobertura", "Brasil, regiones a confirmar"],
     ],
     form: {
       title: "Solicitar Cotización",
@@ -716,7 +716,7 @@ const fr = mergeDeep(pt, {
   },
   hero: {
     badge: "Mobilité Blindée et Discrète",
-    lines: ["Protection qui", "ne se voit pas.", "Solidité qui", "se ressent."],
+    lines: ["Protection qui", "ne se voit pas.", "Sécurité qui", "se ressent."],
     desc:
       "Flotte exclusive de véhicules hybrides blindés, blindage certifié et service totalement confidentiel. Pour les cadres et familles qui ne négocient pas la sécurité.",
     ctaPrimary: "Demander un Devis",
@@ -853,7 +853,7 @@ const fr = mergeDeep(pt, {
       ],
       [
         "Témoignages de clients",
-        "Nous publierons bientôt des témoignages autorisés, toujours de façon anonyme.",
+        "Client A, direction financière: Réponse rapide, véhicule impeccable et service discret toute la semaine. Client B, famille en trajet interurbain: Nous avons ressenti une sécurité réelle sans attirer l'attention. Client C, service juridique d'entreprise: Processus clair, confidentialité respectée et support actif pendant tout l'agenda.",
       ],
     ],
   },
@@ -866,8 +866,8 @@ const fr = mergeDeep(pt, {
     info: [
       ["WhatsApp", "+55 (41) 98531-8314"],
       ["E-mail", "contato@rocas.com.br"],
-      ["Service", "24h — 7 jours par semaine"],
-      ["Zone d'action", "Brésil — régions à confirmer"],
+      ["Service", "24h, 7 jours par semaine"],
+      ["Zone d'action", "Brésil, régions à confirmer"],
     ],
     form: {
       title: "Demander un Devis",

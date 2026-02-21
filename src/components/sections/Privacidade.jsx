@@ -29,7 +29,7 @@ export default function Privacidade() {
                 color: theme.textMd,
                 lineHeight: 1.85,
                 marginTop: "1rem",
-                fontWeight: 300,
+                fontWeight: 500,
               }}
             >
               {paragraph}

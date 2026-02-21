@@ -47,8 +47,8 @@ function NavCta({ onClick, children }) {
         letterSpacing: ".22em",
         cursor: "pointer",
         transition: "all .3s",
-        fontWeight: 600,
-        fontFamily: "'Raleway',sans-serif",
+        fontWeight: 500,
+        fontFamily: "'Neue Montreal', sans-serif",
         textTransform: "uppercase",
         whiteSpace: "nowrap",
       }}
@@ -85,6 +85,12 @@ export default function Nav({ openModal }) {
     { label: t.nav.links[4], href: "#saiba-mais" },
     { label: t.nav.links[5], href: "#contato" },
   ];
+  const languageOptions = [
+    { value: "pt", label: `🇧🇷 ${t.nav.langs.pt}` },
+    { value: "en", label: `🇺🇸 ${t.nav.langs.en}` },
+    { value: "es", label: `🇪🇸 ${t.nav.langs.es}` },
+    { value: "fr", label: `🇫🇷 ${t.nav.langs.fr}` },
+  ];
 
   return (
     <>
@@ -100,7 +106,7 @@ export default function Nav({ openModal }) {
           alignItems: "center",
           justifyContent: "space-between",
           padding: isMobile ? "0 1.25rem" : "0 4rem",
-          background: scrolled ? "rgba(11,13,18,.97)" : "rgba(11,13,18,.88)",
+          background: scrolled ? "rgba(4,9,19,.97)" : "rgba(4,9,19,.9)",
           backdropFilter: "blur(16px)",
           WebkitBackdropFilter: "blur(16px)",
           borderBottom: `1px solid ${theme.bd}`,
@@ -113,7 +119,7 @@ export default function Nav({ openModal }) {
             src={logoImage}
             alt="ROCAS Locadora"
             style={{
-              height: 58,
+              height: 72,
               width: "auto",
               filter: "drop-shadow(0 0 12px rgba(180,210,240,.18))",
             }}
@@ -138,14 +144,16 @@ export default function Nav({ openModal }) {
                 letterSpacing: ".15em",
                 padding: ".3rem .5rem",
                 cursor: "pointer",
-                fontFamily: "'Raleway',sans-serif",
+                fontFamily: "'Neue Montreal', sans-serif",
+                fontWeight: 500,
                 textTransform: "uppercase",
               }}
             >
-              <option value="pt">{t.nav.langs.pt}</option>
-              <option value="en">{t.nav.langs.en}</option>
-              <option value="es">{t.nav.langs.es}</option>
-              <option value="fr">{t.nav.langs.fr}</option>
+              {languageOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
             </select>
             <NavCta onClick={openModal}>{t.nav.cta}</NavCta>
           </div>
@@ -220,14 +228,16 @@ export default function Nav({ openModal }) {
               letterSpacing: ".15em",
               padding: ".5rem .8rem",
               cursor: "pointer",
-              fontFamily: "'Raleway',sans-serif",
+              fontFamily: "'Neue Montreal', sans-serif",
+              fontWeight: 500,
               textTransform: "uppercase",
             }}
           >
-            <option value="pt">{t.nav.langs.pt}</option>
-            <option value="en">{t.nav.langs.en}</option>
-            <option value="es">{t.nav.langs.es}</option>
-            <option value="fr">{t.nav.langs.fr}</option>
+            {languageOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
           </select>
           <NavCta
             onClick={() => {

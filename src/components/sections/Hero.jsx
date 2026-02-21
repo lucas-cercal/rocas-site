@@ -85,7 +85,7 @@ export default function Hero({ openModal }) {
               textTransform: "uppercase",
               color: theme.accentDim,
               marginBottom: "2rem",
-              fontWeight: 600,
+              fontWeight: 500,
             }}
             >
               <span
@@ -100,9 +100,9 @@ export default function Hero({ openModal }) {
           </div>
           <h1
             style={{
-              fontFamily: "'Cormorant Garamond',serif",
+              fontFamily: "'Neue Montreal', sans-serif",
               fontSize: isMobile ? "clamp(2.35rem,12vw,3.6rem)" : "clamp(3.3rem,5.9vw,5.8rem)",
-              fontWeight: 400,
+              fontWeight: 700,
               lineHeight: 1,
               color: theme.cr8,
               marginBottom: "1.8rem",
@@ -112,8 +112,8 @@ export default function Hero({ openModal }) {
             <br />
             <em
               style={{
-                fontStyle: "italic",
-                fontWeight: 300,
+              fontStyle: "italic",
+                fontWeight: 700,
                 background: `linear-gradient(135deg,${theme.cr7},${theme.cr5} 60%,${theme.cr6})`,
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
@@ -134,7 +134,7 @@ export default function Hero({ openModal }) {
               lineHeight: 1.9,
               maxWidth: 520,
               marginBottom: "2.8rem",
-              fontWeight: 300,
+              fontWeight: 500,
             }}
           >
             {t.hero.desc}
@@ -157,10 +157,11 @@ export default function Hero({ openModal }) {
                 <div key={label}>
                   <div
                     style={{
-                      fontFamily: "'Cormorant Garamond',serif",
+                      fontFamily: "'Neue Montreal', sans-serif",
                       fontSize: "2.1rem",
                       color: theme.cr7,
                       lineHeight: 1,
+                      fontWeight: 700,
                     }}
                   >
                     {value}

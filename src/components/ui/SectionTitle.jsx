@@ -12,7 +12,7 @@ export function SLabel({ children }) {
         textTransform: "uppercase",
         color: theme.accentDim,
         marginBottom: ".8rem",
-        fontWeight: 600,
+        fontWeight: 500,
       }}
     >
       <span
@@ -33,9 +33,9 @@ export function STitle({ children }) {
   return (
     <h2
       style={{
-        fontFamily: "'Cormorant Garamond', serif",
+        fontFamily: "'Neue Montreal', sans-serif",
         fontSize: "clamp(2.55rem,3.95vw,3.7rem)",
-        fontWeight: 400,
+        fontWeight: 700,
         lineHeight: 1.1,
         color: theme.cr8,
       }}

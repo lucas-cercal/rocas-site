@@ -33,7 +33,7 @@ function Pillar({ num, title, desc }) {
       />
       <div
         style={{
-          fontFamily: "'Cormorant Garamond',serif",
+          fontFamily: "'Neue Montreal', sans-serif",
           fontSize: "2rem",
           color: "rgba(150,170,200,.1)",
           lineHeight: 1,
@@ -49,12 +49,12 @@ function Pillar({ num, title, desc }) {
           textTransform: "uppercase",
           color: theme.cr6,
           marginBottom: ".4rem",
-          fontWeight: 600,
+          fontWeight: 500,
         }}
       >
         {title}
       </div>
-      <div style={{ fontSize: ".75rem", color: theme.textMd, lineHeight: 1.65, fontWeight: 300 }}>
+      <div style={{ fontSize: ".75rem", color: theme.textMd, lineHeight: 1.65, fontWeight: 500 }}>
         {desc}
       </div>
     </div>
@@ -93,7 +93,7 @@ export default function QuemSomos() {
               color: theme.textMd,
               lineHeight: 1.9,
               marginTop: "1.3rem",
-              fontWeight: 300,
+              fontWeight: 500,
             }}
           >
             {paragraph}
