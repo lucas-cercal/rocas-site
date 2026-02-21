@@ -155,7 +155,7 @@ export function FTextarea({
           padding: ".82rem 1rem",
           outline: "none",
           width: "100%",
-          resize: "vertical",
+          resize: "none",
           boxShadow: isLight ? "inset 0 1px 0 rgba(255,255,255,.65)" : "none",
         }}
       />
