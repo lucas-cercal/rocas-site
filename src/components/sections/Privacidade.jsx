@@ -18,9 +18,7 @@ export default function Privacidade() {
       <Reveal>
         <SLabel tone="light">{t.privacy.label}</SLabel>
         <STitle tone="light">
-          {t.privacy.titleA}
-          <br />
-          <em style={{ fontStyle: "italic", color: lightSection.titleEm }}>{t.privacy.titleB}</em>
+          {t.privacy.titleA} {" "}<em style={{ fontStyle: "normal", color: lightSection.titleEm }}>{t.privacy.titleB}</em>
         </STitle>
       </Reveal>
 
@@ -40,6 +38,18 @@ export default function Privacidade() {
               {paragraph}
             </p>
           ))}
+          <h3 id="cookies" style={{ fontSize: "1.02rem", color: "#1b3553", marginTop: "1.6rem", fontWeight: 700 }}>
+            {t.privacy.cookiesTitle}
+          </h3>
+          <p style={{ fontSize: ".86rem", color: lightSection.text, lineHeight: 1.85, marginTop: ".75rem", fontWeight: 500 }}>
+            {t.privacy.cookiesText}
+          </p>
+          <h3 id="termos" style={{ fontSize: "1.02rem", color: "#1b3553", marginTop: "1.6rem", fontWeight: 700 }}>
+            {t.privacy.termsTitle}
+          </h3>
+          <p style={{ fontSize: ".86rem", color: lightSection.text, lineHeight: 1.85, marginTop: ".75rem", fontWeight: 500 }}>
+            {t.privacy.termsText}
+          </p>
         </div>
       </Reveal>
     </section>

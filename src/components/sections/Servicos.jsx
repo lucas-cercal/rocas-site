@@ -51,15 +51,14 @@ export default function Servicos() {
   const { t } = useI18n();
   const isMobile = useBreakpoint(980);
   const services = t.servicos.items;
+  const hasOddCount = services.length % 2 !== 0;
 
   return (
     <section id="servicos" style={{ background: theme.bg2, padding: isMobile ? "4.5rem 1.25rem" : "7rem 4rem" }}>
       <Reveal>
         <SLabel>{t.servicos.label}</SLabel>
         <STitle>
-          {t.servicos.titleA}
-          <br />
-          <em style={{ fontStyle: "italic", color: theme.cr6 }}>{t.servicos.titleB}</em>
+          {t.servicos.titleA} {" "}<em style={{ fontStyle: "normal", color: theme.cr6 }}>{t.servicos.titleB}</em>
         </STitle>
       </Reveal>
       <Reveal delay={150}>
@@ -72,9 +71,14 @@ export default function Servicos() {
             marginTop: "3rem",
           }}
         >
-          {services.map(([, title, desc]) => (
-            <ServiceCard key={title} title={title} desc={desc} />
-          ))}
+          {services.map(([, title, desc], index) => {
+            const isLastOdd = hasOddCount && index === services.length - 1;
+            return (
+              <div key={title} style={{ gridColumn: !isMobile && isLastOdd ? "1 / -1" : "auto" }}>
+                <ServiceCard title={title} desc={desc} />
+              </div>
+            );
+          })}
         </div>
       </Reveal>
     </section>

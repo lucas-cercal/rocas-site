@@ -8,13 +8,13 @@ const pt = {
     badge: "Mobilidade Blindada & Discreta",
     lines: ["Proteção que", "não se vê.", "Segurança que", "se sente."],
     desc:
-      "Frota exclusiva de veículos blindados híbridos, certificação ABNT e atendimento absolutamente confidencial. Para executivos e famílias que não negociam segurança.",
+      "Frota exclusiva de veículos de alto padrão, com foco em veículos blindados e uma frota versátil que oferece diferentes soluções de mobilidade. Uma solução sob medida para empresas, executivos, famílias e perfis públicos de alta exposição, que não negociam segurança em seu deslocamento.",
     ctaPrimary: "Solicitar Cotação",
     ctaSecondary: "Conhecer a Frota",
     stats: [
       { value: "III-A", label: "Nível blindagem" },
-      { value: "100%", label: "Frota híbrida" },
-      { value: "24h", label: "Suporte ativo" },
+      { value: "Alta", label: "Frota versátil" },
+      { value: "24h", label: "Assistência 24h" },
     ],
     scroll: "Role para explorar",
   },
@@ -24,8 +24,8 @@ const pt = {
     titleB: "fundamentos sólidos",
     paragraphs: [
       "Assim como a rocha sustenta estruturas e protege o que está sobre ela, a ROCAS existe para garantir estabilidade, segurança e confiança em cada deslocamento executivo.",
-      "Nossa frota é composta exclusivamente por veículos híbridos blindados, com aparência discreta e blindagem certificada, porque para quem realmente precisa de proteção, visibilidade é vulnerabilidade.",
-      "Confidencialidade sobre identidade, rotinas e contratos é nossa prática padrão. O mínimo que você merece.",
+      "Nossa frota possui veículos blindados de alto padrão, além de outras opções de mobilidade, sempre com foco em discrição, conforto e eficiência, atendendo diferentes perfis e necessidades de deslocamento. Para quem valoriza segurança, exposição nunca é uma opção.",
+      "A confidencialidade sobre identidade, rotinas e contratos é nossa prática padrão, com atenção, cuidado e responsabilidade em cada etapa do serviço.",
     ],
     pillars: [
       {
@@ -41,7 +41,7 @@ const pt = {
       {
         num: "03",
         title: "Sustentabilidade",
-        desc: "Frota 100% híbrida, eficiência elétrica urbana com autonomia a combustão para longas distâncias.",
+        desc: "A maior parte da nossa frota é híbrida, com eficiência elétrica urbana e autonomia a combustão para longas distâncias.",
       },
       {
         num: "04",
@@ -53,27 +53,33 @@ const pt = {
   veiculos: {
     label: "Nossa Frota",
     titleA: "Veículos que",
-    titleB: "protegem sem declarar",
+    titleB: "protegem além do olhar",
     cta: "Consultar disponibilidade",
-    footnote: "Frota atual: 2 Corolla Hybrid + 1 Jeep Commander, todos blindados e zero km.",
+    footnote: "Frota atual: 2 Corolla Hybrid blindados + 1 Jeep Commander blindado + 1 Sprinter Van 417 não blindada, todos novos.",
     cars: [
       {
         badge: "Sedã Executivo · Híbrido",
         name: "Toyota Corolla Hybrid 01",
-        desc: "Corolla híbrido (combustão + elétrico), blindado nível III-A e zero km. Conforto executivo com máxima discrição.",
-        tags: ["Blindado", "Híbrido", "Zero km"],
+        desc: "Corolla híbrido (combustão + elétrico), blindado nível III-A e novo. Conforto executivo com máxima discrição.",
+        tags: ["Blindado", "Híbrido", "Novo"],
       },
       {
         badge: "Sedã Executivo · Híbrido",
         name: "Toyota Corolla Hybrid 02",
-        desc: "Corolla híbrido (combustão + elétrico), blindado nível III-A e zero km. Ideal para rotina urbana e corporativa.",
-        tags: ["Blindado", "Híbrido", "Zero km"],
+        desc: "Corolla híbrido (combustão + elétrico), blindado nível III-A e novo. Ideal para rotina urbana e corporativa.",
+        tags: ["Blindado", "Híbrido", "Novo"],
       },
       {
         badge: "SUV Premium",
         name: "Jeep Commander",
-        desc: "Jeep Commander blindado nível III-A e zero km, com mais espaço interno e robustez para deslocamentos executivos.",
-        tags: ["Blindado", "Zero km", "SUV"],
+        desc: "Jeep Commander blindado nível III-A e novo, com mais espaço interno e robustez para deslocamentos executivos.",
+        tags: ["Blindado", "Novo", "SUV"],
+      },
+      {
+        badge: "Van Executiva · Não Blindada",
+        name: "Sprinter Van 417 Vidrada Teto Alto Extralonga",
+        desc: "Variante F43A UP8J, cor azul, 16+1 lugares, ar-condicionado, tomadas USB, geladeira, wi-fi e iluminação para leitura.",
+        tags: ["Não blindado", "Van", "Novo"],
       },
     ],
   },
@@ -95,7 +101,7 @@ const pt = {
       [
         "03",
         "Transporte com Motorista",
-        "Condutores treinados em direção defensiva e protocolo de segurança. Discrição e pontualidade em cada trajeto.",
+        "Condutores treinados em direção defensiva e protocolo de segurança. Discrição e pontualidade em cada trajeto. Consulte disponibilidade e orçamento adicional.",
       ],
       [
         "04",
@@ -104,11 +110,6 @@ const pt = {
       ],
       [
         "05",
-        "Assessoria de Mobilidade Segura",
-        "Análise de perfil de risco e planejamento de rotas. Consultoria para empresas que precisam estruturar política interna de segurança.",
-      ],
-      [
-        "06",
         "Suporte 24 Horas",
         "Canal exclusivo para clientes ativos. Disponibilidade integral para emergências, substituições e ajustes de programação.",
       ],
@@ -143,7 +144,7 @@ const pt = {
       ],
       [
         "Depoimentos de clientes",
-        "Cliente A, diretoria financeira: Atendimento rápido, veículo impecável e operação silenciosa em toda a semana. Cliente B, família em deslocamento intermunicipal: Sentimos segurança real sem chamar atenção. Cliente C, jurídico corporativo: Processo de locação objetivo, sigilo respeitado e suporte ativo durante toda a agenda.",
+        "Helena - Executiva: Atendimento rápido, veículo impecável e operação silenciosa em toda a semana. Ricardo - Promoção e Eventos: Sentimos segurança real sem chamar atenção em todo o deslocamento. Beatriz - Gestora de empresa: Processo de locação objetivo, sigilo respeitado e assistência durante toda a agenda.",
       ],
     ],
   },
@@ -154,8 +155,8 @@ const pt = {
     intro:
       "Atendimento reservado, ágil e personalizado. Cada consulta é tratada com confidencialidade absoluta desde o primeiro contato.",
     info: [
-      ["WhatsApp", "+55 (41) 98531-8314"],
-      ["E-mail", "contato@rocas.com.br"],
+      ["WhatsApp", "+55 (41) 99779-0123"],
+      ["E-mail", "contato@rocaslocadora.com.br"],
       ["Atendimento", "24h, 7 dias por semana"],
       ["Área de atuação", "Brasil, regiões a confirmar"],
     ],
@@ -173,7 +174,6 @@ const pt = {
         "Locação corporativa",
         "Transporte com motorista",
         "Evento especial",
-        "Assessoria",
       ],
       namePlaceholder: "Seu nome",
       companyPlaceholder: "Opcional",
@@ -186,6 +186,11 @@ const pt = {
       success: "Enviado com sucesso ✓",
       privacy:
         "Suas informações são tratadas com sigilo absoluto. Respondemos em até 2h em dias úteis.",
+      consentIntro: "Ao enviar, você declara que leu e concorda com:",
+      consentCookies: "Política de Cookies",
+      consentPrivacy: "Política de Privacidade",
+      consentTerms: "Termo de Aceite",
+      consentRequired: "Concordo com os termos acima.",
     },
   },
   modal: {
@@ -208,6 +213,11 @@ const pt = {
     submit: "Enviar via WhatsApp →",
     success: "Enviado com sucesso ✓",
     response: "Resposta em canal seguro em até 2 horas.",
+    consentIntro: "Ao enviar, você declara que leu e concorda com:",
+    consentCookies: "Política de Cookies",
+    consentPrivacy: "Política de Privacidade",
+    consentTerms: "Termo de Aceite",
+    consentRequired: "Concordo com os termos acima.",
   },
   common: {
     selectOption: "Selecione",
@@ -217,6 +227,8 @@ const pt = {
     copyright: "© 2025 ROCAS Locadora de Veículos",
     rights: "Todos os direitos reservados",
     privacy: "Política de Privacidade",
+    cookies: "Política de Cookies",
+    terms: "Termo de Aceite",
   },
   privacy: {
     label: "Privacidade",
@@ -228,6 +240,12 @@ const pt = {
       "Não comercializamos dados pessoais. O compartilhamento com terceiros ocorre apenas quando necessário para execução do serviço ou por obrigação legal.",
       "Solicitações sobre acesso, correção ou remoção de dados podem ser feitas pelos nossos canais oficiais de contato.",
     ],
+    cookiesTitle: "Política de Cookies",
+    cookiesText:
+      "Utilizamos cookies para melhorar a navegação, entender métricas de uso e otimizar a experiência no site. Você pode gerenciar preferências de cookies no seu navegador a qualquer momento.",
+    termsTitle: "Termo de Aceite",
+    termsText:
+      "Ao solicitar cotação, você declara estar ciente e de acordo com o tratamento dos dados informados para atendimento comercial e operacional, conforme nossa política de privacidade.",
   },
 };
 
@@ -406,7 +424,7 @@ const en = mergeDeep(pt, {
     intro:
       "Reserved, agile, and personalized service. Every request is handled with full confidentiality from first contact.",
     info: [
-      ["WhatsApp", "+55 (41) 98531-8314"],
+      ["WhatsApp", "+55 (41) 99779-0123"],
       ["E-mail", "contato@rocas.com.br"],
       ["Service", "24h, 7 days a week"],
       ["Coverage", "Brazil, regions upon confirmation"],
@@ -635,7 +653,7 @@ const es = mergeDeep(pt, {
     intro:
       "Atención reservada, ágil y personalizada. Cada consulta se trata con confidencialidad total desde el primer contacto.",
     info: [
-      ["WhatsApp", "+55 (41) 98531-8314"],
+      ["WhatsApp", "+55 (41) 99779-0123"],
       ["E-mail", "contato@rocas.com.br"],
       ["Atención", "24h, 7 días por semana"],
       ["Cobertura", "Brasil, regiones a confirmar"],
@@ -864,7 +882,7 @@ const fr = mergeDeep(pt, {
     intro:
       "Service réservé, agile et personnalisé. Chaque demande est traitée avec confidentialité absolue dès le premier contact.",
     info: [
-      ["WhatsApp", "+55 (41) 98531-8314"],
+      ["WhatsApp", "+55 (41) 99779-0123"],
       ["E-mail", "contato@rocas.com.br"],
       ["Service", "24h, 7 jours par semaine"],
       ["Zone d'action", "Brésil, régions à confirmer"],

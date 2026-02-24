@@ -8,7 +8,7 @@ export function SLabel({ children, tone = "dark" }) {
         display: "flex",
         alignItems: "center",
         gap: ".8rem",
-        fontSize: ".68rem",
+        fontSize: ".74rem",
         letterSpacing: ".5em",
         textTransform: "uppercase",
         color: isLight ? "#436387" : theme.accentDim,
@@ -36,7 +36,7 @@ export function STitle({ children, tone = "dark" }) {
     <h2
       style={{
         fontFamily: "'Neue Montreal', sans-serif",
-        fontSize: "clamp(2.05rem,3.2vw,3.15rem)",
+        fontSize: "clamp(2.25rem,3.6vw,3.4rem)",
         fontWeight: 700,
         lineHeight: 1.1,
         color: isLight ? "#10233f" : theme.cr8,

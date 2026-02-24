@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { corollaImage, corollaImage2, jeepImage } from "../../assets";
+import { useEffect, useState } from "react";
+import { corollaImage, corollaImage2, jeepImage, sprinterImage } from "../../assets";
 import { theme } from "../../constants/theme";
 import { useBreakpoint } from "../../hooks/useBreakpoint";
 import { useI18n } from "../../i18n/LanguageContext";
@@ -87,18 +87,40 @@ function VehicleCard({ badge, name, desc, tags, grad, image }) {
           overflow: "hidden",
         }}
       >
-        <img
-          src={image}
-          alt={name}
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            opacity: 0.88,
-            transform: hovered ? "scale(1.04)" : "scale(1)",
-            transition: "transform .5s",
-          }}
-        />
+        {image ? (
+          <img
+            src={image}
+            alt={`${name} - frota ROCAS`}
+            title={name}
+            loading="lazy"
+            decoding="async"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              opacity: 0.88,
+              transform: hovered ? "scale(1.04)" : "scale(1)",
+              transition: "transform .5s",
+            }}
+          />
+        ) : (
+          <div
+            style={{
+              width: "100%",
+              height: "100%",
+              display: "grid",
+              placeItems: "center",
+              color: "#2f4d71",
+              fontFamily: "'Neue Montreal', sans-serif",
+              letterSpacing: ".16em",
+              textTransform: "uppercase",
+              fontSize: ".66rem",
+              fontWeight: 700,
+            }}
+          >
+            Van executiva
+          </div>
+        )}
       </div>
       <div style={{ padding: "1.5rem 1.8rem 2rem" }}>
         <div
@@ -161,12 +183,24 @@ function VehicleCard({ badge, name, desc, tags, grad, image }) {
 export default function Veiculos({ openModal }) {
   const { t } = useI18n();
   const isMobile = useBreakpoint(980);
+  const [startIndex, setStartIndex] = useState(0);
   const carVisuals = [
     { grad: "linear-gradient(135deg,#d9e4f2,#f2f7ff)", image: corollaImage },
     { grad: "linear-gradient(135deg,#dae4f0,#f3f7ff)", image: corollaImage2 },
     { grad: "linear-gradient(135deg,#d6e0ed,#eef4fd)", image: jeepImage },
+    { grad: "linear-gradient(135deg,#c7daf0,#e8f2ff)", image: sprinterImage },
   ];
   const cars = t.veiculos.cars.map((car, index) => ({ ...car, ...carVisuals[index] }));
+  const visibleCards = isMobile ? 1 : 3;
+  const maxStartIndex = Math.max(0, cars.length - visibleCards);
+  const canSlide = cars.length > visibleCards;
+
+  useEffect(() => {
+    setStartIndex((prev) => Math.min(prev, maxStartIndex));
+  }, [maxStartIndex]);
+
+  const goPrev = () => setStartIndex((prev) => Math.max(0, prev - 1));
+  const goNext = () => setStartIndex((prev) => Math.min(maxStartIndex, prev + 1));
 
   return (
     <section id="veiculos" style={{ background: lightSection.bg, padding: isMobile ? "4.5rem 1.25rem" : "7rem 4rem" }}>
@@ -183,9 +217,7 @@ export default function Veiculos({ openModal }) {
         <Reveal>
           <SLabel tone="light">{t.veiculos.label}</SLabel>
           <STitle tone="light">
-            {t.veiculos.titleA}
-            <br />
-            <em style={{ fontStyle: "italic", color: lightSection.titleEm }}>{t.veiculos.titleB}</em>
+            {t.veiculos.titleA} {" "}<em style={{ fontStyle: "normal", color: lightSection.titleEm }}>{t.veiculos.titleB}</em>
           </STitle>
         </Reveal>
         <Reveal>
@@ -194,10 +226,61 @@ export default function Veiculos({ openModal }) {
       </div>
 
       <Reveal>
-        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3,1fr)", gap: 1, background: lightSection.border }}>
-          {cars.map((car) => (
-            <VehicleCard key={car.name} {...car} />
-          ))}
+        <div>
+          {canSlide && (
+            <div style={{ display: "flex", justifyContent: "flex-end", gap: ".5rem", marginBottom: ".75rem" }}>
+              <button
+                onClick={goPrev}
+                disabled={startIndex === 0}
+                style={{
+                  width: 34,
+                  height: 34,
+                  border: `1px solid ${lightSection.buttonBorder}`,
+                  background: startIndex === 0 ? "#eef3fa" : "#ffffff",
+                  color: lightSection.buttonText,
+                  cursor: startIndex === 0 ? "not-allowed" : "pointer",
+                }}
+              >
+                ‹
+              </button>
+              <button
+                onClick={goNext}
+                disabled={startIndex >= maxStartIndex}
+                style={{
+                  width: 34,
+                  height: 34,
+                  border: `1px solid ${lightSection.buttonBorder}`,
+                  background: startIndex >= maxStartIndex ? "#eef3fa" : "#ffffff",
+                  color: lightSection.buttonText,
+                  cursor: startIndex >= maxStartIndex ? "not-allowed" : "pointer",
+                }}
+              >
+                ›
+              </button>
+            </div>
+          )}
+          <div style={{ overflow: "hidden", border: `1px solid ${lightSection.border}` }}>
+            <div
+              style={{
+                display: "flex",
+                transform: `translateX(-${(startIndex * 100) / visibleCards}%)`,
+                transition: "transform .35s ease",
+              }}
+            >
+              {cars.map((car) => (
+                <div
+                  key={car.name}
+                  style={{
+                    flex: `0 0 ${100 / visibleCards}%`,
+                    minWidth: 0,
+                    borderRight: `1px solid ${lightSection.border}`,
+                  }}
+                >
+                  <VehicleCard {...car} />
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </Reveal>
 

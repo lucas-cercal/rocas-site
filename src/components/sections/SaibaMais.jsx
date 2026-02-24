@@ -88,9 +88,7 @@ export default function SaibaMais() {
         <div style={{ maxWidth: 520, marginBottom: "3.5rem" }}>
           <SLabel tone="light">{t.saibaMais.label}</SLabel>
           <STitle tone="light">
-            {t.saibaMais.titleA}
-            <br />
-            <em style={{ fontStyle: "italic", color: lightSection.titleEm }}>{t.saibaMais.titleB}</em>
+            {t.saibaMais.titleA} {" "}<em style={{ fontStyle: "normal", color: lightSection.titleEm }}>{t.saibaMais.titleB}</em>
           </STitle>
           <p
             style={{

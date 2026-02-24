@@ -78,9 +78,7 @@ export default function QuemSomos() {
       <Reveal>
         <SLabel>{t.quemSomos.label}</SLabel>
         <STitle>
-          {t.quemSomos.titleA}
-          <br />
-          <em style={{ fontStyle: "italic", color: theme.cr6 }}>{t.quemSomos.titleB}</em>
+          {t.quemSomos.titleA} {" "}<em style={{ fontStyle: "normal", color: theme.cr6 }}>{t.quemSomos.titleB}</em>
         </STitle>
         {t.quemSomos.paragraphs.map((paragraph, index) => (
           <p

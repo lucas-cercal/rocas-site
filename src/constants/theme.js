@@ -15,8 +15,8 @@ export const globalStyles = `
     --font-body: 'Neue Montreal', sans-serif;
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; font-size: clamp(17px, 0.5vw + 13px, 20px); }
-  body { font-family: var(--font-body); font-weight: 500; font-size: 1.03rem; background: ${theme.bg1}; color: ${theme.cr5}; overflow-x: hidden; margin: 0; }
+  html { scroll-behavior: smooth; font-size: clamp(18px, 0.65vw + 13px, 22px); }
+  body { font-family: var(--font-body); font-weight: 500; font-size: 1.08rem; background: ${theme.bg1}; color: ${theme.cr5}; overflow-x: hidden; margin: 0; }
   ::-webkit-scrollbar { width: 3px; }
   ::-webkit-scrollbar-track { background: ${theme.bg0}; }
   ::-webkit-scrollbar-thumb { background: ${theme.cr3}; border-radius: 2px; }

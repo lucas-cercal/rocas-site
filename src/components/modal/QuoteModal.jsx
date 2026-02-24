@@ -17,6 +17,7 @@ export default function QuoteModal({ open, onClose }) {
     whatsapp: "",
     service: "",
     period: "",
+    consent: false,
   });
 
   useEffect(() => {
@@ -37,8 +38,8 @@ export default function QuoteModal({ open, onClose }) {
   }, [open, onClose]);
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+    const { name, value, type, checked } = event.target;
+    setForm((prev) => ({ ...prev, [name]: type === "checkbox" ? checked : value }));
   };
 
   const handleSend = (event) => {
@@ -211,6 +212,33 @@ export default function QuoteModal({ open, onClose }) {
           >
             {sent ? t.modal.success : t.modal.submit}
           </button>
+          <div style={{ marginTop: ".9rem", borderTop: `1px solid ${theme.bd}`, paddingTop: ".85rem" }}>
+            <p style={{ fontSize: ".62rem", color: theme.textLo, lineHeight: 1.6 }}>
+              {t.modal.consentIntro}{" "}
+              <a href="#cookies" onClick={onClose} style={{ color: theme.cr5 }}>
+                {t.modal.consentCookies}
+              </a>
+              ,{" "}
+              <a href="#privacidade" onClick={onClose} style={{ color: theme.cr5 }}>
+                {t.modal.consentPrivacy}
+              </a>{" "}
+              e{" "}
+              <a href="#termos" onClick={onClose} style={{ color: theme.cr5 }}>
+                {t.modal.consentTerms}
+              </a>
+              .
+            </p>
+            <label style={{ display: "flex", alignItems: "center", gap: ".45rem", marginTop: ".55rem", color: theme.cr5, fontSize: ".64rem" }}>
+              <input
+                type="checkbox"
+                name="consent"
+                checked={form.consent}
+                onChange={handleChange}
+                required
+              />
+              {t.modal.consentRequired}
+            </label>
+          </div>
           <p style={{ fontSize: ".6rem", color: theme.textLo, textAlign: "center", marginTop: ".8rem", lineHeight: 1.6 }}>
             {t.modal.response}
           </p>

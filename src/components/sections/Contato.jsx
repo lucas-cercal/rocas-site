@@ -47,6 +47,7 @@ export default function Contato() {
     serviceType: "",
     period: "",
     message: "",
+    consent: false,
   });
   const contactIcons = useMemo(
     () => ({
@@ -64,8 +65,8 @@ export default function Contato() {
   );
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+    const { name, value, type, checked } = event.target;
+    setForm((prev) => ({ ...prev, [name]: type === "checkbox" ? checked : value }));
   };
 
   const handleSubmit = (event) => {
@@ -104,9 +105,7 @@ export default function Contato() {
       <Reveal>
         <SLabel>{t.contato.label}</SLabel>
         <STitle>
-          {t.contato.titleA}
-          <br />
-          <em style={{ fontStyle: "italic", color: theme.cr6 }}>{t.contato.titleB}</em>
+          {t.contato.titleA} {" "}<em style={{ fontStyle: "normal", color: theme.cr6 }}>{t.contato.titleB}</em>
         </STitle>
         <p
           style={{
@@ -287,6 +286,33 @@ export default function Contato() {
             >
               {sent ? t.contato.form.success : t.contato.form.submit}
             </button>
+            <div style={{ marginTop: ".9rem", borderTop: `1px solid ${theme.bd}`, paddingTop: ".85rem" }}>
+              <p style={{ fontSize: ".64rem", color: theme.textLo, lineHeight: 1.6 }}>
+                {t.contato.form.consentIntro}{" "}
+                <a href="#cookies" style={{ color: theme.cr5 }}>
+                  {t.contato.form.consentCookies}
+                </a>
+                ,{" "}
+                <a href="#privacidade" style={{ color: theme.cr5 }}>
+                  {t.contato.form.consentPrivacy}
+                </a>{" "}
+                e{" "}
+                <a href="#termos" style={{ color: theme.cr5 }}>
+                  {t.contato.form.consentTerms}
+                </a>
+                .
+              </p>
+              <label style={{ display: "flex", alignItems: "center", gap: ".45rem", marginTop: ".55rem", color: theme.cr5, fontSize: ".66rem" }}>
+                <input
+                  type="checkbox"
+                  name="consent"
+                  checked={form.consent}
+                  onChange={handleChange}
+                  required
+                />
+                {t.contato.form.consentRequired}
+              </label>
+            </div>
             <p style={{ fontSize: ".6rem", color: theme.textLo, textAlign: "center", marginTop: ".8rem", lineHeight: 1.6 }}>
               {t.contato.form.privacy}
             </p>

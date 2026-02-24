@@ -133,7 +133,7 @@ export default function Nav({ openModal }) {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          padding: isMobile ? "0 1.25rem" : scrolled ? "0 3.2rem" : "0 4rem",
+          padding: isMobile ? "0 1.25rem" : scrolled ? "0 3.2rem 0 1.6rem" : "0 4rem 0 1.8rem",
           background: scrolled ? "rgba(248,251,255,.92)" : "transparent",
           backdropFilter: scrolled ? "blur(16px)" : "none",
           WebkitBackdropFilter: scrolled ? "blur(16px)" : "none",
@@ -145,7 +145,7 @@ export default function Nav({ openModal }) {
         <a href="#home" style={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
           <img
             src={logoImage}
-            alt="ROCAS Locadora"
+            alt="ROCAS Locadora de Veículos Blindados"
             style={{
               height: scrolled ? 60 : 72,
               width: "auto",

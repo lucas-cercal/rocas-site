@@ -24,19 +24,19 @@ const testimonials = [
     quote:
       "Operação impecável. A equipe antecipou cada detalhe da agenda e entregou segurança real com discrição absoluta.",
     name: "Helena",
-    role: "Diretora de Family Office",
+    role: "Executiva",
   },
   {
     quote:
       "Pontualidade, sigilo e padrão executivo em todos os deslocamentos. O nível de serviço é acima do mercado.",
     name: "Ricardo",
-    role: "Managing Partner · Private Equity",
+    role: "Promoção e Eventos",
   },
   {
     quote:
       "A ROCAS virou parte fixa da nossa logística de conselho. Atendimento silencioso, eficiente e extremamente profissional.",
     name: "Beatriz",
-    role: "Conselheira de Multinacional",
+    role: "Gestora de empresa",
   },
 ];
 
@@ -56,9 +56,7 @@ export default function Feedbacks() {
         <div style={{ maxWidth: 640, marginBottom: "2.6rem" }}>
           <SLabel tone="light">Feedbacks</SLabel>
           <STitle tone="light">
-            Quem vive o serviço
-            <br />
-            <em style={{ fontStyle: "italic", color: lightSection.titleEm }}>reconhece a diferença</em>
+            Quem vive o serviço {" "}<em style={{ fontStyle: "normal", color: lightSection.titleEm }}>reconhece a diferença</em>
           </STitle>
           <p style={{ marginTop: ".95rem", fontSize: ".8rem", color: "#4e6686", lineHeight: 1.8, fontWeight: 500 }}>
             Relatos de clientes com rotinas executivas de alta exigência, onde discrição e previsibilidade não são opcionais.

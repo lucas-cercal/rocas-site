@@ -36,7 +36,7 @@ export default function Footer() {
       style={{
         background: theme.bg0,
         borderTop: `1px solid ${theme.bd}`,
-        padding: isMobile ? "2rem 1.25rem" : "3rem 4rem",
+        padding: isMobile ? "2rem 1.25rem" : "3rem 4rem 3rem 1.8rem",
         display: "grid",
         gridTemplateColumns: isMobile ? "1fr" : "1fr auto",
         gap: "2rem",
@@ -46,7 +46,7 @@ export default function Footer() {
       <div>
         <img
           src={logoImage}
-          alt="ROCAS Locadora"
+          alt="ROCAS Locadora de Veículos Blindados"
           style={{
             height: 72,
             width: "auto",
@@ -79,14 +79,12 @@ export default function Footer() {
             }
           />
           <SocialLogo
-            href="https://linkedin.com"
-            label="LinkedIn"
+            href="mailto:contato@rocaslocadora.com.br"
+            label="E-mail"
             icon={
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <rect x="4" y="4" width="16" height="16" rx="3.5" stroke="currentColor" strokeWidth="1.7" />
-                <rect x="7.3" y="10.1" width="2.1" height="6.2" fill="currentColor" />
-                <circle cx="8.35" cy="7.8" r="1.2" fill="currentColor" />
-                <path d="M12 16.3v-3.5c0-1.5.9-2.5 2.2-2.5 1.2 0 2 .8 2 2.3v3.7" stroke="currentColor" strokeWidth="1.7" />
+                <rect x="3.5" y="6.2" width="17" height="11.6" rx="2.3" stroke="currentColor" strokeWidth="1.7" />
+                <path d="M4.7 7.8 12 13l7.3-5.2" stroke="currentColor" strokeWidth="1.7" />
               </svg>
             }
           />
@@ -111,14 +109,20 @@ export default function Footer() {
             }
           />
         </div>
-        <div style={{ fontSize: ".72rem", color: theme.textLo, textAlign: isMobile ? "left" : "right", lineHeight: 1.9 }}>
-        {t.footer.copyright}
-        <br />
-        {t.footer.rights}
-        <br />
-        <a href="#privacidade" style={{ color: theme.textLo }}>
-          {t.footer.privacy}
-        </a>
+        <div style={{ fontSize: ".78rem", color: theme.textLo, textAlign: isMobile ? "left" : "right", lineHeight: 1.8 }}>
+          <div>{t.footer.copyright}</div>
+          <div>{t.footer.rights}</div>
+          <div style={{ display: "flex", gap: ".7rem", flexWrap: "wrap", justifyContent: isMobile ? "flex-start" : "flex-end" }}>
+            <a href="#cookies" style={{ color: theme.textLo }}>
+              {t.footer.cookies}
+            </a>
+            <a href="#privacidade" style={{ color: theme.textLo }}>
+              {t.footer.privacy}
+            </a>
+            <a href="#termos" style={{ color: theme.textLo }}>
+              {t.footer.terms}
+            </a>
+          </div>
         </div>
       </div>
     </footer>

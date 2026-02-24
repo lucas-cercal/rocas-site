@@ -122,10 +122,10 @@ export default function Hero({ openModal }) {
             }}
           >
             {t.hero.lines[0]}
-            <br />
+            {" "}
             <em
               style={{
-              fontStyle: "italic",
+                fontStyle: "normal",
                 fontWeight: 700,
                 background: `linear-gradient(135deg,${theme.cr7},${theme.cr5} 60%,${theme.cr6})`,
                 WebkitBackgroundClip: "text",
@@ -135,9 +135,9 @@ export default function Hero({ openModal }) {
             >
               {t.hero.lines[1]}
             </em>
-            <br />
+            {" "}
             {t.hero.lines[2]}
-            <br />
+            {" "}
             {t.hero.lines[3]}
           </h1>
           <p
