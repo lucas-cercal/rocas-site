@@ -108,7 +108,7 @@ export default function SaibaMais() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: showSideBySide ? "700px minmax(500px, 1fr)" : "1fr",
+            gridTemplateColumns: showSideBySide ? "minmax(0, 1fr) minmax(420px, .8fr)" : "1fr",
             justifyContent: "stretch",
             alignItems: "start",
             gap: isMobile ? "2rem" : showSideBySide ? "2.2rem" : "1.6rem",
@@ -161,7 +161,8 @@ export default function SaibaMais() {
               onMouseEnter={() => setPanelHovered(true)}
               onMouseLeave={() => setPanelHovered(false)}
               style={{
-                width: showSideBySide ? 500 : "min(100%, 560px)",
+                width: "100%",
+                maxWidth: showSideBySide ? 500 : 560,
                 justifySelf: "center",
                 position: "static",
                 background: lightSection.panelBg,
