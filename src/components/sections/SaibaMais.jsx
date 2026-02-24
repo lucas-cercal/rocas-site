@@ -92,9 +92,9 @@ export default function SaibaMais() {
           </STitle>
           <p
             style={{
-              fontSize: ".8rem",
+              fontSize: isMobile ? "16px" : "20px",
               color: lightSection.text,
-              lineHeight: 1.85,
+              lineHeight: 1.5,
               marginTop: "1rem",
               fontWeight: 500,
             }}
@@ -128,7 +128,7 @@ export default function SaibaMais() {
                     gap: "1rem",
                   }}
                 >
-                  <span style={{ fontSize: ".79rem", letterSpacing: ".06em", fontWeight: 500, color: "#19304d" }}>
+                  <span style={{ fontSize: isMobile ? "16px" : "20px", letterSpacing: ".06em", fontWeight: 500, color: "#19304d" }}>
                     {question}
                   </span>
                   <span
@@ -147,7 +147,7 @@ export default function SaibaMais() {
                 </div>
                 {openItem === index && (
                   <div style={{ paddingBottom: "1.3rem" }}>
-                    <p style={{ fontSize: ".77rem", color: lightSection.textSoft, lineHeight: 1.85, fontWeight: 500 }}>
+                    <p style={{ fontSize: isMobile ? "16px" : "20px", color: lightSection.textSoft, lineHeight: 1.5, fontWeight: 500 }}>
                       {answer}
                     </p>
                   </div>
@@ -210,7 +210,7 @@ export default function SaibaMais() {
                 style={{
                   fontSize: ".74rem",
                   color: lightSection.panelText,
-                  lineHeight: 1.7,
+                  lineHeight: 1.5,
                   fontWeight: 500,
                 }}
               >

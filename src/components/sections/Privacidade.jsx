@@ -28,9 +28,9 @@ export default function Privacidade() {
             <p
               key={paragraph}
               style={{
-                fontSize: ".8rem",
+                fontSize: isMobile ? "16px" : "20px",
                 color: lightSection.text,
-                lineHeight: 1.85,
+                lineHeight: 1.5,
                 marginTop: "1rem",
                 fontWeight: 500,
               }}
@@ -41,13 +41,13 @@ export default function Privacidade() {
           <h3 id="cookies" style={{ fontSize: "1.02rem", color: "#1b3553", marginTop: "1.6rem", fontWeight: 700 }}>
             {t.privacy.cookiesTitle}
           </h3>
-          <p style={{ fontSize: ".86rem", color: lightSection.text, lineHeight: 1.85, marginTop: ".75rem", fontWeight: 500 }}>
+          <p style={{ fontSize: ".86rem", color: lightSection.text, lineHeight: 1.5, marginTop: ".75rem", fontWeight: 500 }}>
             {t.privacy.cookiesText}
           </p>
           <h3 id="termos" style={{ fontSize: "1.02rem", color: "#1b3553", marginTop: "1.6rem", fontWeight: 700 }}>
             {t.privacy.termsTitle}
           </h3>
-          <p style={{ fontSize: ".86rem", color: lightSection.text, lineHeight: 1.85, marginTop: ".75rem", fontWeight: 500 }}>
+          <p style={{ fontSize: ".86rem", color: lightSection.text, lineHeight: 1.5, marginTop: ".75rem", fontWeight: 500 }}>
             {t.privacy.termsText}
           </p>
         </div>

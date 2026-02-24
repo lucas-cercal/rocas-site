@@ -109,9 +109,9 @@ export default function Contato() {
         </STitle>
         <p
           style={{
-            fontSize: ".8rem",
+            fontSize: isMobile ? "16px" : "20px",
             color: theme.textMd,
-            lineHeight: 1.85,
+            lineHeight: 1.5,
             marginTop: "1.2rem",
             fontWeight: 500,
           }}
@@ -148,7 +148,7 @@ export default function Contato() {
                 >
                   {label}
                 </div>
-                <div style={{ fontSize: ".8rem", color: theme.cr5, fontWeight: 500 }}>{value}</div>
+                <div style={{ fontSize: isMobile ? "16px" : "20px", color: theme.cr5, fontWeight: 500 }}>{value}</div>
               </div>
             </div>
           ))}
@@ -302,13 +302,14 @@ export default function Contato() {
                 </a>
                 .
               </p>
-              <label style={{ display: "flex", alignItems: "center", gap: ".45rem", marginTop: ".55rem", color: theme.cr5, fontSize: ".66rem" }}>
+              <label style={{ display: "flex", alignItems: "center", gap: ".55rem", marginTop: ".55rem", color: theme.cr5, fontSize: ".66rem", cursor: "pointer" }}>
                 <input
                   type="checkbox"
                   name="consent"
                   checked={form.consent}
                   onChange={handleChange}
                   required
+                  style={{ width: 16, height: 16, accentColor: theme.cr5, cursor: "pointer", margin: 0, borderRadius: 3, flexShrink: 0, opacity: form.consent ? 1 : .9 }}
                 />
                 {t.contato.form.consentRequired}
               </label>

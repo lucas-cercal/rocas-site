@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { logoImage } from "../../assets";
 import heroVideo from "../../assets/cidade.mp4";
 import { theme } from "../../constants/theme";
 import { useBreakpoint } from "../../hooks/useBreakpoint";
@@ -10,6 +9,7 @@ export default function Hero({ openModal }) {
   const { t } = useI18n();
   const isMobile = useBreakpoint(980);
   const [videoError, setVideoError] = useState(false);
+  const [videoLoaded, setVideoLoaded] = useState(false);
 
   return (
     <section
@@ -42,8 +42,8 @@ export default function Hero({ openModal }) {
             loop
             muted
             playsInline
-            poster={logoImage}
             preload="metadata"
+            onLoadedData={() => setVideoLoaded(true)}
             onError={() => setVideoError(true)}
             style={{
               width: "100%",
@@ -52,10 +52,40 @@ export default function Hero({ openModal }) {
               objectPosition: "center 42%",
               transform: "scale(1.18)",
               display: "block",
+              opacity: videoLoaded ? 1 : 0,
+              transition: "opacity .6s ease",
             }}
           >
             <source src={heroVideo} type="video/mp4" />
           </video>
+        </div>
+      )}
+      {!videoLoaded && !videoError && (
+        <div
+          style={{
+            position: "absolute",
+            right: isMobile ? "1rem" : "1.35rem",
+            bottom: isMobile ? "1rem" : "1.2rem",
+            zIndex: 3,
+            display: "inline-flex",
+            alignItems: "center",
+            gap: ".45rem",
+            color: "rgba(228,238,255,.72)",
+            fontSize: ".62rem",
+            letterSpacing: ".14em",
+            textTransform: "uppercase",
+          }}
+        >
+          <span
+            style={{
+              width: 8,
+              height: 8,
+              borderRadius: "50%",
+              background: "rgba(188,214,248,.84)",
+              animation: "scrollPulse 1.3s ease-in-out infinite",
+            }}
+          />
+          Carregando vídeo
         </div>
       )}
       <div
@@ -114,15 +144,14 @@ export default function Hero({ openModal }) {
           <h1
             style={{
               fontFamily: "'Neue Montreal', sans-serif",
-              fontSize: isMobile ? "clamp(1.7rem,8.2vw,2.35rem)" : "clamp(2.2rem,4vw,3.6rem)",
-              fontWeight: 700,
-              lineHeight: 1.04,
+              fontSize: isMobile ? "29px" : "36px",
+              fontWeight: 600,
+              lineHeight: 1.12,
               color: theme.cr8,
               marginBottom: "1.8rem",
             }}
           >
-            {t.hero.lines[0]}
-            {" "}
+            {t.hero.lines[0]}{" "}
             <em
               style={{
                 fontStyle: "normal",
@@ -135,16 +164,14 @@ export default function Hero({ openModal }) {
             >
               {t.hero.lines[1]}
             </em>
-            {" "}
-            {t.hero.lines[2]}
-            {" "}
-            {t.hero.lines[3]}
+            <br />
+            {t.hero.lines[2]} {t.hero.lines[3]}
           </h1>
           <p
             style={{
-              fontSize: ".92rem",
+              fontSize: isMobile ? "16px" : "20px",
               color: theme.textMd,
-              lineHeight: 1.9,
+              lineHeight: 1.5,
               maxWidth: 520,
               marginBottom: "2.8rem",
               fontWeight: 500,

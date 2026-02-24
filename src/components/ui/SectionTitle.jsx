@@ -36,9 +36,9 @@ export function STitle({ children, tone = "dark" }) {
     <h2
       style={{
         fontFamily: "'Neue Montreal', sans-serif",
-        fontSize: "clamp(2.25rem,3.6vw,3.4rem)",
-        fontWeight: 700,
-        lineHeight: 1.1,
+        fontSize: "clamp(29px,3.2vw,36px)",
+        fontWeight: 600,
+        lineHeight: 1.12,
         color: isLight ? "#10233f" : theme.cr8,
       }}
     >

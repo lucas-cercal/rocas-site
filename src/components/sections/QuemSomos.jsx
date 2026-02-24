@@ -84,9 +84,9 @@ export default function QuemSomos() {
           <p
             key={index}
             style={{
-              fontSize: ".81rem",
+              fontSize: isMobile ? "16px" : "20px",
               color: theme.textMd,
-              lineHeight: 1.9,
+              lineHeight: 1.5,
               marginTop: "1.3rem",
               fontWeight: 500,
             }}

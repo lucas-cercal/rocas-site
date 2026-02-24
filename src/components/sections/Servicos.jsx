@@ -5,7 +5,7 @@ import { useI18n } from "../../i18n/LanguageContext";
 import Reveal from "../ui/Reveal";
 import { SLabel, STitle } from "../ui/SectionTitle";
 
-function ServiceCard({ title, desc }) {
+function ServiceCard({ title, desc, isMobile }) {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -39,7 +39,7 @@ function ServiceCard({ title, desc }) {
         >
           {title}
         </div>
-        <div style={{ fontSize: ".76rem", color: theme.textMd, lineHeight: 1.7, fontWeight: 500 }}>
+        <div style={{ fontSize: isMobile ? "16px" : "20px", color: theme.textMd, lineHeight: 1.5, fontWeight: 500 }}>
           {desc}
         </div>
       </div>
@@ -75,7 +75,7 @@ export default function Servicos() {
             const isLastOdd = hasOddCount && index === services.length - 1;
             return (
               <div key={title} style={{ gridColumn: !isMobile && isLastOdd ? "1 / -1" : "auto" }}>
-                <ServiceCard title={title} desc={desc} />
+                <ServiceCard title={title} desc={desc} isMobile={isMobile} />
               </div>
             );
           })}

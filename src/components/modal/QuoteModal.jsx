@@ -228,13 +228,14 @@ export default function QuoteModal({ open, onClose }) {
               </a>
               .
             </p>
-            <label style={{ display: "flex", alignItems: "center", gap: ".45rem", marginTop: ".55rem", color: theme.cr5, fontSize: ".64rem" }}>
+            <label style={{ display: "flex", alignItems: "center", gap: ".55rem", marginTop: ".55rem", color: theme.cr5, fontSize: ".64rem", cursor: "pointer" }}>
               <input
                 type="checkbox"
                 name="consent"
                 checked={form.consent}
                 onChange={handleChange}
                 required
+                style={{ width: 16, height: 16, accentColor: theme.cr5, cursor: "pointer", margin: 0, borderRadius: 3, flexShrink: 0, opacity: form.consent ? 1 : .9 }}
               />
               {t.modal.consentRequired}
             </label>

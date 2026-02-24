@@ -1,25 +1,35 @@
+import { useState } from "react";
 import { logoImage } from "../../assets";
 import { theme } from "../../constants/theme";
 import { useBreakpoint } from "../../hooks/useBreakpoint";
 import { useI18n } from "../../i18n/LanguageContext";
 
 function SocialLogo({ href, label, icon }) {
+  const [hovered, setHovered] = useState(false);
+
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       style={{
         width: 52,
         height: 52,
-        border: `1px solid ${theme.bd}`,
-        background: `linear-gradient(145deg, ${theme.bg2}, ${theme.bg3})`,
+        border: `1px solid ${hovered ? "rgba(182,210,245,.55)" : theme.bd}`,
+        background: hovered
+          ? "linear-gradient(145deg, rgba(30,47,75,.95), rgba(19,31,52,.95))"
+          : `linear-gradient(145deg, ${theme.bg2}, ${theme.bg3})`,
         display: "inline-flex",
         alignItems: "center",
         justifyContent: "center",
-        color: theme.cr7,
+        color: hovered ? "#f4f8ff" : theme.cr7,
         textDecoration: "none",
+        transform: hovered ? "translateY(-2px)" : "translateY(0)",
+        boxShadow: hovered ? "0 10px 20px rgba(6,12,24,.28)" : "none",
+        transition: "all .24s ease",
       }}
     >
       {icon}

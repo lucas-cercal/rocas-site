@@ -13,7 +13,7 @@ function NavLink({ href, children, scrolled = false }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        fontSize: ".76rem",
+        fontSize: ".72rem",
         letterSpacing: ".22em",
         textTransform: "uppercase",
         color: hovered ? (scrolled ? "#0f1c2f" : theme.cr7) : scrolled ? "#243246" : theme.cr4,
@@ -48,7 +48,7 @@ function NavCta({ onClick, href, children, scrolled = false }) {
     background: hovered ? (scrolled ? "#132033" : theme.cr6) : "transparent",
     color: hovered ? (scrolled ? "#f8fbff" : theme.bg0) : scrolled ? "#1a2a40" : theme.cr6,
     padding: ".56rem 1.42rem",
-    fontSize: ".72rem",
+    fontSize: ".68rem",
     letterSpacing: ".22em",
     cursor: "pointer",
     transition: "all .3s",
@@ -171,7 +171,7 @@ export default function Nav({ openModal }) {
                 background: scrolled ? "rgba(250,252,255,.92)" : "transparent",
                 border: scrolled ? "1px solid rgba(16,28,44,.24)" : `1px solid ${theme.bd}`,
                 color: scrolled ? "#1b2b41" : theme.textLo,
-                fontSize: ".68rem",
+                fontSize: ".64rem",
                 letterSpacing: ".15em",
                 padding: ".3rem .5rem",
                 cursor: "pointer",
@@ -182,7 +182,7 @@ export default function Nav({ openModal }) {
               }}
             >
               {languageOptions.map((option) => (
-                <option key={option.value} value={option.value}>
+                <option key={option.value} value={option.value} style={{ cursor: "pointer" }}>
                   {option.label}
                 </option>
               ))}
@@ -246,7 +246,7 @@ export default function Nav({ openModal }) {
               href={link.href}
               onClick={() => setOpen(false)}
               style={{
-                fontSize: ".98rem",
+                fontSize: ".9rem",
                 letterSpacing: ".2em",
                 textTransform: "uppercase",
                 color: theme.cr5,
@@ -264,17 +264,17 @@ export default function Nav({ openModal }) {
               background: "transparent",
               border: `1px solid ${theme.bd}`,
               color: theme.textLo,
-              fontSize: ".8rem",
+              fontSize: ".74rem",
               letterSpacing: ".15em",
-              padding: ".5rem .8rem",
-              cursor: "pointer",
+                padding: ".5rem .8rem",
+                cursor: "pointer",
               fontFamily: "'Neue Montreal', sans-serif",
               fontWeight: 500,
               textTransform: "uppercase",
             }}
           >
             {languageOptions.map((option) => (
-              <option key={option.value} value={option.value}>
+              <option key={option.value} value={option.value} style={{ cursor: "pointer" }}>
                 {option.label}
               </option>
             ))}
