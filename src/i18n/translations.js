@@ -8,7 +8,7 @@ const pt = {
     badge: "Mobilidade Blindada & Discreta",
     lines: ["Proteção que", "não se vê.", "Segurança que", "se sente."],
     desc:
-      "Frota exclusiva de veículos de alto padrão, com foco em veículos blindados e uma frota versátil que oferece diferentes soluções de mobilidade. Uma solução sob medida para empresas, executivos, famílias e perfis públicos de alta exposição, que não negociam segurança em seu deslocamento.",
+      "Frota exclusiva de veículos de alto padrão, com foco em veículos blindados e uma frota versátil que oferece diferentes soluções de mobilidade.",
     ctaPrimary: "Solicitar Cotação",
     ctaSecondary: "Conhecer a Frota",
     stats: [
@@ -23,7 +23,7 @@ const pt = {
     titleA: "Construídos sobre",
     titleB: "fundamentos sólidos",
     paragraphs: [
-      "Assim como a rocha sustenta estruturas e protege o que está sobre ela, a ROCAS existe para garantir estabilidade, segurança e confiança em cada deslocamento executivo.",
+      "Assim como a rocha sustenta estruturas e protege o que está sobre ela, a ROCAS existe para garantir estabilidade, segurança e confiança em cada deslocamento.",
       "Nossa frota possui veículos blindados de alto padrão, além de outras opções de mobilidade, sempre com foco em discrição, conforto e eficiência, atendendo diferentes perfis e necessidades de deslocamento. Para quem valoriza segurança, exposição nunca é uma opção.",
       "A confidencialidade sobre identidade, rotinas e contratos é nossa prática padrão, com atenção, cuidado e responsabilidade em cada etapa do serviço.",
     ],
@@ -55,31 +55,31 @@ const pt = {
     titleA: "Veículos que",
     titleB: "protegem além do olhar",
     cta: "Consultar disponibilidade",
-    footnote: "Frota atual: 2 Corolla Hybrid blindados + 1 Jeep Commander blindado + 1 Sprinter Van 417 não blindada, todos novos.",
+    footnote: "Frota atual: 2 Corolla Hybrid blindados + 1 Jeep Commander blindado Diesel + 1 Mercedes Sprinter Van 417 Diesel não blindada.",
     cars: [
       {
         badge: "Sedã Executivo · Híbrido",
         name: "Toyota Corolla Hybrid 01",
-        desc: "Corolla híbrido (combustão + elétrico), blindado nível III-A e novo. Conforto executivo com máxima discrição.",
-        tags: ["Blindado", "Híbrido", "Novo"],
+        desc: "Corolla híbrido (combustão + elétrico), blindado nível III-A. Conforto com máxima discrição.",
+        tags: ["Blindado", "Híbrido"],
       },
       {
         badge: "Sedã Executivo · Híbrido",
         name: "Toyota Corolla Hybrid 02",
-        desc: "Corolla híbrido (combustão + elétrico), blindado nível III-A e novo. Ideal para rotina urbana e corporativa.",
-        tags: ["Blindado", "Híbrido", "Novo"],
+        desc: "Corolla híbrido (combustão + elétrico), blindado nível III-A. Ideal para rotina urbana e corporativa.",
+        tags: ["Blindado", "Híbrido"],
       },
       {
         badge: "SUV Premium",
         name: "Jeep Commander",
-        desc: "Jeep Commander blindado nível III-A e novo, com mais espaço interno e robustez para deslocamentos executivos.",
-        tags: ["Blindado", "Novo", "SUV"],
+        desc: "Jeep Commander Diesel blindado nível III-A, com mais espaço interno e robustez para deslocamentos.",
+        tags: ["Blindado", "Diesel", "SUV"],
       },
       {
-        badge: "Van Executiva · Não Blindada",
-        name: "Sprinter Van 417 Vidrada Teto Alto Extralonga",
-        desc: "Variante F43A UP8J, cor azul, 16+1 lugares, ar-condicionado, tomadas USB, geladeira, wi-fi e iluminação para leitura.",
-        tags: ["Não blindado", "Van", "Novo"],
+        badge: "Van Executiva · Diesel",
+        name: "Mercedes Sprinter Van 417",
+        desc: "Acomoda até 16 passageiros + motorista, ideal para transporte executivo e turismo. Com motor diesel de 170 cv e câmbio manual de 6 marchas, oferece desempenho confiável. Conta com suspensão confortável e estável, além de USB, geladeira, Wi-Fi e luzes de leitura individuais. Tanque de 71 litros, autonomia de até 800 km e consumo médio entre 10,3 km/l e 11,8 km/l.",
+        tags: ["Não blindado", "Diesel", "Van"],
       },
     ],
   },
@@ -96,7 +96,7 @@ const pt = {
       [
         "02",
         "Locação Corporativa",
-        "Contratos para empresas com frota dedicada, gestão centralizada e confidencialidade institucional. Ideal para diretorias e conselhos.",
+        "Contratos para empresas com frota dedicada, gestão centralizada e confidencialidade institucional.",
       ],
       [
         "03",
@@ -124,7 +124,7 @@ const pt = {
     items: [
       [
         "O que significa blindagem nível III-A?",
-        "O nível III-A é o padrão mais comum para uso civil no Brasil. Protege contra pistolas calibre .44 Magnum, .357 e armas de fogo de uso pessoal. Vidros, painéis laterais, teto, piso e colunas são tratados com materiais balísticos certificados pela ABNT NBR 15000.",
+        "O nível III-A é o padrão mais comum para uso civil no Brasil e o máximo permitido para veículos civis, conforme regulamentação do Exército Brasileiro. Esse nível de blindagem oferece proteção contra disparos de pistolas calibre .44 Magnum, .357 e demais armas curtas de uso permitido. Vidros, painéis laterais, teto, piso e colunas do veículo recebem materiais balísticos certificados de acordo com a norma ABNT NBR 15000, garantindo resistência, segurança e conformidade técnica. Além da regulamentação do Exército Brasileiro, as empresas blindadoras devem seguir rigorosos padrões de qualidade, como certificações ISO, por exemplo, a ISO 9001, assegurando processos controlados, rastreabilidade dos materiais e padrão internacional de excelência na fabricação e instalação da blindagem. Todo o processo deve ser homologado e autorizado pelo Exército Brasileiro, órgão responsável por fiscalizar, controlar e emitir o Certificado de Registro (CR) das empresas blindadoras no país.",
       ],
       [
         "Veículo blindado parece diferente por fora?",
@@ -133,10 +133,6 @@ const pt = {
       [
         "Por que escolher veículos híbridos blindados?",
         "Veículos híbridos combinam eficiência elétrica, menor ruído, emissão e custo operacional, com a autonomia do motor a combustão. Para uso executivo urbano, oferecem economia sem comprometer desempenho. Toda a frota ROCAS é certificada como híbrida e blindada.",
-      ],
-      [
-        "A blindagem exige manutenção especial?",
-        "Sim. O peso adicional exige monitoramento mais frequente de freios, suspensão e pneus. A ROCAS realiza manutenção preventiva rigorosa com revisões periódicas e inspeção completa antes de cada locação, zero improviso.",
       ],
       [
         "Como funciona a confidencialidade dos contratos?",
@@ -171,6 +167,7 @@ const pt = {
       message: "Mensagem",
       serviceOptions: [
         "Locação executiva",
+        "Locação pessoal",
         "Locação corporativa",
         "Transporte com motorista",
         "Evento especial",
@@ -203,6 +200,7 @@ const pt = {
     service: "Serviço desejado",
     serviceOptions: [
       "Locação executiva",
+      "Locação pessoal",
       "Locação corporativa",
       "Transporte com motorista",
       "Evento especial",
@@ -293,7 +291,7 @@ const en = mergeDeep(pt, {
     titleA: "Built on",
     titleB: "solid foundations",
     paragraphs: [
-      "Just as rock supports structures and protects what stands on it, ROCAS exists to provide stability, safety, and confidence in every executive trip.",
+      "Just as rock supports structures and protects what stands on it, ROCAS exists to provide stability, safety, and confidence in every trip.",
       "Our fleet is made exclusively of hybrid armored vehicles with discreet appearance and certified armor, because for those who truly need protection, visibility is vulnerability.",
       "Confidentiality regarding identity, routines, and contracts is our default policy. At minimum, that is what you deserve.",
     ],
@@ -325,25 +323,31 @@ const en = mergeDeep(pt, {
     titleA: "Vehicles that",
     titleB: "protect without announcing",
     cta: "Check availability",
-    footnote: "Current fleet: 2 Corolla Hybrid + 1 Jeep Commander, all armored and zero mileage.",
+    footnote: "Current fleet: 2 armored Corolla Hybrid + 1 armored Jeep Commander Diesel + 1 non-armored Mercedes Sprinter Van 417 Diesel.",
     cars: [
       {
         badge: "Executive Sedan · Hybrid",
         name: "Toyota Corolla Hybrid 01",
-        desc: "Hybrid Corolla (combustion + electric), level III-A armored and zero mileage. Executive comfort with maximum discretion.",
-        tags: ["Armored", "Hybrid", "Zero km"],
+        desc: "Hybrid Corolla (combustion + electric), level III-A armored. Executive comfort with maximum discretion.",
+        tags: ["Armored", "Hybrid"],
       },
       {
         badge: "Executive Sedan · Hybrid",
         name: "Toyota Corolla Hybrid 02",
-        desc: "Hybrid Corolla (combustion + electric), level III-A armored and zero mileage. Ideal for urban and corporate routines.",
-        tags: ["Armored", "Hybrid", "Zero km"],
+        desc: "Hybrid Corolla (combustion + electric), level III-A armored. Ideal for urban and corporate routines.",
+        tags: ["Armored", "Hybrid"],
       },
       {
         badge: "Premium SUV",
         name: "Jeep Commander",
-        desc: "Level III-A armored Jeep Commander, zero mileage, with more interior space and robustness for executive mobility.",
-        tags: ["Armored", "Zero km", "SUV"],
+        desc: "Level III-A armored Jeep Commander Diesel, with more interior space and robustness for executive mobility.",
+        tags: ["Armored", "Diesel", "SUV"],
+      },
+      {
+        badge: "Executive Van · Diesel",
+        name: "Mercedes Sprinter Van 417",
+        desc: "Seats up to 16 passengers plus driver, ideal for executive transport and tourism. With a 170 hp diesel engine and 6-speed manual transmission, it delivers reliable performance. It features comfortable, stable suspension, as well as USB ports, cooler, Wi-Fi, and individual reading lights. 71-liter tank, range of up to 800 km, and average fuel economy between 10.3 km/l and 11.8 km/l.",
+        tags: ["Non-armored", "Diesel", "Van"],
       },
     ],
   },
@@ -360,7 +364,7 @@ const en = mergeDeep(pt, {
       [
         "02",
         "Corporate Rental",
-        "Contracts for companies with dedicated fleet, centralized management, and institutional confidentiality. Ideal for boards and executive teams.",
+        "Contracts for companies with dedicated fleet, centralized management, and institutional confidentiality.",
       ],
       [
         "03",
@@ -393,7 +397,7 @@ const en = mergeDeep(pt, {
     items: [
       [
         "What does level III-A armor mean?",
-        "Level III-A is the most common standard for civilian use in Brazil. It protects against .44 Magnum, .357, and common handgun threats. Glass, side panels, roof, floor, and pillars are reinforced with ABNT-certified ballistic materials.",
+        "Level III-A is the most common standard for civilian use in Brazil and the highest level permitted for civilian vehicles under Brazilian Army regulations. This armor level protects against shots from .44 Magnum, .357, and other permitted handgun calibers. Glass, side panels, roof, floor, and pillars are reinforced with ballistic materials certified according to ABNT NBR 15000, ensuring resistance, safety, and technical compliance. In addition to Brazilian Army regulation, armor manufacturers must follow rigorous quality standards, including ISO certifications such as ISO 9001, ensuring controlled processes, material traceability, and an international standard of excellence in armor manufacturing and installation. The entire process must be approved and authorized by the Brazilian Army, the authority responsible for supervising, controlling, and issuing the Registration Certificate (CR) for armor companies in the country.",
       ],
       [
         "Does an armored vehicle look different from the outside?",
@@ -402,10 +406,6 @@ const en = mergeDeep(pt, {
       [
         "Why choose hybrid armored vehicles?",
         "Hybrid vehicles combine electric efficiency with combustion autonomy. For executive urban use, they reduce operating costs without compromising performance. The entire ROCAS fleet is hybrid and armored.",
-      ],
-      [
-        "Does armor require special maintenance?",
-        "Yes. Extra weight requires closer monitoring of brakes, suspension, and tires. ROCAS performs strict preventive maintenance and full inspection before each rental.",
       ],
       [
         "How does contract confidentiality work?",
@@ -440,6 +440,7 @@ const en = mergeDeep(pt, {
       message: "Message",
       serviceOptions: [
         "Executive rental",
+        "Personal rental",
         "Corporate rental",
         "Chauffeured transport",
         "Special event",
@@ -466,6 +467,7 @@ const en = mergeDeep(pt, {
     service: "Desired service",
     serviceOptions: [
       "Executive rental",
+      "Personal rental",
       "Corporate rental",
       "Chauffeured transport",
       "Special event",
@@ -522,7 +524,7 @@ const es = mergeDeep(pt, {
     titleA: "Construidos sobre",
     titleB: "fundamentos sólidos",
     paragraphs: [
-      "Así como la roca sostiene estructuras y protege lo que está sobre ella, ROCAS existe para garantizar estabilidad, seguridad y confianza en cada traslado ejecutivo.",
+      "Así como la roca sostiene estructuras y protege lo que está sobre ella, ROCAS existe para garantizar estabilidad, seguridad y confianza en cada traslado.",
       "Nuestra flota está compuesta exclusivamente por vehículos híbridos blindados, con apariencia discreta y blindaje certificado.",
       "La confidencialidad sobre identidad, rutinas y contratos es nuestra práctica estándar.",
     ],
@@ -554,25 +556,31 @@ const es = mergeDeep(pt, {
     titleA: "Vehículos que",
     titleB: "protegen sin anunciar",
     cta: "Consultar disponibilidad",
-    footnote: "Flota actual: 2 Corolla Hybrid + 1 Jeep Commander, todos blindados y cero km.",
+    footnote: "Flota actual: 2 Corolla Hybrid blindados + 1 Jeep Commander blindado Diesel + 1 Mercedes Sprinter Van 417 Diesel no blindada.",
     cars: [
       {
         badge: "Sedán Ejecutivo · Híbrido",
         name: "Toyota Corolla Hybrid 01",
-        desc: "Corolla híbrido (combustión + eléctrico), blindado nivel III-A y cero km. Confort ejecutivo con máxima discreción.",
-        tags: ["Blindado", "Híbrido", "Cero km"],
+        desc: "Corolla híbrido (combustión + eléctrico), blindado nivel III-A. Confort ejecutivo con máxima discreción.",
+        tags: ["Blindado", "Híbrido"],
       },
       {
         badge: "Sedán Ejecutivo · Híbrido",
         name: "Toyota Corolla Hybrid 02",
-        desc: "Corolla híbrido (combustión + eléctrico), blindado nivel III-A y cero km. Ideal para rutina urbana y corporativa.",
-        tags: ["Blindado", "Híbrido", "Cero km"],
+        desc: "Corolla híbrido (combustión + eléctrico), blindado nivel III-A. Ideal para rutina urbana y corporativa.",
+        tags: ["Blindado", "Híbrido"],
       },
       {
         badge: "SUV Premium",
         name: "Jeep Commander",
-        desc: "Jeep Commander blindado nivel III-A y cero km, con más espacio interior y robustez para movilidad ejecutiva.",
-        tags: ["Blindado", "Cero km", "SUV"],
+        desc: "Jeep Commander Diesel blindado nivel III-A, con más espacio interior y robustez para movilidad ejecutiva.",
+        tags: ["Blindado", "Diesel", "SUV"],
+      },
+      {
+        badge: "Van Ejecutiva · Diesel",
+        name: "Mercedes Sprinter Van 417",
+        desc: "Acomoda hasta 16 pasajeros + conductor, ideal para transporte ejecutivo y turismo. Con motor diesel de 170 cv y cambio manual de 6 marchas, ofrece un rendimiento confiable. Cuenta con suspensión cómoda y estable, además de USB, nevera, Wi-Fi y luces de lectura individuales. Tanque de 71 litros, autonomía de hasta 800 km y consumo medio entre 10,3 km/l y 11,8 km/l.",
+        tags: ["No blindado", "Diesel", "Van"],
       },
     ],
   },
@@ -622,7 +630,7 @@ const es = mergeDeep(pt, {
     items: [
       [
         "¿Qué significa blindaje nivel III-A?",
-        "El nivel III-A es el estándar civil más común en Brasil. Protege contra amenazas típicas de arma corta.",
+        "El nivel III-A es el estándar más común para uso civil en Brasil y el máximo permitido para vehículos civiles, según la reglamentación del Ejército Brasileño. Este nivel de blindaje ofrece protección contra disparos de pistolas calibre .44 Magnum, .357 y demás armas cortas de uso permitido. Los vidrios, paneles laterales, techo, piso y columnas del vehículo reciben materiales balísticos certificados de acuerdo con la norma ABNT NBR 15000, garantizando resistencia, seguridad y conformidad técnica. Además de la reglamentación del Ejército Brasileño, las empresas blindadoras deben seguir rigurosos estándares de calidad, como certificaciones ISO, por ejemplo la ISO 9001, asegurando procesos controlados, trazabilidad de los materiales y un estándar internacional de excelencia en la fabricación e instalación del blindaje. Todo el proceso debe ser homologado y autorizado por el Ejército Brasileño, organismo responsable de fiscalizar, controlar y emitir el Certificado de Registro (CR) de las empresas blindadoras en el país.",
       ],
       [
         "¿Un vehículo blindado se ve diferente por fuera?",
@@ -631,10 +639,6 @@ const es = mergeDeep(pt, {
       [
         "¿Por qué elegir vehículos híbridos blindados?",
         "Combinan eficiencia eléctrica con autonomía de combustión, reduciendo costos operativos sin perder desempeño.",
-      ],
-      [
-        "¿El blindaje requiere mantenimiento especial?",
-        "Sí. El peso extra exige monitoreo frecuente de frenos, suspensión y neumáticos.",
       ],
       [
         "¿Cómo funciona la confidencialidad de contratos?",
@@ -669,6 +673,7 @@ const es = mergeDeep(pt, {
       message: "Mensaje",
       serviceOptions: [
         "Alquiler ejecutivo",
+        "Alquiler personal",
         "Alquiler corporativo",
         "Transporte con conductor",
         "Evento especial",
@@ -695,6 +700,7 @@ const es = mergeDeep(pt, {
     service: "Servicio deseado",
     serviceOptions: [
       "Alquiler ejecutivo",
+      "Alquiler personal",
       "Alquiler corporativo",
       "Transporte con conductor",
       "Evento especial",
@@ -751,7 +757,7 @@ const fr = mergeDeep(pt, {
     titleA: "Construits sur des",
     titleB: "fondations solides",
     paragraphs: [
-      "Comme la roche soutient les structures et protège ce qu'elle porte, ROCAS garantit stabilité, sécurité et confiance à chaque déplacement exécutif.",
+      "Comme la roche soutient les structures et protège ce qu'elle porte, ROCAS garantit stabilité, sécurité et confiance à chaque déplacement.",
       "Notre flotte est composée exclusivement de véhicules hybrides blindés, à l'apparence discrète et au blindage certifié.",
       "La confidentialité sur l'identité, les routines et les contrats est notre pratique standard.",
     ],
@@ -783,25 +789,31 @@ const fr = mergeDeep(pt, {
     titleA: "Des véhicules qui",
     titleB: "protègent sans s'annoncer",
     cta: "Vérifier la disponibilité",
-    footnote: "Flotte actuelle: 2 Corolla Hybrid + 1 Jeep Commander, tous blindés et zéro km.",
+    footnote: "Flotte actuelle: 2 Corolla Hybrid blindées + 1 Jeep Commander blindé Diesel + 1 Mercedes Sprinter Van 417 Diesel non blindée.",
     cars: [
       {
         badge: "Berline Exécutive · Hybride",
         name: "Toyota Corolla Hybrid 01",
-        desc: "Corolla hybride (thermique + électrique), blindée niveau III-A et zéro km. Confort exécutif avec discrétion maximale.",
-        tags: ["Blindé", "Hybride", "Zéro km"],
+        desc: "Corolla hybride (thermique + électrique), blindée niveau III-A. Confort exécutif avec discrétion maximale.",
+        tags: ["Blindé", "Hybride"],
       },
       {
         badge: "Berline Exécutive · Hybride",
         name: "Toyota Corolla Hybrid 02",
-        desc: "Corolla hybride (thermique + électrique), blindée niveau III-A et zéro km. Idéale pour un usage urbain et corporate.",
-        tags: ["Blindé", "Hybride", "Zéro km"],
+        desc: "Corolla hybride (thermique + électrique), blindée niveau III-A. Idéale pour un usage urbain et corporate.",
+        tags: ["Blindé", "Hybride"],
       },
       {
         badge: "SUV Premium",
         name: "Jeep Commander",
-        desc: "Jeep Commander blindé niveau III-A et zéro km, avec plus d'espace intérieur et de robustesse.",
-        tags: ["Blindé", "Zéro km", "SUV"],
+        desc: "Jeep Commander Diesel blindé niveau III-A, avec plus d'espace intérieur et de robustesse.",
+        tags: ["Blindé", "Diesel", "SUV"],
+      },
+      {
+        badge: "Van Exécutive · Diesel",
+        name: "Mercedes Sprinter Van 417",
+        desc: "Peut accueillir jusqu'à 16 passagers + chauffeur, idéale pour le transport exécutif et le tourisme. Avec un moteur diesel de 170 ch et une boîte manuelle à 6 rapports, elle offre des performances fiables. Elle dispose d'une suspension confortable et stable, ainsi que de ports USB, glacière, Wi-Fi et liseuses individuelles. Réservoir de 71 litres, autonomie jusqu'à 800 km et consommation moyenne entre 10,3 km/l et 11,8 km/l.",
+        tags: ["Non blindée", "Diesel", "Van"],
       },
     ],
   },
@@ -851,7 +863,7 @@ const fr = mergeDeep(pt, {
     items: [
       [
         "Que signifie un blindage niveau III-A ?",
-        "Le niveau III-A est le standard civil le plus courant au Brésil. Il protège contre les menaces typiques d'arme de poing.",
+        "Le niveau III-A est le standard le plus courant pour l'usage civil au Brésil et le niveau maximal autorisé pour les véhicules civils, conformément à la réglementation de l'Armée brésilienne. Ce niveau de blindage protège contre les tirs de pistolets de calibre .44 Magnum, .357 et d'autres armes de poing autorisées. Les vitres, panneaux latéraux, toit, plancher et montants du véhicule reçoivent des matériaux balistiques certifiés selon la norme ABNT NBR 15000, garantissant résistance, sécurité et conformité technique. En plus de la réglementation de l'Armée brésilienne, les entreprises de blindage doivent suivre des standards de qualité rigoureux, comme des certifications ISO, par exemple l'ISO 9001, assurant des processus contrôlés, la traçabilité des matériaux et un niveau international d'excellence dans la fabrication et l'installation du blindage. L'ensemble du processus doit être homologué et autorisé par l'Armée brésilienne, l'organisme chargé de superviser, contrôler et délivrer le Certificat d'Enregistrement (CR) des entreprises de blindage dans le pays.",
       ],
       [
         "Un véhicule blindé paraît-il différent de l'extérieur ?",
@@ -860,10 +872,6 @@ const fr = mergeDeep(pt, {
       [
         "Pourquoi choisir des véhicules hybrides blindés ?",
         "Ils combinent efficacité électrique et autonomie thermique, réduisant les coûts sans compromettre les performances.",
-      ],
-      [
-        "Le blindage exige-t-il une maintenance spéciale ?",
-        "Oui. Le poids supplémentaire demande un suivi fréquent des freins, suspensions et pneus.",
       ],
       [
         "Comment fonctionne la confidentialité des contrats ?",
@@ -898,6 +906,7 @@ const fr = mergeDeep(pt, {
       message: "Message",
       serviceOptions: [
         "Location exécutive",
+        "Location personnelle",
         "Location corporate",
         "Transport avec chauffeur",
         "Événement spécial",
@@ -924,6 +933,7 @@ const fr = mergeDeep(pt, {
     service: "Service souhaité",
     serviceOptions: [
       "Location exécutive",
+      "Location personnelle",
       "Location corporate",
       "Transport avec chauffeur",
       "Événement spécial",

@@ -59,7 +59,7 @@ export default function Feedbacks() {
             Quem vive o serviço {" "}<em style={{ fontStyle: "normal", color: lightSection.titleEm }}>reconhece a diferença</em>
           </STitle>
           <p style={{ marginTop: ".95rem", fontSize: isMobile ? "16px" : "20px", color: "#4e6686", lineHeight: 1.8, fontWeight: 500 }}>
-            Relatos de clientes com rotinas executivas de alta exigência, onde discrição e previsibilidade não são opcionais.
+            Relatos de clientes com rotinas de alta exigência, onde discrição e previsibilidade não são opcionais.
           </p>
         </div>
       </Reveal>
@@ -94,7 +94,7 @@ export default function Feedbacks() {
               }}
             >
               <div style={{ display: "flex", justifyContent: "flex-end", alignItems: "center", marginBottom: ".85rem" }}>
-                <span style={{ fontSize: ".88rem", letterSpacing: ".1em", color: "#86b9f6" }}>★★★★★</span>
+                <span style={{ fontSize: ".88rem", letterSpacing: ".1em", color: "#d4af37" }}>★★★★★</span>
               </div>
 
               <p style={{ fontSize: isMobile ? "16px" : "20px", color: lightSection.text, lineHeight: 1.8, fontWeight: 500, position: "relative" }}>

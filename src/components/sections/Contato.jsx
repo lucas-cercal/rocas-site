@@ -33,6 +33,33 @@ function SocialIcon({ href, label, icon }) {
   );
 }
 
+function getContactAction(label, value) {
+  const normalizedLabel = label.toLowerCase();
+
+  if (normalizedLabel === "whatsapp") {
+    return {
+      href: buildWhatsAppLink("Olá! Vim pelo site e gostaria de falar com a ROCAS."),
+      external: true,
+    };
+  }
+
+  if (normalizedLabel === "e-mail") {
+    return {
+      href: `mailto:${value}`,
+      external: false,
+    };
+  }
+
+  if (["atendimento", "service", "atención"].includes(normalizedLabel)) {
+    return {
+      href: buildWhatsAppLink("Olá! Vim pelo site e gostaria de atendimento da ROCAS."),
+      external: true,
+    };
+  }
+
+  return null;
+}
+
 export default function Contato() {
   const { t } = useI18n();
   const isMobile = useBreakpoint(980);
@@ -119,7 +146,10 @@ export default function Contato() {
           {t.contato.intro}
         </p>
         <div style={{ marginTop: "2.2rem", display: "flex", flexDirection: "column", gap: "1.1rem" }}>
-          {t.contato.info.map(([label, value]) => (
+          {t.contato.info.map(([label, value]) => {
+            const action = getContactAction(label, value);
+
+            return (
             <div key={label} style={{ display: "flex", gap: "1rem", alignItems: "flex-start" }}>
               <div
                 style={{
@@ -148,10 +178,27 @@ export default function Contato() {
                 >
                   {label}
                 </div>
-                <div style={{ fontSize: isMobile ? "16px" : "20px", color: theme.cr5, fontWeight: 500 }}>{value}</div>
+                {action ? (
+                  <a
+                    href={action.href}
+                    target={action.external ? "_blank" : undefined}
+                    rel={action.external ? "noopener noreferrer" : undefined}
+                    style={{
+                      fontSize: isMobile ? "16px" : "20px",
+                      color: theme.cr5,
+                      fontWeight: 500,
+                      textDecoration: "none",
+                    }}
+                  >
+                    {value}
+                  </a>
+                ) : (
+                  <div style={{ fontSize: isMobile ? "16px" : "20px", color: theme.cr5, fontWeight: 500 }}>{value}</div>
+                )}
               </div>
             </div>
-          ))}
+          );
+          })}
         </div>
       </Reveal>
 

@@ -11,76 +11,13 @@ const lightSection = {
   text: "#3f5675",
   textSoft: "#607492",
   accent: "#4e6f96",
-  panelBg: "#111e31",
-  panelTitle: "#e6eeff",
-  panelMuted: "#9cb2d1",
-  panelBorder: "rgba(130,160,205,.2)",
-  shieldOn: "#74bc47",
-  shieldOff: "#cad8e9",
-  levelBg: "#17263d",
-  levelBgHighlight: "#29481f",
-  levelBorder: "rgba(130,160,205,.2)",
-  levelBorderHighlight: "rgba(116,188,71,.45)",
-  panelText: "#b9cbed",
 };
-
-function ShieldIcon({ active = false }) {
-  return (
-    <svg width="16" height="18" viewBox="0 0 24 26" aria-hidden="true">
-      <path
-        d="M12 1.9 21.2 5v7.4c0 5.3-3.7 10.2-9.2 11.7C6.5 22.6 2.8 17.7 2.8 12.4V5L12 1.9Z"
-        fill={active ? lightSection.shieldOn : "none"}
-        stroke={active ? lightSection.shieldOn : lightSection.shieldOff}
-        strokeWidth="1.6"
-      />
-    </svg>
-  );
-}
-
-function ProtectionRow({ label, strength, highlight = false }) {
-  return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        gap: ".8rem",
-        padding: ".45rem .55rem",
-        background: highlight ? lightSection.levelBgHighlight : lightSection.levelBg,
-        border: highlight
-          ? `1px solid ${lightSection.levelBorderHighlight}`
-          : `1px solid ${lightSection.levelBorder}`,
-      }}
-    >
-      <span
-        style={{
-          fontSize: ".58rem",
-          letterSpacing: ".1em",
-          textTransform: "uppercase",
-          color: highlight ? "#cde9bf" : "#c7d7ed",
-          fontWeight: 500,
-          whiteSpace: "nowrap",
-        }}
-      >
-        {label}
-      </span>
-      <div style={{ display: "flex", gap: ".25rem" }}>
-        {[0, 1, 2, 3, 4].map((index) => (
-          <ShieldIcon key={index} active={index < strength} />
-        ))}
-      </div>
-    </div>
-  );
-}
 
 export default function SaibaMais() {
   const { t } = useI18n();
   const isMobile = useBreakpoint(980);
-  const isMediumViewport = useBreakpoint(1280);
   const [openItem, setOpenItem] = useState(null);
-  const [panelHovered, setPanelHovered] = useState(false);
   const items = t.saibaMais.items;
-  const showSideBySide = !isMobile && !isMediumViewport;
 
   return (
     <section id="saiba-mais" style={{ background: lightSection.bg, padding: isMobile ? "4.5rem 1.25rem" : "7rem 4rem" }}>
@@ -88,7 +25,7 @@ export default function SaibaMais() {
         <div style={{ maxWidth: 520, marginBottom: "3.5rem" }}>
           <SLabel tone="light">{t.saibaMais.label}</SLabel>
           <STitle tone="light">
-            {t.saibaMais.titleA} {" "}<em style={{ fontStyle: "normal", color: lightSection.titleEm }}>{t.saibaMais.titleB}</em>
+            {t.saibaMais.titleA} {" "}<em style={{ fontStyle: "normal", color: "inherit" }}>{t.saibaMais.titleB}</em>
           </STitle>
           <p
             style={{
@@ -107,11 +44,7 @@ export default function SaibaMais() {
       <Reveal delay={150}>
         <div
           style={{
-            display: "grid",
-            gridTemplateColumns: showSideBySide ? "minmax(0, 1fr) minmax(420px, .8fr)" : "1fr",
-            justifyContent: "stretch",
-            alignItems: "start",
-            gap: isMobile ? "2rem" : showSideBySide ? "2.2rem" : "1.6rem",
+            maxWidth: 980,
           }}
         >
           <div>
@@ -155,71 +88,6 @@ export default function SaibaMais() {
               </div>
             ))}
           </div>
-
-          {!isMobile && (
-            <aside
-              onMouseEnter={() => setPanelHovered(true)}
-              onMouseLeave={() => setPanelHovered(false)}
-              style={{
-                width: "100%",
-                maxWidth: showSideBySide ? 500 : 560,
-                justifySelf: "center",
-                position: "static",
-                background: lightSection.panelBg,
-                border: `1px solid ${panelHovered ? "rgba(160,192,240,.34)" : lightSection.panelBorder}`,
-                borderRadius: 14,
-                padding: "1.7rem",
-                boxShadow: panelHovered
-                  ? "0 18px 34px rgba(8,14,24,.3), inset 0 0 0 1px rgba(198,220,255,.14), 0 0 0 1px rgba(132,168,220,.16)"
-                  : "0 14px 28px rgba(8,14,24,.22), inset 0 0 0 1px rgba(198,220,255,.08), 0 0 0 1px rgba(112,148,198,.1)",
-                transform: panelHovered ? "translateY(-3px)" : "translateY(0)",
-                transition: "transform .28s ease, box-shadow .28s ease, border-color .28s ease",
-                marginTop: showSideBySide ? 0 : ".4rem",
-              }}
-            >
-              <div
-                style={{
-                  fontSize: ".58rem",
-                  letterSpacing: ".16em",
-                  textTransform: "uppercase",
-                  color: lightSection.panelMuted,
-                  marginBottom: ".6rem",
-                }}
-              >
-                Leitura rápida
-              </div>
-              <h3
-                style={{
-                  fontFamily: "'Neue Montreal', sans-serif",
-                  fontSize: "1.14rem",
-                  color: lightSection.panelTitle,
-                  marginBottom: ".95rem",
-                  lineHeight: 1.2,
-                }}
-              >
-                Blindagem III-A
-              </h3>
-
-              <div style={{ display: "grid", gap: ".5rem", marginBottom: ".9rem" }}>
-                <ProtectionRow label="Nível 1A" strength={1} />
-                <ProtectionRow label="Nível 2 e 2A" strength={2} />
-                <ProtectionRow label="Nível III-A" strength={3} highlight />
-                <ProtectionRow label="Nível III" strength={4} />
-              </div>
-
-              <p
-                style={{
-                  fontSize: ".74rem",
-                  color: lightSection.panelText,
-                  lineHeight: 1.5,
-                  fontWeight: 500,
-                }}
-              >
-                O nível III-A é a referência para proteção civil executiva, equilibrando segurança balística e
-                discrição no uso diário.
-              </p>
-            </aside>
-          )}
         </div>
       </Reveal>
     </section>

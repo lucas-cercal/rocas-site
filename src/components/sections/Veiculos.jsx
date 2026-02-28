@@ -60,6 +60,9 @@ function VehicleCard({ badge, name, desc, tags, grad, image }) {
         position: "relative",
         overflow: "hidden",
         cursor: "pointer",
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
         transition: "background .3s, box-shadow .3s",
         boxShadow: hovered ? "0 10px 24px rgba(16,36,62,.08)" : "none",
       }}
@@ -122,7 +125,14 @@ function VehicleCard({ badge, name, desc, tags, grad, image }) {
           </div>
         )}
       </div>
-      <div style={{ padding: "1.5rem 1.8rem 2rem" }}>
+      <div
+        style={{
+          padding: "1.5rem 1.8rem 2rem",
+          display: "flex",
+          flexDirection: "column",
+          flex: 1,
+        }}
+      >
         <div
           style={{
             fontSize: ".58rem",
@@ -153,11 +163,12 @@ function VehicleCard({ badge, name, desc, tags, grad, image }) {
             lineHeight: 1.65,
             marginBottom: "1.2rem",
             fontWeight: 500,
+            flex: 1,
           }}
         >
           {desc}
         </div>
-        <div style={{ display: "flex", gap: ".5rem", flexWrap: "wrap" }}>
+        <div style={{ display: "flex", gap: ".5rem", flexWrap: "wrap", marginTop: "auto" }}>
           {tags.map((tag) => (
             <span
               key={tag}
@@ -191,9 +202,9 @@ export default function Veiculos({ openModal }) {
     { grad: "linear-gradient(135deg,#c7daf0,#e8f2ff)", image: sprinterImage },
   ];
   const cars = t.veiculos.cars.map((car, index) => ({ ...car, ...carVisuals[index] }));
-  const visibleCards = isMobile ? 1 : 3;
+  const visibleCards = 3;
   const maxStartIndex = Math.max(0, cars.length - visibleCards);
-  const canSlide = cars.length > visibleCards;
+  const canSlide = !isMobile && cars.length > visibleCards;
 
   useEffect(() => {
     setStartIndex((prev) => Math.min(prev, maxStartIndex));
@@ -259,21 +270,29 @@ export default function Veiculos({ openModal }) {
               </button>
             </div>
           )}
-          <div style={{ overflow: "hidden", border: `1px solid ${lightSection.border}` }}>
+          <div
+            style={{
+              overflow: "hidden",
+              border: `1px solid ${lightSection.border}`,
+            }}
+          >
             <div
               style={{
                 display: "flex",
-                transform: `translateX(-${(startIndex * 100) / visibleCards}%)`,
-                transition: "transform .35s ease",
+                flexDirection: isMobile ? "column" : "row",
+                transform: isMobile ? "none" : `translateX(-${(startIndex * 100) / visibleCards}%)`,
+                transition: isMobile ? "none" : "transform .35s ease",
               }}
             >
-              {cars.map((car) => (
+              {cars.map((car, index) => (
                 <div
                   key={car.name}
                   style={{
-                    flex: `0 0 ${100 / visibleCards}%`,
+                    flex: isMobile ? "1 1 auto" : `0 0 ${100 / visibleCards}%`,
                     minWidth: 0,
-                    borderRight: `1px solid ${lightSection.border}`,
+                    borderRight: isMobile ? "none" : `1px solid ${lightSection.border}`,
+                    borderBottom:
+                      isMobile && index < cars.length - 1 ? `1px solid ${lightSection.border}` : "none",
                   }}
                 >
                   <VehicleCard {...car} />
