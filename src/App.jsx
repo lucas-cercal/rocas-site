@@ -1,8 +1,6 @@
-import { useState } from "react";
 import Footer from "./components/layout/Footer";
 import Nav from "./components/layout/Nav";
 import WhatsAppButton from "./components/layout/WhatsAppButton";
-import QuoteModal from "./components/modal/QuoteModal";
 import Contato from "./components/sections/Contato";
 import Feedbacks from "./components/sections/Feedbacks";
 import Hero from "./components/sections/Hero";
@@ -15,15 +13,13 @@ import Divider from "./components/ui/Divider";
 import { globalStyles } from "./constants/theme";
 
 export default function App() {
-  const [modalOpen, setModalOpen] = useState(false);
-
   return (
     <>
       <style>{globalStyles}</style>
-      <Nav openModal={() => setModalOpen(true)} />
-      <Hero openModal={() => setModalOpen(true)} />
+      <Nav />
+      <Hero />
       <Divider />
-      <Veiculos openModal={() => setModalOpen(true)} />
+      <Veiculos />
       <Divider />
       <QuemSomos />
       <Divider />
@@ -38,7 +34,6 @@ export default function App() {
       <Privacidade />
       <Footer />
       <WhatsAppButton />
-      <QuoteModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </>
   );
 }

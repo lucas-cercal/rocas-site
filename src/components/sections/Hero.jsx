@@ -5,7 +5,7 @@ import { useBreakpoint } from "../../hooks/useBreakpoint";
 import { useI18n } from "../../i18n/LanguageContext";
 import { BtnChrome, BtnGhost } from "../ui/Buttons";
 
-export default function Hero({ openModal }) {
+export default function Hero() {
   const { t } = useI18n();
   const isMobile = useBreakpoint(980);
   const [videoError, setVideoError] = useState(false);
@@ -180,7 +180,7 @@ export default function Hero({ openModal }) {
             {t.hero.desc}
           </p>
           <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", alignItems: "center" }}>
-            <BtnChrome onClick={openModal}>{t.hero.ctaPrimary}</BtnChrome>
+            <BtnChrome href="#contato">{t.hero.ctaPrimary}</BtnChrome>
             <BtnGhost href="#veiculos">{t.hero.ctaSecondary}</BtnGhost>
           </div>
           <div

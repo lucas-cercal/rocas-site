@@ -1,11 +1,121 @@
 import { useMemo, useState } from "react";
+import { format } from "date-fns";
+import { enUS, es, fr, ptBR } from "date-fns/locale";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { buildWhatsAppLink } from "../../constants/contact";
 import { theme } from "../../constants/theme";
 import { useBreakpoint } from "../../hooks/useBreakpoint";
 import { useI18n } from "../../i18n/LanguageContext";
 import { FInput, FSelect, FTextarea } from "../forms/Fields";
+import "../forms/DatePicker.css";
 import Reveal from "../ui/Reveal";
 import { SLabel, STitle } from "../ui/SectionTitle";
+
+function formatDate(value) {
+  if (!value) return "-";
+  return value.toLocaleDateString("pt-BR");
+}
+
+function formatTime(value) {
+  if (!value) return "-";
+  return value.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+}
+
+function capitalize(text) {
+  if (!text) return text;
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+function DatePickerField({
+  id,
+  label,
+  selected,
+  onChange,
+  minDate,
+  placeholder,
+  showTimeSelectOnly = false,
+  locale,
+}) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: ".3rem" }}>
+      <label
+        htmlFor={id}
+        style={{
+          fontSize: ".68rem",
+          letterSpacing: ".22em",
+          textTransform: "uppercase",
+          color: theme.textLo,
+        }}
+      >
+        {label}
+      </label>
+      <DatePicker
+        id={id}
+        selected={selected}
+        onChange={onChange}
+        minDate={minDate}
+        placeholderText={placeholder}
+        calendarClassName="quote-datepicker-calendar"
+        popperClassName="quote-datepicker-popper"
+        wrapperClassName="quote-datepicker-wrapper"
+        className="quote-datepicker-input"
+        showPopperArrow={false}
+        dateFormat={showTimeSelectOnly ? "HH:mm" : "dd/MM/yyyy"}
+        showTimeSelect={showTimeSelectOnly}
+        showTimeSelectOnly={showTimeSelectOnly}
+        timeIntervals={30}
+        timeCaption={showTimeSelectOnly ? "Hora" : "Horário"}
+        autoComplete="off"
+        locale={locale}
+        renderCustomHeader={({ date, decreaseMonth, increaseMonth, prevMonthButtonDisabled, nextMonthButtonDisabled }) => (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              padding: ".55rem .7rem",
+            }}
+          >
+            <button
+              type="button"
+              onClick={decreaseMonth}
+              disabled={prevMonthButtonDisabled}
+              style={{
+                border: "none",
+                background: "transparent",
+                color: "#d8e6fb",
+                cursor: prevMonthButtonDisabled ? "default" : "pointer",
+                opacity: prevMonthButtonDisabled ? 0.35 : 1,
+                fontSize: "1rem",
+              }}
+            >
+              {"<"}
+            </button>
+            <span style={{ color: "#d8e6fb", fontWeight: 600 }}>
+              {capitalize(format(date, "LLLL yyyy", { locale }))}
+            </span>
+            <button
+              type="button"
+              onClick={increaseMonth}
+              disabled={nextMonthButtonDisabled}
+              style={{
+                border: "none",
+                background: "transparent",
+                color: "#d8e6fb",
+                cursor: nextMonthButtonDisabled ? "default" : "pointer",
+                opacity: nextMonthButtonDisabled ? 0.35 : 1,
+                fontSize: "1rem",
+              }}
+            >
+              {">"}
+            </button>
+          </div>
+        )}
+      />
+    </div>
+  );
+}
 
 function SocialIcon({ href, label, icon }) {
   return (
@@ -61,7 +171,7 @@ function getContactAction(label, value) {
 }
 
 export default function Contato() {
-  const { t } = useI18n();
+  const { language, t } = useI18n();
   const isMobile = useBreakpoint(980);
   const [sent, setSent] = useState(false);
   const [quoteCardHovered, setQuoteCardHovered] = useState(false);
@@ -72,10 +182,21 @@ export default function Contato() {
     email: "",
     whatsapp: "",
     serviceType: "",
-    period: "",
+    vehicle: "",
+    startDate: null,
+    endDate: null,
+    time: null,
     message: "",
     consent: false,
   });
+  const vehicleOptions = t.veiculos.cars.map((car) => car.name);
+  const calendarLocale =
+    {
+      pt: ptBR,
+      en: enUS,
+      es,
+      fr,
+    }[language] || ptBR;
   const contactIcons = useMemo(
     () => ({
       WhatsApp: "🟢",
@@ -98,6 +219,8 @@ export default function Contato() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (!form.startDate || !form.endDate || !form.time) return;
+
     const message = [
       "Olá! Gostaria de solicitar uma cotação.",
       "",
@@ -106,7 +229,8 @@ export default function Contato() {
       `E-mail: ${form.email}`,
       `WhatsApp: ${form.whatsapp || "-"}`,
       `Serviço: ${form.serviceType || "-"}`,
-      `Período: ${form.period || "-"}`,
+      `Veículo: ${form.vehicle || "-"}`,
+      `Período: ${formatDate(form.startDate)} a ${formatDate(form.endDate)} às ${formatTime(form.time)}`,
       `Mensagem: ${form.message || "-"}`,
     ].join("\n");
 
@@ -288,15 +412,56 @@ export default function Contato() {
                 onChange={handleChange}
                 interactive
               />
-              <FInput
-                id="contato-period"
-                name="period"
-                label={t.contato.form.period}
-                placeholder={t.contato.form.periodPlaceholder}
-                value={form.period}
+              <FSelect
+                id="contato-vehicle"
+                name="vehicle"
+                label={t.contato.form.vehicle}
+                options={vehicleOptions}
+                placeholderOption={t.common.selectOption}
+                value={form.vehicle}
                 onChange={handleChange}
                 interactive
               />
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: ".9rem", marginBottom: ".9rem" }}>
+              <DatePickerField
+                id="contato-start-date"
+                label={t.contato.form.startDate}
+                selected={form.startDate}
+                onChange={(date) => {
+                  setForm((prev) => {
+                    const nextEndDate = prev.endDate && date && prev.endDate < date ? null : prev.endDate;
+                    return { ...prev, startDate: date, endDate: nextEndDate };
+                  });
+                }}
+                placeholder={t.contato.form.startDate}
+                locale={calendarLocale}
+              />
+              <DatePickerField
+                id="contato-end-date"
+                label={t.contato.form.endDate}
+                selected={form.endDate}
+                onChange={(date) => setForm((prev) => ({ ...prev, endDate: date }))}
+                minDate={form.startDate || undefined}
+                placeholder={t.contato.form.endDate}
+                locale={calendarLocale}
+              />
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: ".9rem", marginBottom: ".9rem" }}>
+              <DatePickerField
+                id="contato-time"
+                label={t.contato.form.time}
+                selected={form.time}
+                onChange={(date) => setForm((prev) => ({ ...prev, time: date }))}
+                placeholder={t.contato.form.time}
+                showTimeSelectOnly
+                locale={calendarLocale}
+              />
+              <div style={{ display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
+                <div style={{ fontSize: ".62rem", color: theme.textLo, lineHeight: 1.6 }}>
+                  {t.contato.form.periodHint}
+                </div>
+              </div>
             </div>
             <FTextarea
               id="contato-message"

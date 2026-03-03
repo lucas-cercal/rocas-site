@@ -191,7 +191,7 @@ function VehicleCard({ badge, name, desc, tags, grad, image }) {
   );
 }
 
-export default function Veiculos({ openModal }) {
+export default function Veiculos() {
   const { t } = useI18n();
   const isMobile = useBreakpoint(980);
   const [startIndex, setStartIndex] = useState(0);
@@ -232,7 +232,11 @@ export default function Veiculos({ openModal }) {
           </STitle>
         </Reveal>
         <Reveal>
-          <LightGhostButton onClick={openModal}>{t.veiculos.cta}</LightGhostButton>
+          <LightGhostButton onClick={() => {
+            if (typeof window !== "undefined") {
+              window.location.hash = "contato";
+            }
+          }}>{t.veiculos.cta}</LightGhostButton>
         </Reveal>
       </div>
 

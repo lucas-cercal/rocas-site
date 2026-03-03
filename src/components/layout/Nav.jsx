@@ -296,7 +296,7 @@ function NavCta({ onClick, href, children, scrolled = false }) {
   );
 }
 
-export default function Nav({ openModal }) {
+export default function Nav() {
   const { language, setLanguage, t } = useI18n();
   const scrolled = useScrolled();
   const [open, setOpen] = useState(false);
