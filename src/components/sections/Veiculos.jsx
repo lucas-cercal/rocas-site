@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { corollaImage, corollaImage2, jeepImage, sprinterImage } from "../../assets";
 import { theme } from "../../constants/theme";
 import { useBreakpoint } from "../../hooks/useBreakpoint";
@@ -48,11 +48,12 @@ function LightGhostButton({ children, onClick }) {
   );
 }
 
-function VehicleCard({ badge, name, desc, tags, grad, image }) {
+function VehicleCard({ badge, name, desc, tags, grad, image, onSelect, ctaLabel }) {
   const [hovered, setHovered] = useState(false);
 
   return (
     <div
+      onClick={onSelect}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
@@ -65,6 +66,7 @@ function VehicleCard({ badge, name, desc, tags, grad, image }) {
         height: "100%",
         transition: "background .3s, box-shadow .3s",
         boxShadow: hovered ? "0 10px 24px rgba(16,36,62,.08)" : "none",
+        scrollSnapAlign: "start",
       }}
     >
       <div
@@ -186,15 +188,41 @@ function VehicleCard({ badge, name, desc, tags, grad, image }) {
             </span>
           ))}
         </div>
+        <button
+          type="button"
+          onClick={(event) => {
+            event.stopPropagation();
+            onSelect();
+          }}
+          style={{
+            marginTop: "1.25rem",
+            width: "100%",
+            border: `1px solid ${hovered ? lightSection.buttonText : lightSection.buttonBorder}`,
+            background: hovered ? "rgba(61,93,133,.08)" : "transparent",
+            color: lightSection.buttonText,
+            padding: ".82rem 1rem",
+            fontFamily: "'Neue Montreal', sans-serif",
+            fontSize: ".7rem",
+            letterSpacing: ".18em",
+            textTransform: "uppercase",
+            cursor: "pointer",
+            fontWeight: 600,
+            transition: "all .25s ease",
+          }}
+        >
+          {ctaLabel}
+        </button>
       </div>
     </div>
   );
 }
 
-export default function Veiculos() {
+export default function Veiculos({ onSelectVehicle }) {
   const { t } = useI18n();
   const isMobile = useBreakpoint(980);
-  const [startIndex, setStartIndex] = useState(0);
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(false);
+  const trackRef = useRef(null);
   const carVisuals = [
     { grad: "linear-gradient(135deg,#d9e4f2,#f2f7ff)", image: corollaImage },
     { grad: "linear-gradient(135deg,#dae4f0,#f3f7ff)", image: corollaImage2 },
@@ -202,16 +230,41 @@ export default function Veiculos() {
     { grad: "linear-gradient(135deg,#c7daf0,#e8f2ff)", image: sprinterImage },
   ];
   const cars = t.veiculos.cars.map((car, index) => ({ ...car, ...carVisuals[index] }));
-  const visibleCards = 3;
-  const maxStartIndex = Math.max(0, cars.length - visibleCards);
-  const canSlide = !isMobile && cars.length > visibleCards;
+  const canSlide = !isMobile && cars.length > 3;
 
   useEffect(() => {
-    setStartIndex((prev) => Math.min(prev, maxStartIndex));
-  }, [maxStartIndex]);
+    const element = trackRef.current;
+    if (!element) return undefined;
 
-  const goPrev = () => setStartIndex((prev) => Math.max(0, prev - 1));
-  const goNext = () => setStartIndex((prev) => Math.min(maxStartIndex, prev + 1));
+    const updateControls = () => {
+      const maxScrollLeft = element.scrollWidth - element.clientWidth - 4;
+      setCanScrollPrev(element.scrollLeft > 4);
+      setCanScrollNext(element.scrollLeft < maxScrollLeft);
+    };
+
+    updateControls();
+    element.addEventListener("scroll", updateControls, { passive: true });
+    window.addEventListener("resize", updateControls);
+
+    return () => {
+      element.removeEventListener("scroll", updateControls);
+      window.removeEventListener("resize", updateControls);
+    };
+  }, [cars.length, isMobile]);
+
+  const scrollByCards = (direction) => {
+    const element = trackRef.current;
+    if (!element) return;
+    const amount = isMobile ? element.clientWidth : element.clientWidth * 0.72;
+    element.scrollBy({ left: direction * amount, behavior: "smooth" });
+  };
+
+  const handleSelectVehicle = (vehicle) => {
+    onSelectVehicle?.(vehicle);
+    if (typeof window !== "undefined") {
+      window.location.hash = "contato";
+    }
+  };
 
   return (
     <section id="veiculos" style={{ background: lightSection.bg, padding: isMobile ? "4.5rem 1.25rem" : "7rem 4rem" }}>
@@ -236,73 +289,100 @@ export default function Veiculos() {
             if (typeof window !== "undefined") {
               window.location.hash = "contato";
             }
-          }}>{t.veiculos.cta}</LightGhostButton>
+          }}>
+            {t.veiculos.cta}
+          </LightGhostButton>
         </Reveal>
       </div>
 
       <Reveal>
         <div>
           {canSlide && (
-            <div style={{ display: "flex", justifyContent: "flex-end", gap: ".5rem", marginBottom: ".75rem" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "1rem", marginBottom: ".9rem" }}>
+              <div style={{ fontSize: ".62rem", letterSpacing: ".16em", textTransform: "uppercase", color: lightSection.textSoft }}>
+                {t.veiculos.moreHint}
+              </div>
+              <div style={{ display: "flex", gap: ".5rem" }}>
               <button
-                onClick={goPrev}
-                disabled={startIndex === 0}
+                onClick={() => scrollByCards(-1)}
+                disabled={!canScrollPrev}
                 style={{
                   width: 34,
                   height: 34,
                   border: `1px solid ${lightSection.buttonBorder}`,
-                  background: startIndex === 0 ? "#eef3fa" : "#ffffff",
+                  background: !canScrollPrev ? "#eef3fa" : "#ffffff",
                   color: lightSection.buttonText,
-                  cursor: startIndex === 0 ? "not-allowed" : "pointer",
+                  cursor: !canScrollPrev ? "not-allowed" : "pointer",
                 }}
               >
                 ‹
               </button>
               <button
-                onClick={goNext}
-                disabled={startIndex >= maxStartIndex}
+                onClick={() => scrollByCards(1)}
+                disabled={!canScrollNext}
                 style={{
                   width: 34,
                   height: 34,
                   border: `1px solid ${lightSection.buttonBorder}`,
-                  background: startIndex >= maxStartIndex ? "#eef3fa" : "#ffffff",
+                  background: !canScrollNext ? "#eef3fa" : "#ffffff",
                   color: lightSection.buttonText,
-                  cursor: startIndex >= maxStartIndex ? "not-allowed" : "pointer",
+                  cursor: !canScrollNext ? "not-allowed" : "pointer",
                 }}
               >
                 ›
               </button>
+              </div>
             </div>
           )}
           <div
             style={{
-              overflow: "hidden",
+              position: "relative",
               border: `1px solid ${lightSection.border}`,
             }}
           >
             <div
+              ref={trackRef}
               style={{
                 display: "flex",
-                flexDirection: isMobile ? "column" : "row",
-                transform: isMobile ? "none" : `translateX(-${(startIndex * 100) / visibleCards}%)`,
-                transition: isMobile ? "none" : "transform .35s ease",
+                flexDirection: "row",
+                gap: isMobile ? ".9rem" : "1rem",
+                overflowX: "auto",
+                scrollSnapType: "x mandatory",
+                scrollbarWidth: "none",
+                padding: isMobile ? ".9rem" : "1rem",
+                scrollBehavior: "smooth",
               }}
             >
               {cars.map((car, index) => (
                 <div
                   key={car.name}
                   style={{
-                    flex: isMobile ? "1 1 auto" : `0 0 ${100 / visibleCards}%`,
+                    flex: isMobile ? "0 0 100%" : "0 0 calc((100% - 2rem) / 3.2)",
                     minWidth: 0,
-                    borderRight: isMobile ? "none" : `1px solid ${lightSection.border}`,
-                    borderBottom:
-                      isMobile && index < cars.length - 1 ? `1px solid ${lightSection.border}` : "none",
                   }}
                 >
-                  <VehicleCard {...car} />
+                  <VehicleCard
+                    {...car}
+                    ctaLabel={t.veiculos.selectVehicle}
+                    onSelect={() => handleSelectVehicle(car.name)}
+                  />
                 </div>
               ))}
             </div>
+            {!isMobile && canScrollNext && (
+              <div
+                aria-hidden="true"
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  right: 0,
+                  bottom: 0,
+                  width: 86,
+                  background: "linear-gradient(to right, rgba(246,249,254,0), rgba(246,249,254,.92) 72%)",
+                  pointerEvents: "none",
+                }}
+              />
+            )}
           </div>
         </div>
       </Reveal>

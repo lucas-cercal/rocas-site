@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { format } from "date-fns";
 import { enUS, es, fr, ptBR } from "date-fns/locale";
 import DatePicker from "react-datepicker";
@@ -170,7 +170,7 @@ function getContactAction(label, value) {
   return null;
 }
 
-export default function Contato() {
+export default function Contato({ selectedVehicle, onSelectedVehicleChange }) {
   const { language, t } = useI18n();
   const isMobile = useBreakpoint(980);
   const [sent, setSent] = useState(false);
@@ -214,8 +214,16 @@ export default function Contato() {
 
   const handleChange = (event) => {
     const { name, value, type, checked } = event.target;
+    if (name === "vehicle") {
+      onSelectedVehicleChange?.(value);
+    }
     setForm((prev) => ({ ...prev, [name]: type === "checkbox" ? checked : value }));
   };
+
+  useEffect(() => {
+    if (!selectedVehicle) return;
+    setForm((prev) => (prev.vehicle === selectedVehicle ? prev : { ...prev, vehicle: selectedVehicle }));
+  }, [selectedVehicle]);
 
   const handleSubmit = (event) => {
     event.preventDefault();

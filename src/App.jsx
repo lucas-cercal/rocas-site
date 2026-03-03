@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Footer from "./components/layout/Footer";
 import Nav from "./components/layout/Nav";
 import WhatsAppButton from "./components/layout/WhatsAppButton";
@@ -13,13 +14,15 @@ import Divider from "./components/ui/Divider";
 import { globalStyles } from "./constants/theme";
 
 export default function App() {
+  const [selectedVehicle, setSelectedVehicle] = useState("");
+
   return (
     <>
       <style>{globalStyles}</style>
       <Nav />
       <Hero />
       <Divider />
-      <Veiculos />
+      <Veiculos onSelectVehicle={setSelectedVehicle} />
       <Divider />
       <QuemSomos />
       <Divider />
@@ -29,7 +32,7 @@ export default function App() {
       <Divider />
       <Feedbacks />
       <Divider />
-      <Contato />
+      <Contato selectedVehicle={selectedVehicle} onSelectedVehicleChange={setSelectedVehicle} />
       <Divider />
       <Privacidade />
       <Footer />
