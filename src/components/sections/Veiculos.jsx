@@ -102,7 +102,7 @@ function VehicleCard({
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: grad,
+          background: teaser ? grad : hovered ? lightSection.cardHover : lightSection.card,
           position: "relative",
           overflow: "hidden",
         }}
@@ -147,7 +147,7 @@ function VehicleCard({
       </div>
       <div
         style={{
-          padding: teaser ? ".8rem" : compact ? "1.1rem 1.1rem 1.25rem" : "1.5rem 1.8rem 2rem",
+          padding: teaser ? ".8rem" : compact ? "1.25rem 1.35rem 1.45rem" : "1.5rem 1.8rem 2rem",
           display: "flex",
           flexDirection: "column",
           flex: 1,
@@ -170,7 +170,7 @@ function VehicleCard({
             <div
               style={{
                 fontFamily: "'Neue Montreal', sans-serif",
-                fontSize: compact ? "1.08rem" : "1.4rem",
+                fontSize: compact ? "1.16rem" : "1.4rem",
                 color: "#10233f",
                 fontWeight: 700,
                 marginBottom: ".6rem",
@@ -198,22 +198,24 @@ function VehicleCard({
           </div>
         ) : (
           <>
-            {!compact && (
-              <div
-                style={{
-                  fontSize: ".75rem",
-                  color: lightSection.textSoft,
-                  lineHeight: 1.65,
-                  marginBottom: "1.2rem",
-                  fontWeight: 500,
-                  flex: 1,
-                }}
-              >
-                {desc}
-              </div>
-            )}
+            <div
+              style={{
+                fontSize: compact ? ".7rem" : ".75rem",
+                color: lightSection.textSoft,
+                lineHeight: compact ? 1.58 : 1.65,
+                marginBottom: "1.2rem",
+                fontWeight: 500,
+                flex: 1,
+                display: "-webkit-box",
+                WebkitLineClamp: compact ? 4 : "unset",
+                WebkitBoxOrient: "vertical",
+                overflow: "hidden",
+              }}
+            >
+              {desc}
+            </div>
             <div style={{ display: "flex", gap: ".5rem", flexWrap: "wrap", marginTop: compact ? "auto" : "auto" }}>
-              {tags.slice(0, compact ? 2 : tags.length).map((tag) => (
+              {tags.map((tag) => (
                 <span
                   key={tag}
                   style={{
