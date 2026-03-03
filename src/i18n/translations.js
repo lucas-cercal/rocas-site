@@ -230,6 +230,20 @@ const pt = {
   common: {
     selectOption: "Selecione",
   },
+  consentModal: {
+    tag: "Privacidade & Dados",
+    titlePrefix: "Sua",
+    titleHighlight: "privacidade",
+    titleSuffix: "é nossa prioridade.",
+    description:
+      "Ao continuar no site, você declara ciência sobre nossos termos, política de privacidade e uso de cookies quando houver coleta de dados de navegação ou atendimento.",
+    privacy: "Ler Política de Privacidade",
+    cookies: "Ler Política de Cookies",
+    terms: "Ler Termo de Aceite",
+    checkbox: "Li e concordo com os termos, política de privacidade e política de cookies.",
+    note: "Esse aceite é registrado apenas para a sua navegação neste dispositivo.",
+    accept: "Aceitar e continuar",
+  },
   footer: {
     tagline: "Mobilidade Blindada · Híbrida · Discreta",
     copyright: "© 2025 ROCAS Locadora de Veículos",
@@ -517,6 +531,20 @@ const en = mergeDeep(pt, {
     ],
   },
   common: { selectOption: "Select" },
+  consentModal: {
+    tag: "Privacy & Data",
+    titlePrefix: "Your",
+    titleHighlight: "privacy",
+    titleSuffix: "is our priority.",
+    description:
+      "By continuing on the site, you acknowledge our terms, privacy policy, and use of cookies whenever browsing or contact data is collected.",
+    privacy: "Read Privacy Policy",
+    cookies: "Read Cookie Policy",
+    terms: "Read Terms of Acceptance",
+    checkbox: "I have read and agree to the terms, privacy policy, and cookie policy.",
+    note: "This consent is stored only for your browsing on this device.",
+    accept: "Accept and continue",
+  },
 });
 
 const es = mergeDeep(pt, {
@@ -760,6 +788,20 @@ const es = mergeDeep(pt, {
     ],
   },
   common: { selectOption: "Seleccionar" },
+  consentModal: {
+    tag: "Privacidad & Datos",
+    titlePrefix: "Tu",
+    titleHighlight: "privacidad",
+    titleSuffix: "es nuestra prioridad.",
+    description:
+      "Al continuar en el sitio, declaras conocer nuestros términos, política de privacidad y uso de cookies cuando se recopilen datos de navegación o contacto.",
+    privacy: "Leer Política de Privacidad",
+    cookies: "Leer Política de Cookies",
+    terms: "Leer Término de Aceptación",
+    checkbox: "He leído y acepto los términos, la política de privacidad y la política de cookies.",
+    note: "Esta aceptación se guarda solo para tu navegación en este dispositivo.",
+    accept: "Aceptar y continuar",
+  },
 });
 
 const fr = mergeDeep(pt, {
@@ -1003,6 +1045,20 @@ const fr = mergeDeep(pt, {
     ],
   },
   common: { selectOption: "Sélectionner" },
+  consentModal: {
+    tag: "Confidentialité & Données",
+    titlePrefix: "Votre",
+    titleHighlight: "confidentialité",
+    titleSuffix: "est notre priorité.",
+    description:
+      "En continuant sur le site, vous reconnaissez nos conditions, notre politique de confidentialité et l'utilisation de cookies lorsque des données de navigation ou de contact sont collectées.",
+    privacy: "Lire la Politique de Confidentialité",
+    cookies: "Lire la Politique de Cookies",
+    terms: "Lire le Terme d'Acceptation",
+    checkbox: "J'ai lu et j'accepte les conditions, la politique de confidentialité et la politique de cookies.",
+    note: "Cette acceptation est enregistrée uniquement pour votre navigation sur cet appareil.",
+    accept: "Accepter et continuer",
+  },
 });
 
 export const translations = { pt, en, es, fr };

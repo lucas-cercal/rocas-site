@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Footer from "./components/layout/Footer";
+import ConsentModal from "./components/layout/ConsentModal";
 import Nav from "./components/layout/Nav";
 import WhatsAppButton from "./components/layout/WhatsAppButton";
 import Contato from "./components/sections/Contato";
@@ -19,6 +20,7 @@ export default function App() {
   return (
     <>
       <style>{globalStyles}</style>
+      <ConsentModal />
       <Nav />
       <Hero />
       <Divider />
