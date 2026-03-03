@@ -56,7 +56,6 @@ const pt = {
     titleB: "protegem além do olhar",
     cta: "Consultar disponibilidade",
     selectVehicle: "Selecionar veículo",
-    moreHint: "Continue deslizando para ver mais veículos",
     footnote: "Frota atual: 2 Corolla Hybrid blindados + 1 Jeep Commander blindado Diesel + 1 Mercedes Sprinter Van 417 Diesel não blindada.",
     cars: [
       {
@@ -348,7 +347,6 @@ const en = mergeDeep(pt, {
     titleB: "protect without announcing",
     cta: "Check availability",
     selectVehicle: "Select vehicle",
-    moreHint: "Keep sliding to view more vehicles",
     footnote: "Current fleet: 2 armored Corolla Hybrid + 1 armored Jeep Commander Diesel + 1 non-armored Mercedes Sprinter Van 417 Diesel.",
     cars: [
       {
@@ -605,7 +603,6 @@ const es = mergeDeep(pt, {
     titleB: "protegen sin anunciar",
     cta: "Consultar disponibilidad",
     selectVehicle: "Seleccionar vehículo",
-    moreHint: "Sigue deslizando para ver más vehículos",
     footnote: "Flota actual: 2 Corolla Hybrid blindados + 1 Jeep Commander blindado Diesel + 1 Mercedes Sprinter Van 417 Diesel no blindada.",
     cars: [
       {
@@ -862,7 +859,6 @@ const fr = mergeDeep(pt, {
     titleB: "protègent sans s'annoncer",
     cta: "Vérifier la disponibilité",
     selectVehicle: "Sélectionner le véhicule",
-    moreHint: "Continuez à faire défiler pour voir plus de véhicules",
     footnote: "Flotte actuelle: 2 Corolla Hybrid blindées + 1 Jeep Commander blindé Diesel + 1 Mercedes Sprinter Van 417 Diesel non blindée.",
     cars: [
       {

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { corollaImage, corollaImage2, jeepImage, sprinterImage } from "../../assets";
 import { theme } from "../../constants/theme";
 import { useBreakpoint } from "../../hooks/useBreakpoint";
@@ -48,7 +48,22 @@ function LightGhostButton({ children, onClick }) {
   );
 }
 
-function VehicleCard({ badge, name, desc, tags, grad, image, onSelect, ctaLabel }) {
+function VehicleCard({
+  badge,
+  name,
+  desc,
+  tags,
+  grad,
+  image,
+  imageFit = "cover",
+  imagePosition = "center center",
+  imageScale = 1,
+  imageAspect,
+  onSelect,
+  ctaLabel,
+  compact = false,
+  teaser = false,
+}) {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -83,7 +98,7 @@ function VehicleCard({ badge, name, desc, tags, grad, image, onSelect, ctaLabel 
       />
       <div
         style={{
-          aspectRatio: "16/9",
+          aspectRatio: imageAspect || (teaser ? "4/5" : compact ? "16/8.4" : "16/5.7"),
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -99,165 +114,179 @@ function VehicleCard({ badge, name, desc, tags, grad, image, onSelect, ctaLabel 
             title={name}
             loading="lazy"
             decoding="async"
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              opacity: 0.88,
-              transform: hovered ? "scale(1.04)" : "scale(1)",
-              transition: "transform .5s",
-            }}
-          />
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: imageFit,
+                objectPosition: imagePosition,
+                opacity: 0.88,
+                transform: hovered
+                  ? `scale(${imageScale * (imageFit === "contain" ? 1.02 : 1.04)})`
+                  : `scale(${imageScale})`,
+                transition: "transform .5s",
+              }}
+            />
         ) : (
           <div
-            style={{
-              width: "100%",
-              height: "100%",
+              style={{
+                width: "100%",
+                height: "100%",
               display: "grid",
               placeItems: "center",
               color: "#2f4d71",
               fontFamily: "'Neue Montreal', sans-serif",
               letterSpacing: ".16em",
               textTransform: "uppercase",
-              fontSize: ".66rem",
-              fontWeight: 700,
-            }}
-          >
+                fontSize: ".66rem",
+                fontWeight: 700,
+              }}
+            >
             Van executiva
           </div>
         )}
       </div>
       <div
         style={{
-          padding: "1.5rem 1.8rem 2rem",
+          padding: teaser ? ".8rem" : compact ? "1.1rem 1.1rem 1.25rem" : "1.5rem 1.8rem 2rem",
           display: "flex",
           flexDirection: "column",
           flex: 1,
         }}
       >
-        <div
-          style={{
-            fontSize: ".58rem",
-            letterSpacing: ".3em",
-            color: "#496a92",
-            textTransform: "uppercase",
-            marginBottom: ".5rem",
-            fontWeight: 500,
-          }}
-        >
-          {badge}
-        </div>
-        <div
-          style={{
-            fontFamily: "'Neue Montreal', sans-serif",
-            fontSize: "1.4rem",
-            color: "#10233f",
-            fontWeight: 700,
-            marginBottom: ".6rem",
-          }}
-        >
-          {name}
-        </div>
-        <div
-          style={{
-            fontSize: ".75rem",
-            color: lightSection.textSoft,
-            lineHeight: 1.65,
-            marginBottom: "1.2rem",
-            fontWeight: 500,
-            flex: 1,
-          }}
-        >
-          {desc}
-        </div>
-        <div style={{ display: "flex", gap: ".5rem", flexWrap: "wrap", marginTop: "auto" }}>
-          {tags.map((tag) => (
-            <span
-              key={tag}
+        {!teaser && (
+          <>
+            <div
               style={{
                 fontSize: ".58rem",
-                letterSpacing: ".12em",
-                color: lightSection.tagText,
+                letterSpacing: ".3em",
+                color: "#496a92",
                 textTransform: "uppercase",
-                padding: ".2rem .6rem",
-                border: `1px solid ${lightSection.tagBorder}`,
-                background: "#f8fbff",
+                marginBottom: ".5rem",
+                fontWeight: 500,
               }}
             >
-              {tag}
-            </span>
-          ))}
-        </div>
-        <button
-          type="button"
-          onClick={(event) => {
-            event.stopPropagation();
-            onSelect();
-          }}
-          style={{
-            marginTop: "1.25rem",
-            width: "100%",
-            border: `1px solid ${hovered ? lightSection.buttonText : lightSection.buttonBorder}`,
-            background: hovered ? "rgba(61,93,133,.08)" : "transparent",
-            color: lightSection.buttonText,
-            padding: ".82rem 1rem",
-            fontFamily: "'Neue Montreal', sans-serif",
-            fontSize: ".7rem",
-            letterSpacing: ".18em",
-            textTransform: "uppercase",
-            cursor: "pointer",
-            fontWeight: 600,
-            transition: "all .25s ease",
-          }}
-        >
-          {ctaLabel}
-        </button>
+              {badge}
+            </div>
+            <div
+              style={{
+                fontFamily: "'Neue Montreal', sans-serif",
+                fontSize: compact ? "1.08rem" : "1.4rem",
+                color: "#10233f",
+                fontWeight: 700,
+                marginBottom: ".6rem",
+              }}
+            >
+              {name}
+            </div>
+          </>
+        )}
+        {teaser ? (
+          <div
+            style={{
+              marginTop: "auto",
+              fontFamily: "'Neue Montreal', sans-serif",
+              fontSize: ".72rem",
+              letterSpacing: ".16em",
+              textTransform: "uppercase",
+              color: "#35557a",
+              writingMode: "vertical-rl",
+              transform: "rotate(180deg)",
+              alignSelf: "center",
+            }}
+          >
+            ROCAS
+          </div>
+        ) : (
+          <>
+            {!compact && (
+              <div
+                style={{
+                  fontSize: ".75rem",
+                  color: lightSection.textSoft,
+                  lineHeight: 1.65,
+                  marginBottom: "1.2rem",
+                  fontWeight: 500,
+                  flex: 1,
+                }}
+              >
+                {desc}
+              </div>
+            )}
+            <div style={{ display: "flex", gap: ".5rem", flexWrap: "wrap", marginTop: compact ? "auto" : "auto" }}>
+              {tags.slice(0, compact ? 2 : tags.length).map((tag) => (
+                <span
+                  key={tag}
+                  style={{
+                    fontSize: ".58rem",
+                    letterSpacing: ".12em",
+                    color: lightSection.tagText,
+                    textTransform: "uppercase",
+                    padding: ".2rem .6rem",
+                    border: `1px solid ${lightSection.tagBorder}`,
+                    background: "#f8fbff",
+                  }}
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+            <button
+              type="button"
+              onClick={(event) => {
+                event.stopPropagation();
+                onSelect();
+              }}
+              style={{
+                marginTop: "1.25rem",
+                width: "100%",
+                border: `1px solid ${hovered ? lightSection.buttonText : lightSection.buttonBorder}`,
+                background: hovered ? "rgba(61,93,133,.08)" : "transparent",
+                color: lightSection.buttonText,
+                padding: compact ? ".7rem .85rem" : ".82rem 1rem",
+                fontFamily: "'Neue Montreal', sans-serif",
+                fontSize: compact ? ".62rem" : ".7rem",
+                letterSpacing: ".18em",
+                textTransform: "uppercase",
+                cursor: "pointer",
+                fontWeight: 600,
+                transition: "all .25s ease",
+              }}
+            >
+              {ctaLabel}
+            </button>
+          </>
+        )}
       </div>
     </div>
   );
 }
 
+function getCircularOffset(index, activeIndex, total) {
+  let offset = index - activeIndex;
+  if (offset > total / 2) offset -= total;
+  if (offset < -total / 2) offset += total;
+  return offset;
+}
+
 export default function Veiculos({ onSelectVehicle }) {
   const { t } = useI18n();
   const isMobile = useBreakpoint(980);
-  const [canScrollPrev, setCanScrollPrev] = useState(false);
-  const [canScrollNext, setCanScrollNext] = useState(false);
-  const trackRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(1);
   const carVisuals = [
-    { grad: "linear-gradient(135deg,#d9e4f2,#f2f7ff)", image: corollaImage },
-    { grad: "linear-gradient(135deg,#dae4f0,#f3f7ff)", image: corollaImage2 },
-    { grad: "linear-gradient(135deg,#d6e0ed,#eef4fd)", image: jeepImage },
-    { grad: "linear-gradient(135deg,#c7daf0,#e8f2ff)", image: sprinterImage },
+    { grad: "linear-gradient(135deg,#d9e4f2,#f2f7ff)", image: corollaImage, imageFit: "contain", imagePosition: "center center", imageScale: 1.02, imageAspect: "16/7.4" },
+    { grad: "linear-gradient(135deg,#dae4f0,#f3f7ff)", image: corollaImage2, imageFit: "contain", imagePosition: "center center", imageScale: 1.02, imageAspect: "16/7.4" },
+    { grad: "linear-gradient(135deg,#d6e0ed,#eef4fd)", image: jeepImage, imageFit: "contain", imagePosition: "center center", imageScale: 1.02, imageAspect: "16/7.4" },
+    {
+      grad: "linear-gradient(135deg,#d8e0ea,#eef2f7)",
+      image: sprinterImage,
+      imageFit: "contain",
+      imagePosition: "center center",
+      imageScale: 1.02,
+      imageAspect: "16/7.4",
+    },
   ];
   const cars = t.veiculos.cars.map((car, index) => ({ ...car, ...carVisuals[index] }));
-  const canSlide = !isMobile && cars.length > 3;
-
-  useEffect(() => {
-    const element = trackRef.current;
-    if (!element) return undefined;
-
-    const updateControls = () => {
-      const maxScrollLeft = element.scrollWidth - element.clientWidth - 4;
-      setCanScrollPrev(element.scrollLeft > 4);
-      setCanScrollNext(element.scrollLeft < maxScrollLeft);
-    };
-
-    updateControls();
-    element.addEventListener("scroll", updateControls, { passive: true });
-    window.addEventListener("resize", updateControls);
-
-    return () => {
-      element.removeEventListener("scroll", updateControls);
-      window.removeEventListener("resize", updateControls);
-    };
-  }, [cars.length, isMobile]);
-
-  const scrollByCards = (direction) => {
-    const element = trackRef.current;
-    if (!element) return;
-    const amount = isMobile ? element.clientWidth : element.clientWidth * 0.72;
-    element.scrollBy({ left: direction * amount, behavior: "smooth" });
-  };
+  const canSlide = !isMobile && cars.length > 1;
 
   const handleSelectVehicle = (vehicle) => {
     onSelectVehicle?.(vehicle);
@@ -265,6 +294,9 @@ export default function Veiculos({ onSelectVehicle }) {
       window.location.hash = "contato";
     }
   };
+
+  const goPrev = () => setActiveIndex((prev) => (prev - 1 + cars.length) % cars.length);
+  const goNext = () => setActiveIndex((prev) => (prev + 1) % cars.length);
 
   return (
     <section id="veiculos" style={{ background: lightSection.bg, padding: isMobile ? "4.5rem 1.25rem" : "7rem 4rem" }}>
@@ -298,92 +330,119 @@ export default function Veiculos({ onSelectVehicle }) {
       <Reveal>
         <div>
           {canSlide && (
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "1rem", marginBottom: ".9rem" }}>
-              <div style={{ fontSize: ".62rem", letterSpacing: ".16em", textTransform: "uppercase", color: lightSection.textSoft }}>
-                {t.veiculos.moreHint}
-              </div>
-              <div style={{ display: "flex", gap: ".5rem" }}>
+            <div style={{ marginBottom: ".9rem" }} />
+          )}
+          {isMobile ? (
+            <div
+              style={{
+                display: "grid",
+                gap: ".9rem",
+                border: `1px solid ${lightSection.border}`,
+                padding: ".9rem",
+              }}
+            >
+              {cars.map((car) => (
+                <VehicleCard
+                  key={car.name}
+                  {...car}
+                  ctaLabel={t.veiculos.selectVehicle}
+                  onSelect={() => handleSelectVehicle(car.name)}
+                />
+              ))}
+            </div>
+          ) : (
+            <div
+              style={{
+                position: "relative",
+                border: `1px solid ${lightSection.border}`,
+                height: 760,
+                overflow: "hidden",
+                background: "linear-gradient(180deg,#f8fbff,#eef4fc)",
+              }}
+            >
               <button
-                onClick={() => scrollByCards(-1)}
-                disabled={!canScrollPrev}
+                type="button"
+                onClick={goPrev}
+                aria-label="Veículo anterior"
                 style={{
-                  width: 34,
-                  height: 34,
+                  position: "absolute",
+                  left: 10,
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  zIndex: 10,
+                  width: 42,
+                  height: 42,
+                  borderRadius: "50%",
                   border: `1px solid ${lightSection.buttonBorder}`,
-                  background: !canScrollPrev ? "#eef3fa" : "#ffffff",
+                  background: "rgba(255,255,255,.92)",
                   color: lightSection.buttonText,
-                  cursor: !canScrollPrev ? "not-allowed" : "pointer",
+                  cursor: "pointer",
+                  boxShadow: "0 8px 22px rgba(29,53,86,.12)",
                 }}
               >
                 ‹
               </button>
               <button
-                onClick={() => scrollByCards(1)}
-                disabled={!canScrollNext}
+                type="button"
+                onClick={goNext}
+                aria-label="Próximo veículo"
                 style={{
-                  width: 34,
-                  height: 34,
+                  position: "absolute",
+                  right: 10,
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  zIndex: 10,
+                  width: 42,
+                  height: 42,
+                  borderRadius: "50%",
                   border: `1px solid ${lightSection.buttonBorder}`,
-                  background: !canScrollNext ? "#eef3fa" : "#ffffff",
+                  background: "rgba(255,255,255,.92)",
                   color: lightSection.buttonText,
-                  cursor: !canScrollNext ? "not-allowed" : "pointer",
+                  cursor: "pointer",
+                  boxShadow: "0 8px 22px rgba(29,53,86,.12)",
                 }}
               >
                 ›
               </button>
+              <div style={{ position: "absolute", inset: "0 48px" }}>
+                {cars.map((car, index) => {
+                  const offset = getCircularOffset(index, activeIndex, cars.length);
+                  const absOffset = Math.abs(offset);
+                  const hidden = absOffset > 2;
+                  const width = absOffset === 0 ? "38%" : absOffset === 1 ? "25.5%" : "8%";
+                  const x = offset === 0 ? "50%" : offset === -1 ? "19%" : offset === 1 ? "81%" : offset < 0 ? "3.5%" : "96.5%";
+                  const scale = absOffset === 0 ? 1 : absOffset === 1 ? 0.94 : 0.82;
+
+                  return (
+                    <div
+                      key={car.name}
+                      style={{
+                        position: "absolute",
+                        top: 20,
+                        bottom: 20,
+                        left: x,
+                        width,
+                        transform: `translateX(-50%) scale(${scale})`,
+                        opacity: hidden ? 0 : absOffset === 2 ? 0.55 : absOffset === 1 ? 0.88 : 1,
+                        zIndex: 20 - absOffset,
+                        transition: "all .42s cubic-bezier(.22,1,.36,1)",
+                        pointerEvents: hidden ? "none" : "auto",
+                        filter: absOffset === 0 ? "none" : "saturate(.88)",
+                      }}
+                    >
+                      <VehicleCard
+                        {...car}
+                        ctaLabel={t.veiculos.selectVehicle}
+                        onSelect={() => handleSelectVehicle(car.name)}
+                        compact={absOffset === 1}
+                        teaser={absOffset === 2}
+                      />
+                    </div>
+                  );
+                })}
               </div>
             </div>
           )}
-          <div
-            style={{
-              position: "relative",
-              border: `1px solid ${lightSection.border}`,
-            }}
-          >
-            <div
-              ref={trackRef}
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                gap: isMobile ? ".9rem" : "1rem",
-                overflowX: "auto",
-                scrollSnapType: "x mandatory",
-                scrollbarWidth: "none",
-                padding: isMobile ? ".9rem" : "1rem",
-                scrollBehavior: "smooth",
-              }}
-            >
-              {cars.map((car, index) => (
-                <div
-                  key={car.name}
-                  style={{
-                    flex: isMobile ? "0 0 100%" : "0 0 calc((100% - 2rem) / 3.2)",
-                    minWidth: 0,
-                  }}
-                >
-                  <VehicleCard
-                    {...car}
-                    ctaLabel={t.veiculos.selectVehicle}
-                    onSelect={() => handleSelectVehicle(car.name)}
-                  />
-                </div>
-              ))}
-            </div>
-            {!isMobile && canScrollNext && (
-              <div
-                aria-hidden="true"
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  right: 0,
-                  bottom: 0,
-                  width: 86,
-                  background: "linear-gradient(to right, rgba(246,249,254,0), rgba(246,249,254,.92) 72%)",
-                  pointerEvents: "none",
-                }}
-              />
-            )}
-          </div>
         </div>
       </Reveal>
 
