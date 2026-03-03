@@ -1,8 +1,218 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { logoImage } from "../../assets";
 import { theme } from "../../constants/theme";
 import { useScrolled } from "../../hooks/useScrolled";
 import { useI18n } from "../../i18n/LanguageContext";
+
+function FlagIcon({ country }) {
+  const common = {
+    width: 18,
+    height: 12,
+    viewBox: "0 0 18 12",
+    xmlns: "http://www.w3.org/2000/svg",
+    style: { display: "block", borderRadius: 2, boxShadow: "0 0 0 1px rgba(0,0,0,.12)" },
+    "aria-hidden": true,
+  };
+
+  if (country === "br") {
+    return (
+      <svg {...common}>
+        <rect width="18" height="12" fill="#1F8B4C" />
+        <polygon points="9,1.4 15.1,6 9,10.6 2.9,6" fill="#F7C63D" />
+        <circle cx="9" cy="6" r="2.3" fill="#204B9B" />
+      </svg>
+    );
+  }
+
+  if (country === "us") {
+    return (
+      <svg {...common}>
+        <rect width="18" height="12" fill="#fff" />
+        {[0, 2, 4, 6, 8, 10].map((y) => (
+          <rect key={y} y={y} width="18" height="1" fill="#B22234" />
+        ))}
+        <rect width="7.6" height="5.8" fill="#3C3B6E" />
+      </svg>
+    );
+  }
+
+  if (country === "es") {
+    return (
+      <svg {...common}>
+        <rect width="18" height="12" fill="#AA151B" />
+        <rect y="3" width="18" height="6" fill="#F1BF00" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg {...common}>
+      <rect width="18" height="12" fill="#1F4AA8" />
+      <rect y="4" width="18" height="4" fill="#fff" />
+      <rect x="5" width="4" height="12" fill="#fff" />
+      <rect y="4.8" width="18" height="2.4" fill="#D72638" />
+      <rect x="5.8" width="2.4" height="12" fill="#D72638" />
+    </svg>
+  );
+}
+
+function LanguageMenu({ value, options, onChange, scrolled = false, mobile = false }) {
+  const [open, setOpen] = useState(false);
+  const containerRef = useRef(null);
+  const current = options.find((option) => option.value === value) || options[0];
+
+  useEffect(() => {
+    if (!open) return undefined;
+
+    const handlePointerDown = (event) => {
+      if (!containerRef.current?.contains(event.target)) {
+        setOpen(false);
+      }
+    };
+
+    const handleEscape = (event) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+
+    document.addEventListener("mousedown", handlePointerDown);
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("mousedown", handlePointerDown);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [open]);
+
+  const palette = mobile
+    ? {
+        background: "rgba(8,10,16,.72)",
+        border: `1px solid ${theme.bd}`,
+        color: theme.textLo,
+        menuBackground: "rgba(8,10,16,.98)",
+        menuBorder: `1px solid ${theme.bd}`,
+        hover: "rgba(255,255,255,.08)",
+        shadow: "0 16px 32px rgba(0,0,0,.28)",
+      }
+    : {
+        background: scrolled ? "rgba(250,252,255,.92)" : "transparent",
+        border: scrolled ? "1px solid rgba(16,28,44,.24)" : `1px solid ${theme.bd}`,
+        color: scrolled ? "#1b2b41" : theme.textLo,
+        menuBackground: scrolled ? "rgba(248,251,255,.98)" : "rgba(9,14,22,.96)",
+        menuBorder: scrolled ? "1px solid rgba(16,28,44,.14)" : `1px solid ${theme.bd}`,
+        hover: scrolled ? "rgba(20,36,56,.08)" : "rgba(255,255,255,.08)",
+        shadow: scrolled ? "0 14px 30px rgba(9,18,32,.12)" : "0 18px 36px rgba(0,0,0,.26)",
+      };
+
+  return (
+    <div
+      ref={containerRef}
+      style={{
+        position: "relative",
+        minWidth: mobile ? 116 : 98,
+      }}
+    >
+      <button
+        type="button"
+        onClick={() => setOpen((state) => !state)}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        style={{
+          width: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: ".55rem",
+          background: palette.background,
+          border: palette.border,
+          color: palette.color,
+          fontSize: mobile ? ".74rem" : ".64rem",
+          letterSpacing: ".15em",
+          padding: mobile ? ".5rem .8rem" : ".38rem .62rem",
+          cursor: "pointer",
+          fontFamily: "'Neue Montreal', sans-serif",
+          fontWeight: 500,
+          textTransform: "uppercase",
+          transition: "all .28s ease",
+        }}
+      >
+        <span style={{ display: "flex", alignItems: "center", gap: ".45rem" }}>
+          <FlagIcon country={current.flag} />
+          <span>{current.label}</span>
+        </span>
+        <span
+          aria-hidden="true"
+          style={{
+            display: "inline-block",
+            width: 8,
+            height: 8,
+            borderRight: `1.5px solid ${palette.color}`,
+            borderBottom: `1.5px solid ${palette.color}`,
+            transform: open ? "rotate(-135deg)" : "rotate(45deg)",
+            transition: "transform .2s ease",
+            marginTop: open ? 4 : -2,
+            flexShrink: 0,
+          }}
+        />
+      </button>
+
+      {open && (
+        <div
+          role="listbox"
+          style={{
+            position: "absolute",
+            top: "calc(100% + .45rem)",
+            left: 0,
+            right: 0,
+            display: "grid",
+            gap: ".2rem",
+            padding: ".28rem",
+            background: palette.menuBackground,
+            border: palette.menuBorder,
+            boxShadow: palette.shadow,
+            backdropFilter: "blur(16px)",
+            WebkitBackdropFilter: "blur(16px)",
+          }}
+        >
+          {options.map((option) => {
+            const active = option.value === value;
+
+            return (
+              <button
+                key={option.value}
+                type="button"
+                role="option"
+                aria-selected={active}
+                onClick={() => {
+                  onChange(option.value);
+                  setOpen(false);
+                }}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: ".55rem",
+                  width: "100%",
+                  border: "none",
+                  background: active ? palette.hover : "transparent",
+                  color: palette.color,
+                  padding: ".48rem .5rem",
+                  cursor: "pointer",
+                  fontFamily: "'Neue Montreal', sans-serif",
+                  fontSize: mobile ? ".72rem" : ".64rem",
+                  letterSpacing: ".15em",
+                  textTransform: "uppercase",
+                  textAlign: "left",
+                }}
+              >
+                <FlagIcon country={option.flag} />
+                <span>{option.label}</span>
+              </button>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
 
 function NavLink({ href, children, scrolled = false }) {
   const [hovered, setHovered] = useState(false);
@@ -114,10 +324,10 @@ export default function Nav({ openModal }) {
     { label: t.nav.links[5], href: "#contato" },
   ];
   const languageOptions = [
-    { value: "pt", label: `🇧🇷 ${t.nav.langs.pt}` },
-    { value: "en", label: `🇺🇸 ${t.nav.langs.en}` },
-    { value: "es", label: `🇪🇸 ${t.nav.langs.es}` },
-    { value: "fr", label: `🇫🇷 ${t.nav.langs.fr}` },
+    { value: "pt", label: t.nav.langs.pt, flag: "br" },
+    { value: "en", label: t.nav.langs.en, flag: "us" },
+    { value: "es", label: t.nav.langs.es, flag: "es" },
+    { value: "fr", label: t.nav.langs.fr, flag: "fr" },
   ];
 
   return (
@@ -164,29 +374,7 @@ export default function Nav({ openModal }) {
                 {link.label}
               </NavLink>
             ))}
-            <select
-              value={language}
-              onChange={(event) => setLanguage(event.target.value)}
-              style={{
-                background: scrolled ? "rgba(250,252,255,.92)" : "transparent",
-                border: scrolled ? "1px solid rgba(16,28,44,.24)" : `1px solid ${theme.bd}`,
-                color: scrolled ? "#1b2b41" : theme.textLo,
-                fontSize: ".64rem",
-                letterSpacing: ".15em",
-                padding: ".3rem .5rem",
-                cursor: "pointer",
-                fontFamily: "'Neue Montreal', sans-serif",
-                fontWeight: 500,
-                textTransform: "uppercase",
-                transition: "all .28s ease",
-              }}
-            >
-              {languageOptions.map((option) => (
-                <option key={option.value} value={option.value} style={{ cursor: "pointer" }}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
+            <LanguageMenu value={language} options={languageOptions} onChange={setLanguage} scrolled={scrolled} />
             <NavCta href="#contato" scrolled={scrolled}>
               {t.nav.cta}
             </NavCta>
@@ -257,28 +445,15 @@ export default function Nav({ openModal }) {
               {link.label}
             </a>
           ))}
-          <select
+          <LanguageMenu
             value={language}
-            onChange={(event) => setLanguage(event.target.value)}
-            style={{
-              background: "transparent",
-              border: `1px solid ${theme.bd}`,
-              color: theme.textLo,
-              fontSize: ".74rem",
-              letterSpacing: ".15em",
-                padding: ".5rem .8rem",
-                cursor: "pointer",
-              fontFamily: "'Neue Montreal', sans-serif",
-              fontWeight: 500,
-              textTransform: "uppercase",
+            options={languageOptions}
+            onChange={(nextLanguage) => {
+              setLanguage(nextLanguage);
+              setOpen(false);
             }}
-          >
-            {languageOptions.map((option) => (
-              <option key={option.value} value={option.value} style={{ cursor: "pointer" }}>
-                {option.label}
-              </option>
-            ))}
-          </select>
+            mobile
+          />
           <NavCta
             href="#contato"
             onClick={() => setOpen(false)}
