@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { corollaImage, corollaImage2, jeepImage, sprinterImage } from "../../assets";
-import { theme } from "../../constants/theme";
 import { useBreakpoint } from "../../hooks/useBreakpoint";
 import { useI18n } from "../../i18n/LanguageContext";
 import Reveal from "../ui/Reveal";
@@ -19,6 +18,12 @@ const lightSection = {
   buttonText: "#2d4f78",
   buttonBorder: "rgba(40,71,110,.28)",
   buttonHoverBg: "rgba(61,93,133,.08)",
+  shell: "transparent",
+  shellBorder: "transparent",
+  shellText: "#10233f",
+  shellTextSoft: "#607492",
+  shellTagText: "#365274",
+  shellTagBorder: "rgba(40,71,110,.2)",
 };
 
 function LightGhostButton({ children, onClick }) {
@@ -48,7 +53,7 @@ function LightGhostButton({ children, onClick }) {
   );
 }
 
-function VehicleCard({
+function MobileVehicleCard({
   badge,
   name,
   desc,
@@ -61,236 +66,336 @@ function VehicleCard({
   imageAspect,
   onSelect,
   ctaLabel,
-  compact = false,
-  teaser = false,
-  onCardClick,
 }) {
   const [hovered, setHovered] = useState(false);
 
   return (
     <div
-      onClick={onCardClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
         background: hovered ? lightSection.cardHover : lightSection.card,
         position: "relative",
         overflow: "hidden",
-        cursor: "pointer",
         display: "flex",
         flexDirection: "column",
-        height: "100%",
         transition: "background .3s, box-shadow .3s",
         boxShadow: hovered ? "0 10px 24px rgba(16,36,62,.08)" : "none",
-        scrollSnapAlign: "start",
       }}
     >
       <div
         style={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          height: 1,
-          background: "linear-gradient(to right,transparent,rgba(58,90,130,.45),transparent)",
-          opacity: hovered ? 1 : 0,
-          transition: "opacity .3s",
-        }}
-      />
-      <div
-        style={{
-          aspectRatio: imageAspect || (teaser ? "4/5" : compact ? "16/8.4" : "16/5.7"),
+          aspectRatio: imageAspect || "16/7.4",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: teaser ? grad : hovered ? lightSection.cardHover : lightSection.card,
-          position: "relative",
+          background: hovered ? lightSection.cardHover : grad,
           overflow: "hidden",
         }}
       >
-        {image ? (
-          <img
-            src={image}
-            alt={`${name} - frota ROCAS`}
-            title={name}
-            loading="lazy"
-            decoding="async"
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: imageFit,
-                objectPosition: imagePosition,
-                opacity: 0.88,
-                transform: hovered
-                  ? `scale(${imageScale * (imageFit === "contain" ? 1.02 : 1.04)})`
-                  : `scale(${imageScale})`,
-                transition: "transform .5s",
-              }}
-            />
-        ) : (
-          <div
-              style={{
-                width: "100%",
-                height: "100%",
-              display: "grid",
-              placeItems: "center",
-              color: "#2f4d71",
-              fontFamily: "'Neue Montreal', sans-serif",
-              letterSpacing: ".16em",
-              textTransform: "uppercase",
-                fontSize: ".66rem",
-                fontWeight: 700,
-              }}
-            >
-            Van executiva
-          </div>
-        )}
+        <img
+          src={image}
+          alt={`${name} - frota ROCAS`}
+          title={name}
+          loading="lazy"
+          decoding="async"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: imageFit,
+            objectPosition: imagePosition,
+            opacity: 0.9,
+            transform: hovered
+              ? `scale(${imageScale * (imageFit === "contain" ? 1.03 : 1.05)})`
+              : `scale(${imageScale})`,
+            transition: "transform .45s ease",
+          }}
+        />
       </div>
+
       <div
         style={{
-          padding: teaser ? ".8rem" : compact ? "1.25rem 1.35rem 1.45rem" : "1.5rem 1.8rem 2rem",
+          padding: "1.35rem 1.35rem 1.5rem",
           display: "flex",
           flexDirection: "column",
           flex: 1,
         }}
       >
-        {!teaser && (
-          <>
-            <div
+        <div
+          style={{
+            fontSize: ".58rem",
+            letterSpacing: ".3em",
+            color: "#496a92",
+            textTransform: "uppercase",
+            marginBottom: ".5rem",
+            fontWeight: 500,
+          }}
+        >
+          {badge}
+        </div>
+        <div
+          style={{
+            fontFamily: "'Neue Montreal', sans-serif",
+            fontSize: "1.26rem",
+            color: "#10233f",
+            fontWeight: 700,
+            marginBottom: ".6rem",
+          }}
+        >
+          {name}
+        </div>
+        <div
+          style={{
+            fontSize: ".74rem",
+            color: lightSection.textSoft,
+            lineHeight: 1.65,
+            marginBottom: "1.2rem",
+            fontWeight: 500,
+            textAlign: "justify",
+          }}
+        >
+          {desc}
+        </div>
+        <div style={{ display: "flex", gap: ".5rem", flexWrap: "wrap" }}>
+          {tags.map((tag) => (
+            <span
+              key={tag}
               style={{
                 fontSize: ".58rem",
-                letterSpacing: ".3em",
-                color: "#496a92",
+                letterSpacing: ".12em",
+                color: lightSection.tagText,
                 textTransform: "uppercase",
-                marginBottom: ".5rem",
-                fontWeight: 500,
+                padding: ".2rem .6rem",
+                border: `1px solid ${lightSection.tagBorder}`,
+                background: "#f8fbff",
               }}
             >
-              {badge}
-            </div>
-            <div
-              style={{
-                fontFamily: "'Neue Montreal', sans-serif",
-                fontSize: compact ? "1.16rem" : "1.4rem",
-                color: "#10233f",
-                fontWeight: 700,
-                marginBottom: ".6rem",
-              }}
-            >
-              {name}
-            </div>
-          </>
-        )}
-        {teaser ? (
-          <div
-            style={{
-              marginTop: "auto",
-              fontFamily: "'Neue Montreal', sans-serif",
-              fontSize: ".72rem",
-              letterSpacing: ".16em",
-              textTransform: "uppercase",
-              color: "#35557a",
-              writingMode: "vertical-rl",
-              transform: "rotate(180deg)",
-              alignSelf: "center",
-            }}
-          >
-            ROCAS
-          </div>
-        ) : (
-          <>
-            <div
-              style={{
-                fontSize: compact ? ".7rem" : ".75rem",
-                color: lightSection.textSoft,
-                lineHeight: compact ? 1.58 : 1.65,
-                marginBottom: "1.2rem",
-                fontWeight: 500,
-                flex: 1,
-                display: "-webkit-box",
-                WebkitLineClamp: compact ? 4 : "unset",
-                WebkitBoxOrient: "vertical",
-                overflow: "hidden",
-                textAlign: "justify",
-              }}
-            >
-              {desc}
-            </div>
-            <div style={{ display: "flex", gap: ".5rem", flexWrap: "wrap", marginTop: compact ? "auto" : "auto" }}>
-              {tags.map((tag) => (
-                <span
-                  key={tag}
-                  style={{
-                    fontSize: ".58rem",
-                    letterSpacing: ".12em",
-                    color: lightSection.tagText,
-                    textTransform: "uppercase",
-                    padding: ".2rem .6rem",
-                    border: `1px solid ${lightSection.tagBorder}`,
-                    background: "#f8fbff",
-                  }}
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-            <button
-              type="button"
-              onClick={(event) => {
-                event.stopPropagation();
-                onSelect();
-              }}
-              style={{
-                marginTop: "1.25rem",
-                width: "100%",
-                border: `1px solid ${hovered ? lightSection.buttonText : lightSection.buttonBorder}`,
-                background: hovered ? "rgba(61,93,133,.08)" : "transparent",
-                color: lightSection.buttonText,
-                padding: compact ? ".7rem .85rem" : ".82rem 1rem",
-                fontFamily: "'Neue Montreal', sans-serif",
-                fontSize: compact ? ".62rem" : ".7rem",
-                letterSpacing: ".18em",
-                textTransform: "uppercase",
-                cursor: "pointer",
-                fontWeight: 600,
-                transition: "all .25s ease",
-              }}
-            >
-              {ctaLabel}
-            </button>
-          </>
-        )}
+              {tag}
+            </span>
+          ))}
+        </div>
+        <button
+          type="button"
+          onClick={onSelect}
+          style={{
+            marginTop: "1.25rem",
+            width: "100%",
+            border: `1px solid ${hovered ? lightSection.buttonText : lightSection.buttonBorder}`,
+            background: hovered ? "rgba(61,93,133,.08)" : "transparent",
+            color: lightSection.buttonText,
+            padding: ".82rem 1rem",
+            fontFamily: "'Neue Montreal', sans-serif",
+            fontSize: ".68rem",
+            letterSpacing: ".18em",
+            textTransform: "uppercase",
+            cursor: "pointer",
+            fontWeight: 600,
+            transition: "all .25s ease",
+          }}
+        >
+          {ctaLabel}
+        </button>
       </div>
     </div>
   );
 }
 
-function getCircularOffset(index, activeIndex, total) {
-  let offset = index - activeIndex;
-  if (offset > total / 2) offset -= total;
-  if (offset < -total / 2) offset += total;
-  return offset;
+function DesktopVehicleCard({
+  badge,
+  name,
+  desc,
+  tags,
+  image,
+  imageFit = "cover",
+  imagePosition = "center center",
+  imageScale = 1,
+  active,
+  onActivate,
+  onSelect,
+  ctaLabel,
+}) {
+  const [hovered, setHovered] = useState(false);
+  const isSprinter = /sprinter/i.test(name);
+
+  return (
+    <article
+      onClick={() => {
+        if (!active) onActivate();
+      }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        flex: "0 0 auto",
+        width: "var(--card-w)",
+        minHeight: 640,
+        margin: "0 var(--card-gap)",
+        background: active ? "#ffffff" : "rgba(255,255,255,.72)",
+        borderRadius: 14,
+        overflow: "hidden",
+        display: "flex",
+        flexDirection: "column",
+        cursor: active ? "default" : "pointer",
+        transition: "transform .5s cubic-bezier(.25,.46,.45,.94), background .5s ease, box-shadow .5s ease, opacity .5s ease",
+        transform: active ? "scale(1)" : "scale(.88)",
+        opacity: active ? 1 : 0.8,
+        boxShadow: active ? "0 20px 44px rgba(16,36,62,.12)" : "0 8px 18px rgba(16,36,62,.04)",
+      }}
+    >
+      <div
+        style={{
+          width: "100%",
+          height: 280,
+          overflow: "hidden",
+          background: active ? "#eef4fc" : "#dfe8f3",
+          position: "relative",
+        }}
+      >
+        <img
+          src={image}
+          alt={`${name} - frota ROCAS`}
+          title={name}
+          loading="lazy"
+          decoding="async"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: imageFit,
+            objectPosition: imagePosition,
+            transition: "transform .4s ease, filter .4s ease",
+            transform: active && hovered ? `scale(${imageScale * 1.02})` : `scale(${imageScale})`,
+            filter: active ? "brightness(1)" : "brightness(.88)",
+          }}
+        />
+      </div>
+
+      <div
+        style={{
+          padding: "1.1rem 1.25rem .4rem",
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <div
+          style={{
+            fontSize: ".68rem",
+            fontWeight: 600,
+            letterSpacing: ".18em",
+            textTransform: "uppercase",
+            color: active ? "#496a92" : "#6e83a2",
+            marginBottom: ".4rem",
+          }}
+        >
+          {badge}
+        </div>
+        <div
+          style={{
+            fontFamily: "'Neue Montreal', sans-serif",
+            fontSize: isSprinter ? "1.2rem" : "1.3rem",
+            fontWeight: 700,
+            lineHeight: 1.2,
+            color: lightSection.shellText,
+            marginBottom: ".5rem",
+          }}
+        >
+          {name}
+        </div>
+        <div
+          style={{
+            fontSize: isSprinter ? ".76rem" : ".82rem",
+            color: lightSection.shellTextSoft,
+            lineHeight: 1.6,
+            flex: 1,
+            minHeight: 104,
+            textAlign: "justify",
+          }}
+        >
+          {desc}
+        </div>
+      </div>
+
+      <div
+        style={{
+          padding: ".9rem 1.25rem 1.25rem",
+          display: "flex",
+          flexDirection: "column",
+          gap: ".65rem",
+        }}
+      >
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+          {tags.map((tag) => (
+            <span
+              key={tag}
+              style={{
+                fontSize: ".62rem",
+                fontWeight: 600,
+                letterSpacing: ".1em",
+                textTransform: "uppercase",
+                border: `1px solid ${lightSection.shellTagBorder}`,
+                color: lightSection.shellTagText,
+                borderRadius: 4,
+                padding: "3px 8px",
+                background: "#f8fbff",
+              }}
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+        <button
+          type="button"
+          disabled={!active}
+          onClick={(event) => {
+            event.stopPropagation();
+            if (active) onSelect();
+          }}
+          style={{
+            width: "100%",
+            padding: "12px",
+            textAlign: "center",
+            fontFamily: "'Neue Montreal', sans-serif",
+            fontSize: ".7rem",
+            fontWeight: 600,
+            letterSpacing: ".18em",
+            textTransform: "uppercase",
+            color: active ? lightSection.buttonText : lightSection.buttonText,
+            border: `1px solid ${active ? (hovered ? lightSection.buttonText : lightSection.buttonBorder) : lightSection.buttonBorder}`,
+            borderRadius: 8,
+            background: active && hovered ? "rgba(61,93,133,.08)" : "transparent",
+            cursor: active ? "pointer" : "default",
+            pointerEvents: active ? "auto" : "none",
+            opacity: active ? 1 : 0.45,
+            transition: "background .2s, color .2s, border-color .2s",
+          }}
+        >
+          {ctaLabel}
+        </button>
+      </div>
+    </article>
+  );
 }
 
 export default function Veiculos({ onSelectVehicle }) {
   const { t } = useI18n();
-  const isMobile = useBreakpoint(980);
-  const [activeIndex, setActiveIndex] = useState(1);
+  const isMobile = useBreakpoint(1180);
+  const viewportRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [cardWidth, setCardWidth] = useState(420);
+  const [viewportWidth, setViewportWidth] = useState(0);
+  const carGap = 16;
+
   const carVisuals = [
     { grad: "linear-gradient(135deg,#d9e4f2,#f2f7ff)", image: corollaImage, imageFit: "contain", imagePosition: "center center", imageScale: 1.02, imageAspect: "16/7.4" },
     { grad: "linear-gradient(135deg,#dae4f0,#f3f7ff)", image: corollaImage2, imageFit: "contain", imagePosition: "center center", imageScale: 1.02, imageAspect: "16/7.4" },
-    { grad: "linear-gradient(135deg,#d6e0ed,#eef4fd)", image: jeepImage, imageFit: "contain", imagePosition: "center center", imageScale: 1.02, imageAspect: "16/7.4" },
-    {
-      grad: "linear-gradient(135deg,#d8e0ea,#eef2f7)",
-      image: sprinterImage,
-      imageFit: "contain",
-      imagePosition: "center center",
-      imageScale: 1.02,
-      imageAspect: "16/7.4",
-    },
+    { grad: "linear-gradient(135deg,#d6e0ed,#eef4fd)", image: jeepImage, imageFit: "cover", imagePosition: "center center", imageScale: 1.02, imageAspect: "16/7.4" },
+    { grad: "linear-gradient(135deg,#d8e0ea,#eef2f7)", image: sprinterImage, imageFit: "cover", imagePosition: "center center", imageScale: 1.06, imageAspect: "16/7.4" },
   ];
-  const cars = t.veiculos.cars.map((car, index) => ({ ...car, ...carVisuals[index], id: `vehicle-${index}` }));
-  const canSlide = !isMobile && cars.length > 1;
+
+  const cars = t.veiculos.cars.map((car, index) => ({
+    ...car,
+    ...carVisuals[index],
+    id: `vehicle-${index}`,
+  }));
 
   const handleSelectVehicle = (vehicle) => {
     onSelectVehicle?.(vehicle);
@@ -301,6 +406,22 @@ export default function Veiculos({ onSelectVehicle }) {
 
   const goPrev = () => setActiveIndex((prev) => (prev - 1 + cars.length) % cars.length);
   const goNext = () => setActiveIndex((prev) => (prev + 1) % cars.length);
+
+  useEffect(() => {
+    if (isMobile) return undefined;
+
+    const updateMetrics = () => {
+      const width = viewportRef.current?.offsetWidth || 0;
+      setViewportWidth(width);
+      setCardWidth(420);
+    };
+
+    updateMetrics();
+    window.addEventListener("resize", updateMetrics);
+    return () => window.removeEventListener("resize", updateMetrics);
+  }, [isMobile]);
+
+  const trackOffset = activeIndex * (cardWidth + carGap * 2) - (viewportWidth / 2 - cardWidth / 2);
 
   return (
     <section id="veiculos" style={{ background: lightSection.bg, padding: isMobile ? "4.5rem 1.25rem" : "7rem 4rem" }}>
@@ -321,11 +442,13 @@ export default function Veiculos({ onSelectVehicle }) {
           </STitle>
         </Reveal>
         <Reveal>
-          <LightGhostButton onClick={() => {
-            if (typeof window !== "undefined") {
-              window.location.hash = "contato";
-            }
-          }}>
+          <LightGhostButton
+            onClick={() => {
+              if (typeof window !== "undefined") {
+                window.location.hash = "contato";
+              }
+            }}
+          >
             {t.veiculos.cta}
           </LightGhostButton>
         </Reveal>
@@ -333,9 +456,6 @@ export default function Veiculos({ onSelectVehicle }) {
 
       <Reveal>
         <div>
-          {canSlide && (
-            <div style={{ marginBottom: ".9rem" }} />
-          )}
           {isMobile ? (
             <div
               style={{
@@ -345,22 +465,20 @@ export default function Veiculos({ onSelectVehicle }) {
               }}
             >
               {cars.map((car) => (
-                <VehicleCard
-                  key={car.name}
+                <MobileVehicleCard
+                  key={car.id}
                   {...car}
                   ctaLabel={t.veiculos.selectVehicle}
-                  onCardClick={undefined}
                   onSelect={() => handleSelectVehicle(car.id)}
                 />
               ))}
             </div>
           ) : (
-            <div
+            <>
+              <div
               style={{
                 position: "relative",
-                height: 760,
-                overflow: "hidden",
-                background: "linear-gradient(180deg,#f8fbff,#eef4fc)",
+                paddingBottom: "2rem",
               }}
             >
               <button
@@ -369,16 +487,18 @@ export default function Veiculos({ onSelectVehicle }) {
                 aria-label="Veículo anterior"
                 style={{
                   position: "absolute",
-                  left: 10,
-                  top: "50%",
+                  left: -10,
+                  top: "42%",
                   transform: "translateY(-50%)",
-                  zIndex: 10,
+                  zIndex: 20,
                   width: 42,
                   height: 42,
                   borderRadius: "50%",
                   border: `1px solid ${lightSection.buttonBorder}`,
                   background: "rgba(255,255,255,.92)",
                   color: lightSection.buttonText,
+                  display: "grid",
+                  placeItems: "center",
                   cursor: "pointer",
                   boxShadow: "0 8px 22px rgba(29,53,86,.12)",
                 }}
@@ -391,61 +511,71 @@ export default function Veiculos({ onSelectVehicle }) {
                 aria-label="Próximo veículo"
                 style={{
                   position: "absolute",
-                  right: 10,
-                  top: "50%",
+                  right: -10,
+                  top: "42%",
                   transform: "translateY(-50%)",
-                  zIndex: 10,
+                  zIndex: 20,
                   width: 42,
                   height: 42,
                   borderRadius: "50%",
                   border: `1px solid ${lightSection.buttonBorder}`,
                   background: "rgba(255,255,255,.92)",
                   color: lightSection.buttonText,
+                  display: "grid",
+                  placeItems: "center",
                   cursor: "pointer",
                   boxShadow: "0 8px 22px rgba(29,53,86,.12)",
                 }}
               >
                 ›
               </button>
-              <div style={{ position: "absolute", inset: "0 48px" }}>
-                {cars.map((car, index) => {
-                  const offset = getCircularOffset(index, activeIndex, cars.length);
-                  const absOffset = Math.abs(offset);
-                  const hidden = absOffset > 2;
-                  const width = absOffset === 0 ? "38%" : absOffset === 1 ? "25.5%" : "8%";
-                  const x = offset === 0 ? "50%" : offset === -1 ? "19%" : offset === 1 ? "81%" : offset < 0 ? "3.5%" : "96.5%";
-                  const scale = absOffset === 0 ? 1 : absOffset === 1 ? 0.94 : 0.82;
-
-                  return (
-                    <div
-                      key={car.name}
-                      style={{
-                        position: "absolute",
-                        top: 20,
-                        bottom: 20,
-                        left: x,
-                        width,
-                        transform: `translateX(-50%) scale(${scale})`,
-                        opacity: hidden ? 0 : absOffset === 2 ? 0.55 : absOffset === 1 ? 0.88 : 1,
-                        zIndex: 20 - absOffset,
-                        transition: "all .42s cubic-bezier(.22,1,.36,1)",
-                        pointerEvents: hidden ? "none" : "auto",
-                        filter: absOffset === 0 ? "none" : "saturate(.88)",
-                      }}
-                    >
-                      <VehicleCard
-                        {...car}
-                        ctaLabel={t.veiculos.selectVehicle}
-                        onCardClick={absOffset === 0 ? undefined : () => setActiveIndex(index)}
-                        onSelect={() => handleSelectVehicle(car.id)}
-                        compact={absOffset === 1}
-                        teaser={absOffset === 2}
-                      />
-                    </div>
-                  );
-                })}
+              <div ref={viewportRef} style={{ overflowX: "hidden", overflowY: "visible", position: "relative", padding: "0 0.75rem 0.75rem" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    transition: "transform .5s cubic-bezier(.25,.46,.45,.94)",
+                    willChange: "transform",
+                    transform: `translateX(${-trackOffset}px)`,
+                    ["--card-w"]: `${cardWidth}px`,
+                    ["--card-gap"]: `${carGap}px`,
+                  }}
+                >
+                  {cars.map((car, index) => (
+                    <DesktopVehicleCard
+                      key={car.id}
+                      {...car}
+                      active={index === activeIndex}
+                      onActivate={() => setActiveIndex(index)}
+                      onSelect={() => handleSelectVehicle(car.id)}
+                      ctaLabel={t.veiculos.selectVehicle}
+                    />
+                  ))}
+                </div>
               </div>
-            </div>
+
+              <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 22 }}>
+                {cars.map((car, index) => (
+                  <button
+                    key={`${car.id}-dot`}
+                    type="button"
+                    aria-label={`Ir para ${car.name}`}
+                    onClick={() => setActiveIndex(index)}
+                    style={{
+                      width: 7,
+                      height: 7,
+                      borderRadius: "50%",
+                      border: "none",
+                      cursor: "pointer",
+                      background: index === activeIndex ? lightSection.buttonText : "rgba(61,93,133,.24)",
+                      transform: index === activeIndex ? "scale(1.3)" : "scale(1)",
+                      transition: "background .2s, transform .2s",
+                    }}
+                  />
+                ))}
+              </div>
+              </div>
+            </>
           )}
         </div>
       </Reveal>
