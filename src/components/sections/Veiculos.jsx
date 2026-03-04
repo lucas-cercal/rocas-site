@@ -287,7 +287,7 @@ export default function Veiculos({ onSelectVehicle }) {
       imageAspect: "16/7.4",
     },
   ];
-  const cars = t.veiculos.cars.map((car, index) => ({ ...car, ...carVisuals[index] }));
+  const cars = t.veiculos.cars.map((car, index) => ({ ...car, ...carVisuals[index], id: `vehicle-${index}` }));
   const canSlide = !isMobile && cars.length > 1;
 
   const handleSelectVehicle = (vehicle) => {
@@ -347,7 +347,7 @@ export default function Veiculos({ onSelectVehicle }) {
                   key={car.name}
                   {...car}
                   ctaLabel={t.veiculos.selectVehicle}
-                  onSelect={() => handleSelectVehicle(car.name)}
+                  onSelect={() => handleSelectVehicle(car.id)}
                 />
               ))}
             </div>
@@ -433,7 +433,7 @@ export default function Veiculos({ onSelectVehicle }) {
                       <VehicleCard
                         {...car}
                         ctaLabel={t.veiculos.selectVehicle}
-                        onSelect={() => handleSelectVehicle(car.name)}
+                        onSelect={() => handleSelectVehicle(car.id)}
                         compact={absOffset === 1}
                         teaser={absOffset === 2}
                       />

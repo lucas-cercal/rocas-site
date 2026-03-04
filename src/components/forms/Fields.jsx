@@ -147,6 +147,9 @@ export function FSelect({
   const isLight = variant === "light";
   const [focused, setFocused] = useState(false);
   const [hovered, setHovered] = useState(false);
+  const normalizedOptions = options.map((option) =>
+    typeof option === "string" ? { value: option, label: option } : option
+  );
   const borderColor = focused
     ? isLight
       ? "rgba(60,98,146,.55)"
@@ -203,9 +206,9 @@ export function FSelect({
         }}
       >
         <option value="">{placeholderOption}</option>
-        {options.map((option) => (
-          <option key={option} value={option}>
-            {option}
+        {normalizedOptions.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
           </option>
         ))}
       </select>

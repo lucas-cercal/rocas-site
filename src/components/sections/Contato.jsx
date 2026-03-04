@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { format } from "date-fns";
 import { enUS, es, fr, ptBR } from "date-fns/locale";
 import DatePicker from "react-datepicker";
@@ -189,7 +189,13 @@ export default function Contato({ selectedVehicle, onSelectedVehicleChange }) {
     message: "",
     consent: false,
   });
-  const vehicleOptions = t.veiculos.cars.map((car) => car.name);
+  const vehicleOptions = t.veiculos.cars.map((car, index) => ({
+    value: `vehicle-${index}`,
+    label: car.name,
+  }));
+  const effectiveVehicle = selectedVehicle || form.vehicle;
+  const selectedVehicleLabel =
+    vehicleOptions.find((option) => option.value === effectiveVehicle)?.label || "";
   const calendarLocale =
     {
       pt: ptBR,
@@ -220,11 +226,6 @@ export default function Contato({ selectedVehicle, onSelectedVehicleChange }) {
     setForm((prev) => ({ ...prev, [name]: type === "checkbox" ? checked : value }));
   };
 
-  useEffect(() => {
-    if (!selectedVehicle) return;
-    setForm((prev) => (prev.vehicle === selectedVehicle ? prev : { ...prev, vehicle: selectedVehicle }));
-  }, [selectedVehicle]);
-
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!form.startDate || !form.endDate || !form.time) return;
@@ -237,7 +238,7 @@ export default function Contato({ selectedVehicle, onSelectedVehicleChange }) {
       `E-mail: ${form.email}`,
       `WhatsApp: ${form.whatsapp || "-"}`,
       `Serviço: ${form.serviceType || "-"}`,
-      `Veículo: ${form.vehicle || "-"}`,
+      `Veículo: ${selectedVehicleLabel || "-"}`,
       `Período: ${formatDate(form.startDate)} a ${formatDate(form.endDate)} às ${formatTime(form.time)}`,
       `Mensagem: ${form.message || "-"}`,
     ].join("\n");
@@ -426,7 +427,7 @@ export default function Contato({ selectedVehicle, onSelectedVehicleChange }) {
                 label={t.contato.form.vehicle}
                 options={vehicleOptions}
                 placeholderOption={t.common.selectOption}
-                value={form.vehicle}
+                value={effectiveVehicle}
                 onChange={handleChange}
                 interactive
               />
