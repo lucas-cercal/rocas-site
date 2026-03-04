@@ -56,7 +56,7 @@ function FlagIcon({ country }) {
   );
 }
 
-function LanguageMenu({ value, options, onChange, scrolled = false, mobile = false }) {
+function LanguageMenu({ value, options, onChange, scrolled = false, mobile = false, compact = false }) {
   const [open, setOpen] = useState(false);
   const containerRef = useRef(null);
   const current = options.find((option) => option.value === value) || options[0];
@@ -108,7 +108,7 @@ function LanguageMenu({ value, options, onChange, scrolled = false, mobile = fal
       ref={containerRef}
       style={{
         position: "relative",
-        minWidth: mobile ? 116 : 98,
+        minWidth: mobile ? 116 : compact ? 88 : 98,
       }}
     >
       <button
@@ -125,9 +125,9 @@ function LanguageMenu({ value, options, onChange, scrolled = false, mobile = fal
           background: palette.background,
           border: palette.border,
           color: palette.color,
-          fontSize: mobile ? ".74rem" : ".64rem",
+          fontSize: mobile ? ".74rem" : compact ? ".6rem" : ".64rem",
           letterSpacing: ".15em",
-          padding: mobile ? ".5rem .8rem" : ".38rem .62rem",
+          padding: mobile ? ".5rem .8rem" : compact ? ".34rem .52rem" : ".38rem .62rem",
           cursor: "pointer",
           fontFamily: "'Neue Montreal', sans-serif",
           fontWeight: 500,
@@ -214,7 +214,7 @@ function LanguageMenu({ value, options, onChange, scrolled = false, mobile = fal
   );
 }
 
-function NavLink({ href, children, scrolled = false }) {
+function NavLink({ href, children, scrolled = false, compact = false }) {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -223,8 +223,8 @@ function NavLink({ href, children, scrolled = false }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
-        fontSize: ".72rem",
-        letterSpacing: ".22em",
+        fontSize: compact ? ".64rem" : ".72rem",
+        letterSpacing: compact ? ".16em" : ".22em",
         textTransform: "uppercase",
         color: hovered ? (scrolled ? "#0f1c2f" : theme.cr7) : scrolled ? "#243246" : theme.cr4,
         textDecoration: "none",
@@ -232,6 +232,7 @@ function NavLink({ href, children, scrolled = false }) {
         transition: "color .2s, border-color .2s",
         position: "relative",
         paddingBottom: 4,
+        whiteSpace: "nowrap",
         borderBottom: hovered
           ? `1px solid ${scrolled ? "rgba(15,28,47,.35)" : theme.cr6}`
           : "1px solid transparent",
@@ -242,7 +243,7 @@ function NavLink({ href, children, scrolled = false }) {
   );
 }
 
-function NavCta({ onClick, href, children, scrolled = false }) {
+function NavCta({ onClick, href, children, scrolled = false, compact = false }) {
   const [hovered, setHovered] = useState(false);
 
   const style = {
@@ -257,9 +258,9 @@ function NavCta({ onClick, href, children, scrolled = false }) {
     }`,
     background: hovered ? (scrolled ? "#132033" : theme.cr6) : "transparent",
     color: hovered ? (scrolled ? "#f8fbff" : theme.bg0) : scrolled ? "#1a2a40" : theme.cr6,
-    padding: ".56rem 1.42rem",
-    fontSize: ".68rem",
-    letterSpacing: ".22em",
+    padding: compact ? ".48rem .82rem" : ".56rem 1.42rem",
+    fontSize: compact ? ".58rem" : ".68rem",
+    letterSpacing: compact ? ".12em" : ".22em",
     cursor: "pointer",
     transition: "all .3s",
     fontWeight: 500,
@@ -301,12 +302,17 @@ export default function Nav() {
   const scrolled = useScrolled();
   const [open, setOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isCompactDesktop, setIsCompactDesktop] = useState(false);
 
   useEffect(() => {
     const initial = typeof window !== "undefined" && window.innerWidth < 980;
     setIsMobile(initial);
+    setIsCompactDesktop(typeof window !== "undefined" && window.innerWidth < 1380);
 
-    const onResize = () => setIsMobile(window.innerWidth < 980);
+    const onResize = () => {
+      setIsMobile(window.innerWidth < 980);
+      setIsCompactDesktop(window.innerWidth < 1380);
+    };
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
@@ -343,7 +349,7 @@ export default function Nav() {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          padding: isMobile ? "0 1.25rem" : scrolled ? "0 3.2rem 0 1.6rem" : "0 4rem 0 1.8rem",
+          padding: isMobile ? "0 1.25rem" : isCompactDesktop ? "0 2rem 0 1.2rem" : scrolled ? "0 3.2rem 0 1.6rem" : "0 4rem 0 1.8rem",
           background: scrolled ? "rgba(248,251,255,.92)" : "transparent",
           backdropFilter: scrolled ? "blur(16px)" : "none",
           WebkitBackdropFilter: scrolled ? "blur(16px)" : "none",
@@ -363,19 +369,29 @@ export default function Nav() {
                 ? "brightness(.22) contrast(1.18) drop-shadow(0 1px 2px rgba(0,0,0,.12))"
                 : "drop-shadow(0 0 12px rgba(180,210,240,.18))",
               transition: "height .28s ease, filter .28s ease",
+              flexShrink: 0,
             }}
           />
         </a>
 
         {!isMobile && (
-          <div style={{ display: "flex", alignItems: "center", gap: "2rem" }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: isCompactDesktop ? ".72rem" : "2rem",
+              flexWrap: "nowrap",
+              minWidth: 0,
+              marginLeft: isCompactDesktop ? ".85rem" : "0",
+            }}
+          >
             {links.map((link) => (
-              <NavLink key={link.href} href={link.href} scrolled={scrolled}>
+              <NavLink key={link.href} href={link.href} scrolled={scrolled} compact={isCompactDesktop}>
                 {link.label}
               </NavLink>
             ))}
-            <LanguageMenu value={language} options={languageOptions} onChange={setLanguage} scrolled={scrolled} />
-            <NavCta href="#contato" scrolled={scrolled}>
+            <LanguageMenu value={language} options={languageOptions} onChange={setLanguage} scrolled={scrolled} compact={isCompactDesktop} />
+            <NavCta href="#contato" scrolled={scrolled} compact={isCompactDesktop}>
               {t.nav.cta}
             </NavCta>
           </div>

@@ -155,7 +155,7 @@ const pt = {
       ["WhatsApp", "+55 (41) 99779-0123"],
       ["E-mail", "contato@rocaslocadora.com.br"],
       ["Atendimento", "24h, 7 dias por semana"],
-      ["Área de atuação", "Brasil, regiões a confirmar"],
+      ["Área de atuação", "Atendemos PR, SP, RJ e SC"],
     ],
     form: {
       title: "Solicitar Cotação",
@@ -451,7 +451,7 @@ const en = mergeDeep(pt, {
       ["WhatsApp", "+55 (41) 99779-0123"],
       ["E-mail", "contato@rocas.com.br"],
       ["Service", "24h, 7 days a week"],
-      ["Coverage", "Brazil, regions upon confirmation"],
+      ["Coverage", "We serve PR, SP, RJ, and SC"],
     ],
     form: {
       title: "Request Quote",
@@ -707,7 +707,7 @@ const es = mergeDeep(pt, {
       ["WhatsApp", "+55 (41) 99779-0123"],
       ["E-mail", "contato@rocas.com.br"],
       ["Atención", "24h, 7 días por semana"],
-      ["Cobertura", "Brasil, regiones a confirmar"],
+      ["Cobertura", "Atendemos PR, SP, RJ y SC"],
     ],
     form: {
       title: "Solicitar Cotización",
@@ -963,7 +963,7 @@ const fr = mergeDeep(pt, {
       ["WhatsApp", "+55 (41) 99779-0123"],
       ["E-mail", "contato@rocas.com.br"],
       ["Service", "24h, 7 jours par semaine"],
-      ["Zone d'action", "Brésil, régions à confirmer"],
+      ["Zone d'action", "Nous desservons PR, SP, RJ et SC"],
     ],
     form: {
       title: "Demander un Devis",
