@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { testimonials } from "../../constants/testimonials";
 import { useBreakpoint } from "../../hooks/useBreakpoint";
 import { useI18n } from "../../i18n/LanguageContext";
 import Reveal from "../ui/Reveal";
@@ -11,7 +12,19 @@ const lightSection = {
   text: "#3f5675",
   textSoft: "#607492",
   accent: "#4e6f96",
+  testimonialName: "#3d5168",
+  testimonialQuote: "#b8ccd8",
 };
+
+const testimonialAvatarGradients = [
+  "linear-gradient(135deg, #c8d8e8, #a0b8cc)",
+  "linear-gradient(135deg, #ccd4e8, #a8b4d4)",
+  "linear-gradient(135deg, #c8e0d8, #a0c4b8)",
+];
+
+function isTestimonialsItem(question) {
+  return /depoimentos|testimonials|testimonios|témoignages/i.test(question);
+}
 
 export default function SaibaMais() {
   const { t } = useI18n();
@@ -81,9 +94,97 @@ export default function SaibaMais() {
                 </div>
                 {openItem === index && (
                   <div style={{ paddingBottom: "1.3rem" }}>
-                    <p style={{ fontSize: isMobile ? "16px" : "20px", color: lightSection.textSoft, lineHeight: 1.5, fontWeight: 500, textAlign: "justify" }}>
-                      {answer}
-                    </p>
+                    {isTestimonialsItem(question) ? (
+                      <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
+                        {testimonials.map((testimonial, testimonialIndex) => (
+                          <article
+                            key={testimonial.name}
+                            style={{
+                              display: "flex",
+                              gap: "1rem",
+                              padding: testimonialIndex === 0 ? "0 0 1.1rem" : "1.1rem 0",
+                              borderBottom:
+                                testimonialIndex === testimonials.length - 1
+                                  ? "none"
+                                  : "1px solid #eaeff4",
+                              opacity: 0,
+                              transform: "translateY(10px)",
+                              animation: `fadeUp .5s ease ${0.1 + testimonialIndex * 0.15}s forwards`,
+                            }}
+                          >
+                            <div
+                              style={{
+                                width: 38,
+                                height: 38,
+                                borderRadius: "50%",
+                                background:
+                                  testimonialAvatarGradients[testimonialIndex % testimonialAvatarGradients.length],
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                flexShrink: 0,
+                                fontFamily: "'Neue Montreal', sans-serif",
+                                fontSize: ".82rem",
+                                fontWeight: 700,
+                                color: "#4a6a84",
+                                border: "1.5px solid #d0dce8",
+                              }}
+                            >
+                              {testimonial.name.charAt(0).toUpperCase()}
+                            </div>
+
+                            <div style={{ flex: 1 }}>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  alignItems: "baseline",
+                                  gap: ".4rem",
+                                  marginBottom: ".35rem",
+                                  flexWrap: "wrap",
+                                }}
+                              >
+                                <span
+                                  style={{
+                                    fontSize: ".8rem",
+                                    fontWeight: 700,
+                                    color: lightSection.testimonialName,
+                                    letterSpacing: ".01em",
+                                  }}
+                                >
+                                  {testimonial.name}
+                                </span>
+                              </div>
+
+                              <p
+                                style={{
+                                  fontFamily: "Georgia, serif",
+                                  fontSize: ".84rem",
+                                  color: "#5a7088",
+                                  lineHeight: 1.65,
+                                  fontStyle: "italic",
+                                }}
+                              >
+                                <span
+                                  style={{
+                                    color: lightSection.testimonialQuote,
+                                    fontSize: "1rem",
+                                    verticalAlign: "-2px",
+                                    marginRight: 1,
+                                  }}
+                                >
+                                  "
+                                </span>
+                                {testimonial.quote}
+                              </p>
+                            </div>
+                          </article>
+                        ))}
+                      </div>
+                    ) : (
+                      <p style={{ fontSize: isMobile ? "16px" : "20px", color: lightSection.textSoft, lineHeight: 1.5, fontWeight: 500, textAlign: "justify" }}>
+                        {answer}
+                      </p>
+                    )}
                   </div>
                 )}
               </div>
