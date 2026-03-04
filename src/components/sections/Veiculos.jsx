@@ -63,12 +63,13 @@ function VehicleCard({
   ctaLabel,
   compact = false,
   teaser = false,
+  onCardClick,
 }) {
   const [hovered, setHovered] = useState(false);
 
   return (
     <div
-      onClick={onSelect}
+      onClick={onCardClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
@@ -347,6 +348,7 @@ export default function Veiculos({ onSelectVehicle }) {
                   key={car.name}
                   {...car}
                   ctaLabel={t.veiculos.selectVehicle}
+                  onCardClick={undefined}
                   onSelect={() => handleSelectVehicle(car.id)}
                 />
               ))}
@@ -433,6 +435,7 @@ export default function Veiculos({ onSelectVehicle }) {
                       <VehicleCard
                         {...car}
                         ctaLabel={t.veiculos.selectVehicle}
+                        onCardClick={absOffset === 0 ? undefined : () => setActiveIndex(index)}
                         onSelect={() => handleSelectVehicle(car.id)}
                         compact={absOffset === 1}
                         teaser={absOffset === 2}
