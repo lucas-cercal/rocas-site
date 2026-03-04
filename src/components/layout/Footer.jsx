@@ -121,6 +121,7 @@ export default function Footer() {
         </div>
         <div style={{ fontSize: ".78rem", color: theme.textLo, textAlign: isMobile ? "left" : "right", lineHeight: 1.8 }}>
           <div>{t.footer.copyright}</div>
+          <div>CNPJ: 65.418.416/0001-70</div>
           <div>{t.footer.rights}</div>
           <div style={{ display: "flex", gap: ".7rem", flexWrap: "wrap", justifyContent: isMobile ? "flex-start" : "flex-end" }}>
             <a href="#cookies" style={{ color: theme.textLo }}>
