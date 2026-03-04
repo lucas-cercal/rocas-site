@@ -339,7 +339,6 @@ export default function Veiculos({ onSelectVehicle }) {
               style={{
                 display: "grid",
                 gap: ".9rem",
-                border: `1px solid ${lightSection.border}`,
                 padding: ".9rem",
               }}
             >
@@ -356,7 +355,6 @@ export default function Veiculos({ onSelectVehicle }) {
             <div
               style={{
                 position: "relative",
-                border: `1px solid ${lightSection.border}`,
                 height: 760,
                 overflow: "hidden",
                 background: "linear-gradient(180deg,#f8fbff,#eef4fc)",
