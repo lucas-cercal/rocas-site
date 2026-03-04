@@ -274,6 +274,7 @@ export default function Contato({ selectedVehicle, onSelectedVehicleChange }) {
             lineHeight: 1.5,
             marginTop: "1.2rem",
             fontWeight: 500,
+            textAlign: "justify",
           }}
         >
           {t.contato.intro}

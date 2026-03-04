@@ -175,6 +175,7 @@ export default function Hero() {
               maxWidth: 520,
               marginBottom: "2.8rem",
               fontWeight: 500,
+              textAlign: "justify",
             }}
           >
             {t.hero.desc}

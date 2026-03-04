@@ -34,6 +34,7 @@ export default function SaibaMais() {
               lineHeight: 1.5,
               marginTop: "1rem",
               fontWeight: 500,
+              textAlign: "justify",
             }}
           >
             {t.saibaMais.intro}
@@ -80,7 +81,7 @@ export default function SaibaMais() {
                 </div>
                 {openItem === index && (
                   <div style={{ paddingBottom: "1.3rem" }}>
-                    <p style={{ fontSize: isMobile ? "16px" : "20px", color: lightSection.textSoft, lineHeight: 1.5, fontWeight: 500 }}>
+                    <p style={{ fontSize: isMobile ? "16px" : "20px", color: lightSection.textSoft, lineHeight: 1.5, fontWeight: 500, textAlign: "justify" }}>
                       {answer}
                     </p>
                   </div>

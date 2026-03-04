@@ -51,7 +51,7 @@ function Pillar({ title, desc }) {
       >
         {title}
       </div>
-      <div style={{ fontSize: ".75rem", color: theme.textMd, lineHeight: 1.65, fontWeight: 500 }}>
+      <div style={{ fontSize: ".75rem", color: theme.textMd, lineHeight: 1.65, fontWeight: 500, textAlign: "justify" }}>
         {desc}
       </div>
     </div>
@@ -89,6 +89,7 @@ export default function QuemSomos() {
               lineHeight: 1.5,
               marginTop: "1.3rem",
               fontWeight: 500,
+              textAlign: "justify",
             }}
           >
             {paragraph}

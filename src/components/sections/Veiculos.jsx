@@ -211,6 +211,7 @@ function VehicleCard({
                 WebkitLineClamp: compact ? 4 : "unset",
                 WebkitBoxOrient: "vertical",
                 overflow: "hidden",
+                textAlign: "justify",
               }}
             >
               {desc}

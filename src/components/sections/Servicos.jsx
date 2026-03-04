@@ -39,7 +39,7 @@ function ServiceCard({ title, desc, isMobile }) {
         >
           {title}
         </div>
-        <div style={{ fontSize: isMobile ? "16px" : "20px", color: theme.textMd, lineHeight: 1.5, fontWeight: 500 }}>
+        <div style={{ fontSize: isMobile ? "16px" : "20px", color: theme.textMd, lineHeight: 1.5, fontWeight: 500, textAlign: "justify" }}>
           {desc}
         </div>
       </div>
