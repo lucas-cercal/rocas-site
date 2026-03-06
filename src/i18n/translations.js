@@ -133,7 +133,7 @@ const pt = {
       ],
       [
         "Por que escolher veículos híbridos blindados?",
-        "Veículos híbridos combinam eficiência elétrica, menor ruído, emissão e custo operacional, com a autonomia do motor a combustão. Para uso executivo urbano, oferecem economia sem comprometer desempenho. Toda a frota ROCAS é certificada como híbrida e blindada.",
+        "Veículos híbridos combinam eficiência elétrica, menor ruído, emissão e custo operacional, com a autonomia do motor a combustão. Para uso executivo urbano, oferecem economia sem comprometer desempenho.",
       ],
       [
         "Como funciona a confidencialidade dos contratos?",
