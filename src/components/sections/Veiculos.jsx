@@ -306,7 +306,7 @@ function DesktopVehicleCard({
             color: lightSection.shellTextSoft,
             lineHeight: 1.6,
             flex: 1,
-            minHeight: 104,
+            minHeight: isSprinter ? 104 : 200,
             textAlign: "justify",
           }}
         >
@@ -380,13 +380,13 @@ export default function Veiculos({ onSelectVehicle }) {
   const isMobile = useBreakpoint(1180);
   const viewportRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [cardWidth, setCardWidth] = useState(420);
+  const [cardWidth, setCardWidth] = useState(460);
   const [viewportWidth, setViewportWidth] = useState(0);
   const carGap = 16;
 
   const carVisuals = [
-    { grad: "linear-gradient(135deg,#d9e4f2,#f2f7ff)", image: corollaImage, imageFit: "contain", imagePosition: "center center", imageScale: 1.02, imageAspect: "16/7.4" },
-    { grad: "linear-gradient(135deg,#dae4f0,#f3f7ff)", image: corollaImage2, imageFit: "contain", imagePosition: "center center", imageScale: 1.02, imageAspect: "16/7.4" },
+    { grad: "linear-gradient(135deg,#d9e4f2,#f2f7ff)", image: corollaImage, imageFit: "cover", imagePosition: "center center", imageScale: 1.02, imageAspect: "16/7.4" },
+    { grad: "linear-gradient(135deg,#dae4f0,#f3f7ff)", image: corollaImage2, imageFit: "cover", imagePosition: "center center", imageScale: 1.02, imageAspect: "16/7.4" },
     { grad: "linear-gradient(135deg,#d6e0ed,#eef4fd)", image: jeepImage, imageFit: "cover", imagePosition: "center center", imageScale: 1.02, imageAspect: "16/7.4" },
     { grad: "linear-gradient(135deg,#d8e0ea,#eef2f7)", image: sprinterImage, imageFit: "cover", imagePosition: "center center", imageScale: 1.06, imageAspect: "16/7.4" },
   ];
@@ -413,7 +413,7 @@ export default function Veiculos({ onSelectVehicle }) {
     const updateMetrics = () => {
       const width = viewportRef.current?.offsetWidth || 0;
       setViewportWidth(width);
-      setCardWidth(420);
+      setCardWidth(460);
     };
 
     updateMetrics();
@@ -421,7 +421,10 @@ export default function Veiculos({ onSelectVehicle }) {
     return () => window.removeEventListener("resize", updateMetrics);
   }, [isMobile]);
 
-  const trackOffset = activeIndex * (cardWidth + carGap * 2) - (viewportWidth / 2 - cardWidth / 2);
+  const totalTrackWidth = cars.length * (cardWidth + carGap * 2);
+  const desiredOffset = activeIndex * (cardWidth + carGap * 2) - (viewportWidth / 2 - cardWidth / 2);
+  const maxTrackOffset = Math.max(0, totalTrackWidth - viewportWidth);
+  const trackOffset = Math.min(Math.max(desiredOffset, 0), maxTrackOffset);
 
   return (
     <section id="veiculos" style={{ background: lightSection.bg, padding: isMobile ? "4.5rem 1.25rem" : "7rem 4rem" }}>
