@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
+import { CONSENT_STORAGE_KEY, grantAnalyticsConsent } from "../../constants/analytics";
 import { useI18n } from "../../i18n/LanguageContext";
 import "./ConsentModal.css";
-
-const CONSENT_STORAGE_KEY = "rocas:site-consent:v1";
 
 function ExternalArrow() {
   return (
@@ -47,6 +46,7 @@ export default function ConsentModal() {
         JSON.stringify({ acceptedAt: new Date().toISOString() }),
       );
     }
+    grantAnalyticsConsent();
     setOpen(false);
   };
 
