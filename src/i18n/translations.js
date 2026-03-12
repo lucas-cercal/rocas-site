@@ -101,16 +101,11 @@ const pt = {
       ],
       [
         "03",
-        "Transporte com Motorista",
-        "Condutores treinados em direção defensiva e protocolo de segurança. Discrição e pontualidade em cada trajeto. Consulte disponibilidade e orçamento adicional.",
-      ],
-      [
-        "04",
         "Eventos e Ocasiões Especiais",
         "Aeroportos, eventos corporativos e situações que exigem proteção reforçada com logística precisa e discreta.",
       ],
       [
-        "05",
+        "04",
         "Suporte 24 Horas",
         "Canal exclusivo para clientes ativos. Disponibilidade integral para emergências, substituições e ajustes de programação.",
       ],
@@ -174,7 +169,6 @@ const pt = {
         "Locação executiva",
         "Locação pessoal",
         "Locação corporativa",
-        "Transporte com motorista",
         "Evento especial",
       ],
       namePlaceholder: "Seu nome",
@@ -206,7 +200,6 @@ const pt = {
       "Locação executiva",
       "Locação pessoal",
       "Locação corporativa",
-      "Transporte com motorista",
       "Evento especial",
       "Outro",
     ],
